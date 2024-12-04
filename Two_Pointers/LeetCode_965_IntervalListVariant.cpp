@@ -1,6 +1,6 @@
 /**
- * Problem: KthLargestStream (CSES 1984)
- * Link: https://cses.com/problems/kthlargeststream/
+ * Problem: IntervalListVariant (LeetCode 965)
+ * Link: https://leetcode.com/problems/intervallistvariant/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1984() {
+void solveBrute_965() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1984() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1984() {
+void solveOptimal_965() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,13 +39,10 @@ void solveOptimal_1984() {
 }
 
 int main() {
-    // cout << "Testing KthLargestStream" << endl;
-    // solveOptimal_1984();
+    // cout << "Testing IntervalListVariant" << endl;
+    // solveOptimal_965();
     return 0;
 }
-
-
-
 
 
 
