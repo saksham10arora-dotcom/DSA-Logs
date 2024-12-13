@@ -1,6 +1,6 @@
 /**
- * Problem: Maximum Path Intersection Sum in a Grid (LeetCode 3938)
- * Link: https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/
+ * Problem: Maximize Sum of At Most K Distinct Elements (LeetCode 3684)
+ * Link: https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Maximum Path Intersection Sum in a Grid" << endl;
+    // cout << "Testing Maximize Sum of At Most K Distinct Elements" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
