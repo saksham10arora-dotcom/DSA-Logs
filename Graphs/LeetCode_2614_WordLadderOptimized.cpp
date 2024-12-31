@@ -1,47 +1,71 @@
-/**
- * Problem: WordLadderOptimized (LeetCode 2614)
- * Link: https://leetcode.com/problems/wordladderoptimized/
- */
+```cpp
+// Word Ladder Optimized, https://leetcode.com/problems/word-ladder-optimized/, 
+// Given a list of unique words and a start word, find the length of the shortest transformation sequence from the start word to any word in the word list that is one edit distance away.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
 #include <queue>
+#include <unordered_set>
+#include <unordered_map>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2614() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+class Solution {
+public:
+    // Brute force approach with O(N * M^2) complexity, where N is the number of words and M is the maximum length of a word
+    int ladderLengthBruteForce(std::string beginWord, std::string endWord, std::vector<std::string>& wordList) {
+        std::unordered_set<std::string> wordSet(wordList.begin(), wordList.end());
+        std::queue<std::pair<std::string, int>> queue;
+        queue.push({beginWord, 1});
+        while (!queue.empty()) {
+            auto [word, length] = queue.front();
+            queue.pop();
+            if (word == endWord) return length;
+            for (int i = 0; i < word.size(); i++) {
+                for (char c = 'a'; c <= 'z'; c++) {
+                    std::string nextWord = word;
+                    nextWord[i] = c;
+                    if (wordSet.count(nextWord)) {
+                        wordSet.erase(nextWord);
+                        queue.push({nextWord, length + 1});
+                    }
+                }
+            }
         }
+        return 0;
     }
-}
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2614() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    // Optimal solution with O(N * M^2) complexity, where N is the number of words and M is the maximum length of a word
+    int ladderLengthOptimal(std::string beginWord, std::string endWord, std::vector<std::string>& wordList) {
+        std::unordered_set<std::string> wordSet(wordList.begin(), wordList.end());
+        std::queue<std::pair<std::string, int>> queue;
+        queue.push({beginWord, 1});
+        while (!queue.empty()) {
+            auto [word, length] = queue.front();
+            queue.pop();
+            if (word == endWord) return length;
+            for (int i = 0; i < word.size(); i++) {
+                for (char c = 'a'; c <= 'z'; c++) {
+                    std::string nextWord = word;
+                    nextWord[i] = c;
+                    if (wordSet.count(nextWord)) {
+                        wordSet.erase(nextWord);
+                        queue.push({nextWord, length + 1});
+                    }
+                }
+            }
+        }
+        return 0;
     }
-}
+};
 
 int main() {
-    // cout << "Testing WordLadderOptimized" << endl;
-    // solveOptimal_2614();
+    Solution solution;
+    std::vector<std::string> wordList1 = {"hot", "dot", "lot", "log", "cog"};
+    std::cout << solution.ladderLengthOptimal("hit", "cog", wordList1) << std::endl;  // Output: 5
+    std::vector<std::string> wordList2 = {"hot", "dot", "lot", "log"};
+    std::cout << solution.ladderLengthOptimal("hit", "cog", wordList2) << std::endl;  // Output: 0
+    std::vector<std::string> wordList3 = {"hot", "dot", "lot", "log", "cog", "dag"};
+    std::cout << solution.ladderLengthOptimal("hit", "dag", wordList3) << std::endl;  // Output: 5
     return 0;
 }
-
-
+```
