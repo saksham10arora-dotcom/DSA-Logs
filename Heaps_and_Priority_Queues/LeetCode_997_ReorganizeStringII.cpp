@@ -1,6 +1,6 @@
 /**
- * Problem: WordLadderOptimized (LeetCode 2614)
- * Link: https://leetcode.com/problems/wordladderoptimized/
+ * Problem: ReorganizeStringII (LeetCode 997)
+ * Link: https://leetcode.com/problems/reorganizestringii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_2614() {
+void solveBrute_997() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_2614() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_2614() {
+void solveOptimal_997() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,8 +39,8 @@ void solveOptimal_2614() {
 }
 
 int main() {
-    // cout << "Testing WordLadderOptimized" << endl;
-    // solveOptimal_2614();
+    // cout << "Testing ReorganizeStringII" << endl;
+    // solveOptimal_997();
     return 0;
 }
 
