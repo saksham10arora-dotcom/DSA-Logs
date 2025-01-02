@@ -1,6 +1,6 @@
 /**
- * Problem: BulbSwitcherII (LeetCode 774)
- * Link: https://leetcode.com/problems/bulbswitcherii/
+ * Problem: MaximumProductOptimized (CSES 1404)
+ * Link: https://cses.com/problems/maximumproductoptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_774() {
+void solveBrute_1404() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_774() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_774() {
+void solveOptimal_1404() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,9 @@ void solveOptimal_774() {
 }
 
 int main() {
-    // cout << "Testing BulbSwitcherII" << endl;
-    // solveOptimal_774();
+    // cout << "Testing MaximumProductOptimized" << endl;
+    // solveOptimal_1404();
     return 0;
 }
-
 
 
