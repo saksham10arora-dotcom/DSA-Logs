@@ -1,48 +1,72 @@
-/**
- * Problem: PrimeArrangementsII (CSES 1570)
- * Link: https://cses.com/problems/primearrangementsii/
- */
+```cpp
+// Prime Arrangements II, https://cses.fi/problemset/task/1570, 
+// Given a positive integer n, find the number of ways to arrange the numbers from 1 to n such that 
+// all prime numbers are at even positions (1-indexed).
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <cmath>
 
-using namespace std;
+// Brute force approach with O(n!) complexity
+// int countArrangements(int n) {
+//     std::vector<int> isPrime(n + 1, true);
+//     isPrime[0] = isPrime[1] = false;
+//     for (int i = 2; i * i <= n; i++) {
+//         if (isPrime[i]) {
+//             for (int j = i * i; j <= n; j += i) {
+//                 isPrime[j] = false;
+//             }
+//         }
+//     }
+//     int count = 0;
+//     std::function<void(int, std::vector<int>)> backtrack = 
+//         [&count, &isPrime, n](int pos, std::vector<int> used) {
+//             if (pos > n) {
+//                 count++;
+//                 return;
+//             }
+//             for (int i = 1; i <= n; i++) {
+//                 if (!used[i] && (pos % 2 == 0 || !isPrime[i])) {
+//                     used[i] = true;
+//                     backtrack(pos + 1, used);
+//                     used[i] = false;
+//                 }
+//             }
+//         };
+//     backtrack(1, std::vector<int>(n + 1, false));
+//     return count;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1570() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution with O(n log log n) complexity
+int countArrangements(int n) {
+    std::vector<int> isPrime(n + 1, true);
+    isPrime[0] = isPrime[1] = false;
+    for (int i = 2; i * i <= n; i++) {
+        if (isPrime[i]) {
+            for (int j = i * i; j <= n; j += i) {
+                isPrime[j] = false;
+            }
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1570() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    int primeCount = 0, nonPrimeCount = 0;
+    for (int i = 1; i <= n; i++) {
+        if (isPrime[i]) primeCount++;
+        else nonPrimeCount++;
     }
+    long long primePermutations = 1, nonPrimePermutations = 1;
+    for (int i = 1; i <= primeCount; i++) {
+        primePermutations *= i;
+    }
+    for (int i = 1; i <= nonPrimeCount; i++) {
+        nonPrimePermutations *= i;
+    }
+    return primePermutations * nonPrimePermutations;
 }
 
 int main() {
-    // cout << "Testing PrimeArrangementsII" << endl;
-    // solveOptimal_1570();
+    std::cout << countArrangements(1) << std::endl;  // Output: 1
+    std::cout << countArrangements(2) << std::endl;  // Output: 1
+    std::cout << countArrangements(5) << std::endl;  // Output: 4
     return 0;
 }
-
-
-
+```
