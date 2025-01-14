@@ -1,6 +1,6 @@
 /**
- * Problem: Construct Uniform Parity Array II (LeetCode 3876)
- * Link: https://leetcode.com/problems/construct-uniform-parity-array-ii/
+ * Problem: Where Will the Ball Fall (LeetCode 1706)
+ * Link: https://leetcode.com/problems/where-will-the-ball-fall/
  */
 
 #include <iostream>
@@ -35,11 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Construct Uniform Parity Array II" << endl;
+    // cout << "Testing Where Will the Ball Fall" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
 
