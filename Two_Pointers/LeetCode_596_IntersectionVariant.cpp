@@ -1,6 +1,6 @@
 /**
- * Problem: CreateSortedArrayOptimized (CSES 1047)
- * Link: https://cses.com/problems/createsortedarrayoptimized/
+ * Problem: IntersectionVariant (LeetCode 596)
+ * Link: https://leetcode.com/problems/intersectionvariant/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1047() {
+void solveBrute_596() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1047() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1047() {
+void solveOptimal_596() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,12 +39,9 @@ void solveOptimal_1047() {
 }
 
 int main() {
-    // cout << "Testing CreateSortedArrayOptimized" << endl;
-    // solveOptimal_1047();
+    // cout << "Testing IntersectionVariant" << endl;
+    // solveOptimal_596();
     return 0;
 }
-
-
-
 
 
