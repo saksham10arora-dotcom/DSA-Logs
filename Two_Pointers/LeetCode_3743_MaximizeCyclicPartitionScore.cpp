@@ -1,6 +1,6 @@
 /**
- * Problem: Sum of K-Digit Numbers in a Range (LeetCode 3855)
- * Link: https://leetcode.com/problems/sum-of-k-digit-numbers-in-a-range/
+ * Problem: Maximize Cyclic Partition Score (LeetCode 3743)
+ * Link: https://leetcode.com/problems/maximize-cyclic-partition-score/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Sum of K-Digit Numbers in a Range" << endl;
+    // cout << "Testing Maximize Cyclic Partition Score" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
