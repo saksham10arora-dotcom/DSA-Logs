@@ -1,52 +1,45 @@
-```cpp
-// LeetCode problem 3855: Sum Of K Digit Numbers In A Range
-// https://leetcode.com/problems/sum-of-k-digit-numbers-in-a-range/
-// Given two integers l and r, find the sum of all numbers in the range [l, r] that have exactly k digits.
+/**
+ * Problem: Sum of K-Digit Numbers in a Range (LeetCode 3855)
+ * Link: https://leetcode.com/problems/sum-of-k-digit-numbers-in-a-range/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach: O(n) where n is the range of numbers
-class SolutionBruteForce {
-public:
-    int sumOfKDigitNumbersInARange(int l, int r, int k) {
-        int sum = 0;
-        for (int i = l; i <= r; i++) {
-            std::string str = std::to_string(i);
-            if (str.length() == k) {
-                sum += i;
-            }
-        }
-        return sum;
-    }
-};
+using namespace std;
 
-// Optimal solution: O(log n) where n is the range of numbers
-class SolutionOptimal {
-public:
-    int sumOfKDigitNumbersInARange(int l, int r, int k) {
-        int sum = 0;
-        for (int i = l; i <= r; i++) {
-            int digits = 0;
-            int num = i;
-            while (num > 0) {
-                num /= 10;
-                digits++;
-            }
-            if (digits == k) {
-                sum += i;
-            }
-        }
-        return sum;
-    }
-};
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    SolutionOptimal solution;
-    std::cout << solution.sumOfKDigitNumbersInARange(1, 13, 2) << std::endl;  // Output: 24
-    std::cout << solution.sumOfKDigitNumbersInARange(100, 130, 3) << std::endl;  // Output: 1710
-    std::cout << solution.sumOfKDigitNumbersInARange(1000, 1300, 4) << std::endl;  // Output: 17100
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Sum of K-Digit Numbers in a Range" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
+
