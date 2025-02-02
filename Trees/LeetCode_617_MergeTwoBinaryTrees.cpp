@@ -1,6 +1,6 @@
 /**
- * Problem: Find Nearest Point That Has the Same X or Y Coordinate (LeetCode 1779)
- * Link: https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
+ * Problem: Merge Two Binary Trees (LeetCode 617)
+ * Link: https://leetcode.com/problems/merge-two-binary-trees/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Find Nearest Point That Has the Same X or Y Coordinate" << endl;
+    // cout << "Testing Merge Two Binary Trees" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
