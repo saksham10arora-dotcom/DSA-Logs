@@ -1,6 +1,6 @@
 /**
- * Problem: RedundantConnectionVariant (LeetCode 2182)
- * Link: https://leetcode.com/problems/redundantconnectionvariant/
+ * Problem: WordLadder (LeetCode 748)
+ * Link: https://leetcode.com/problems/wordladder/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_2182() {
+void solveBrute_748() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_2182() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_2182() {
+void solveOptimal_748() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,9 @@ void solveOptimal_2182() {
 }
 
 int main() {
-    // cout << "Testing RedundantConnectionVariant" << endl;
-    // solveOptimal_2182();
+    // cout << "Testing WordLadder" << endl;
+    // solveOptimal_748();
     return 0;
 }
-
 
 
