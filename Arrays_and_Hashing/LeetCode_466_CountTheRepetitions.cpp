@@ -1,6 +1,6 @@
 /**
- * Problem: Count Different Palindromic Subsequences (LeetCode 730)
- * Link: https://leetcode.com/problems/count-different-palindromic-subsequences/
+ * Problem: Count The Repetitions (LeetCode 466)
+ * Link: https://leetcode.com/problems/count-the-repetitions/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Count Different Palindromic Subsequences" << endl;
+    // cout << "Testing Count The Repetitions" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
