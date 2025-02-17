@@ -1,6 +1,6 @@
 /**
- * Problem: N-Queens II (LeetCode 52)
- * Link: https://leetcode.com/problems/n-queens-ii/
+ * Problem: Number of Longest Increasing Subsequence (LeetCode 673)
+ * Link: https://leetcode.com/problems/number-of-longest-increasing-subsequence/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing N-Queens II" << endl;
+    // cout << "Testing Number of Longest Increasing Subsequence" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
