@@ -1,6 +1,6 @@
 /**
- * Problem: ReorganizeStringII (LeetCode 997)
- * Link: https://leetcode.com/problems/reorganizestringii/
+ * Problem: CountOfRangeSum (Codeforces 514E)
+ * Link: https://codeforces.com/problems/countofrangesum/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_997() {
+void solveBrute_514E() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_997() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_997() {
+void solveOptimal_514E() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,10 @@ void solveOptimal_997() {
 }
 
 int main() {
-    // cout << "Testing ReorganizeStringII" << endl;
-    // solveOptimal_997();
+    // cout << "Testing CountOfRangeSum" << endl;
+    // solveOptimal_514E();
     return 0;
 }
-
 
 
 
