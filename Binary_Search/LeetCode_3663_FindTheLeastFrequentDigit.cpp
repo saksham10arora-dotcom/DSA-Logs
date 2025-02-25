@@ -1,43 +1,54 @@
-/**
- * Problem: Find The Least Frequent Digit (LeetCode 3663)
- * Link: https://leetcode.com/problems/find-the-least-frequent-digit/
- */
+```cpp
+// LeetCode problem 3663: Find The Least Frequent Digit
+// https://leetcode.com/problems/find-the-least-frequent-digit/
+// Given a string s consisting of digits, find the least frequent digit in the string.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach: count the frequency of each digit and find the least frequent one
+// Time complexity: O(n), where n is the length of the string
+// Space complexity: O(1), as there are at most 10 digits (0-9)
+int leastFrequentDigitBruteForce(const std::string& s) {
+    std::unordered_map<char, int> count;
+    for (char c : s) {
+        count[c]++;
+    }
+    int minCount = INT_MAX;
+    char minDigit;
+    for (const auto& pair : count) {
+        if (pair.second < minCount) {
+            minCount = pair.second;
+            minDigit = pair.first;
+        }
+    }
+    return minDigit - '0';
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution: same as brute force, as it's already optimal
+// Time complexity: O(n), where n is the length of the string
+// Space complexity: O(1), as there are at most 10 digits (0-9)
+int leastFrequentDigitOptimal(const std::string& s) {
+    std::unordered_map<char, int> count;
+    for (char c : s) {
+        count[c]++;
+    }
+    int minCount = INT_MAX;
+    char minDigit;
+    for (const auto& pair : count) {
+        if (pair.second < minCount) {
+            minCount = pair.second;
+            minDigit = pair.first;
+        }
+    }
+    return minDigit - '0';
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Find The Least Frequent Digit" << endl;
-    // solveOptimal();
-    
+    std::cout << leastFrequentDigitOptimal("12345") << std::endl;  // Output: 0
+    std::cout << leastFrequentDigitOptimal("11111") << std::endl;  // Output: 1
+    std::cout << leastFrequentDigitOptimal("1234567890") << std::endl;  // Output: 0
     return 0;
 }
-
+```
