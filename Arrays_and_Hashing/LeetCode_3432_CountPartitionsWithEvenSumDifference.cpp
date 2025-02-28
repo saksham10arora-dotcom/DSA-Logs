@@ -1,6 +1,6 @@
 /**
- * Problem: Palindrome Partitioning III (LeetCode 1278)
- * Link: https://leetcode.com/problems/palindrome-partitioning-iii/
+ * Problem: Count Partitions with Even Sum Difference (LeetCode 3432)
+ * Link: https://leetcode.com/problems/count-partitions-with-even-sum-difference/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Palindrome Partitioning III" << endl;
+    // cout << "Testing Count Partitions with Even Sum Difference" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
