@@ -1,6 +1,6 @@
 /**
- * Problem: IntersectionAdvanced (LeetCode 556)
- * Link: https://leetcode.com/problems/intersectionadvanced/
+ * Problem: RectangleAreaOptimized (LeetCode 529)
+ * Link: https://leetcode.com/problems/rectangleareaoptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_556() {
+void solveBrute_529() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_556() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_556() {
+void solveOptimal_529() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,10 @@ void solveOptimal_556() {
 }
 
 int main() {
-    // cout << "Testing IntersectionAdvanced" << endl;
-    // solveOptimal_556();
+    // cout << "Testing RectangleAreaOptimized" << endl;
+    // solveOptimal_529();
     return 0;
 }
-
 
 
 
