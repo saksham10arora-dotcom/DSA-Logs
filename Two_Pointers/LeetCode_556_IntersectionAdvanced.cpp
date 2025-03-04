@@ -1,48 +1,73 @@
-/**
- * Problem: IntersectionAdvanced (LeetCode 556)
- * Link: https://leetcode.com/problems/intersectionadvanced/
- */
+```cpp
+// LeetCode problem 556: Next Greater Element III
+// https://leetcode.com/problems/next-greater-element-iii/
+// Given a positive integer n, find the smallest integer which is greater than n and has the same digits.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_556() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+        // Convert integer to vector of digits
+        std::vector<int> digits;
+        while (n > 0) {
+            digits.push_back(n % 10);
+            n /= 10;
         }
-    }
-}
+        std::reverse(digits.begin(), digits.end());
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_556() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+        // Find the first decreasing digit from the right
+        int i = digits.size() - 2;
+        while (i >= 0 && digits[i] >= digits[i + 1]) {
+            i--;
+        }
+
+        // If no decreasing digit is found, the number is the largest possible
+        if (i < 0) {
+            return -1;
+        }
+
+        // Find the smallest digit greater than digits[i] from the right
+        int j = digits.size() - 1;
+        while (digits[j] <= digits[i]) {
+            j--;
+        }
+
+        // Swap digits[i] and digits[j]
+        std::swap(digits[i], digits[j]);
+
+        // Sort the digits to the right of i in ascending order
+        std::sort(digits.begin() + i + 1, digits.end());
+
+        // Convert vector of digits back to integer
+        long long result = 0;
+        for (int digit : digits) {
+            result = result * 10 + digit;
+        }
+
+        // Check for overflow
+        if (result > INT_MAX) {
+            return -1;
+        }
+
+        return result;
     }
-}
+};
 
 int main() {
-    // cout << "Testing IntersectionAdvanced" << endl;
-    // solveOptimal_556();
+    Solution solution;
+
+    // Test case 1
+    std::cout << solution.nextGreaterElement(12) << std::endl;  // Output: 21
+
+    // Test case 2
+    std::cout << solution.nextGreaterElement(21) << std::endl;  // Output: -1
+
+    // Test case 3
+    std::cout << solution.nextGreaterElement(123) << std::endl;  // Output: 132
+
     return 0;
 }
-
-
-
+```
