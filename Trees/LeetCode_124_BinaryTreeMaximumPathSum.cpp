@@ -1,6 +1,6 @@
 /**
- * Problem: Minimum Removals to Balance Array (LeetCode 3634)
- * Link: https://leetcode.com/problems/minimum-removals-to-balance-array/
+ * Problem: Binary Tree Maximum Path Sum (LeetCode 124)
+ * Link: https://leetcode.com/problems/binary-tree-maximum-path-sum/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Minimum Removals to Balance Array" << endl;
+    // cout << "Testing Binary Tree Maximum Path Sum" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
