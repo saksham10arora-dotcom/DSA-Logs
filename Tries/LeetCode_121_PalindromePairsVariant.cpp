@@ -1,6 +1,6 @@
 /**
- * Problem: NetworkDelayAdvanced (LeetCode 2336)
- * Link: https://leetcode.com/problems/networkdelayadvanced/
+ * Problem: PalindromePairsVariant (LeetCode 121)
+ * Link: https://leetcode.com/problems/palindromepairsvariant/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_2336() {
+void solveBrute_121() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_2336() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_2336() {
+void solveOptimal_121() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,8 +39,8 @@ void solveOptimal_2336() {
 }
 
 int main() {
-    // cout << "Testing NetworkDelayAdvanced" << endl;
-    // solveOptimal_2336();
+    // cout << "Testing PalindromePairsVariant" << endl;
+    // solveOptimal_121();
     return 0;
 }
 
