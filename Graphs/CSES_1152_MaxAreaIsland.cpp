@@ -1,49 +1,80 @@
-/**
- * Problem: MaxAreaIsland (CSES 1152)
- * Link: https://cses.com/problems/maxareaisland/
- */
+```cpp
+// Problem: Max Area Island
+// Link: https://cses.fi/problemset/task/1152
+// Description: Given a grid of 0s and 1s, find the maximum area of an island.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: O(n*m*4^n*m) - checking all possible paths
+// int maxArea(std::vector<std::vector<int>>& grid) {
+//     int maxArea = 0;
+//     for (int i = 0; i < grid.size(); i++) {
+//         for (int j = 0; j < grid[0].size(); j++) {
+//             if (grid[i][j] == 1) {
+//                 maxArea = std::max(maxArea, dfs(grid, i, j));
+//             }
+//         }
+//     }
+//     return maxArea;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1152() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: O(n*m) - using DFS to explore the grid
+int maxArea(std::vector<std::vector<int>>& grid) {
+    if (grid.empty()) return 0;
+    int maxArea = 0;
+    for (int i = 0; i < grid.size(); i++) {
+        for (int j = 0; j < grid[0].size(); j++) {
+            if (grid[i][j] == 1) {
+                maxArea = std::max(maxArea, dfs(grid, i, j));
+            }
         }
     }
+    return maxArea;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1152() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+int dfs(std::vector<std::vector<int>>& grid, int i, int j) {
+    if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size() || grid[i][j] == 0) {
+        return 0;
     }
+    grid[i][j] = 0; // mark as visited
+    return 1 + dfs(grid, i - 1, j) + dfs(grid, i + 1, j) + dfs(grid, i, j - 1) + dfs(grid, i, j + 1);
 }
 
 int main() {
-    // cout << "Testing MaxAreaIsland" << endl;
-    // solveOptimal_1152();
+    // Test case 1:
+    std::vector<std::vector<int>> grid1 = {
+        {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+    };
+    std::cout << maxArea(grid1) << std::endl; // Output: 6
+
+    // Test case 2:
+    std::vector<std::vector<int>> grid2 = {
+        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1}
+    };
+    std::cout << maxArea(grid2) << std::endl; // Output: 25
+
+    // Test case 3:
+    std::vector<std::vector<int>> grid3 = {
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
+    std::cout << maxArea(grid3) << std::endl; // Output: 0
+
     return 0;
 }
-
-
-
-
+```
