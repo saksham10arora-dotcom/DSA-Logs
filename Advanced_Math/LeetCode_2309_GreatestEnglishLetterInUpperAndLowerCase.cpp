@@ -1,43 +1,44 @@
-```cpp
-// LeetCode problem 2309: Greatest English Letter In Upper And Lower Case
-// https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/
-// Given a string of English letters, return the greatest English letter which occurs as both a lowercase and uppercase letter in the string.
+/**
+ * Problem: Greatest English Letter in Upper and Lower Case (LeetCode 2309)
+ * Link: https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/
+ */
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
 #include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach with O(n^2) complexity
-std::string greatestLetterBruteForce(std::string s) {
-    std::string result = "";
-    for (char c = 'z'; c >= 'a'; --c) {
-        if (s.find(c) != std::string::npos && s.find(c - 32) != std::string::npos) {
-            result = c;
-            break;
-        }
-    }
-    return result;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution with O(n) complexity
-std::string greatestLetterOptimal(std::string s) {
-    std::unordered_set<char> lower, upper;
-    for (char c : s) {
-        if (c >= 'a' && c <= 'z') lower.insert(c);
-        else upper.insert(c);
-    }
-    for (char c = 'z'; c >= 'a'; --c) {
-        if (lower.find(c) != lower.end() && upper.find(c - 32) != upper.end()) {
-            return std::string(1, c);
-        }
-    }
-    return "";
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::cout << greatestLetterOptimal("lEtLeT") << std::endl;  // "E"
-    std::cout << greatestLetterOptimal("arRAzFif") << std::endl;  // "R"
-    std::cout << greatestLetterOptimal("AbCdEfGh") << std::endl;  // ""
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Greatest English Letter in Upper and Lower Case" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
