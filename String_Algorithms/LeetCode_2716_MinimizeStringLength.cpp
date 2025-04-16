@@ -1,6 +1,6 @@
 /**
- * Problem: Minimum Sum of Mountain Triplets I (LeetCode 2908)
- * Link: https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/
+ * Problem: Minimize String Length (LeetCode 2716)
+ * Link: https://leetcode.com/problems/minimize-string-length/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Minimum Sum of Mountain Triplets I" << endl;
+    // cout << "Testing Minimize String Length" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
