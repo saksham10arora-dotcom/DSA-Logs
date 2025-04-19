@@ -1,6 +1,6 @@
 /**
- * Problem: Domino and Tromino Tiling (LeetCode 790)
- * Link: https://leetcode.com/problems/domino-and-tromino-tiling/
+ * Problem: Poor Pigs (LeetCode 458)
+ * Link: https://leetcode.com/problems/poor-pigs/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Domino and Tromino Tiling" << endl;
+    // cout << "Testing Poor Pigs" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
