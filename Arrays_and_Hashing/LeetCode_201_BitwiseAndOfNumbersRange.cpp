@@ -1,45 +1,45 @@
-```cpp
-// LeetCode problem 201: Bitwise AND of Numbers Range
-// https://leetcode.com/problems/bitwise-and-of-numbers-range/
-// Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive.
+/**
+ * Problem: Bitwise AND of Numbers Range (LeetCode 201)
+ * Link: https://leetcode.com/problems/bitwise-and-of-numbers-range/
+ */
 
-class Solution {
-public:
-    // Brute force approach with O(n) complexity
-    int rangeBitwiseAnd_BruteForce(int m, int n) {
-        int result = m;
-        for (int i = m + 1; i <= n; i++) {
-            result = result & i;
-        }
-        return result;
-    }
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-    // Optimal solution with O(log n) complexity
-    int rangeBitwiseAnd(int m, int n) {
-        int shift = 0;
-        while (m < n) {
-            m = m >> 1;
-            n = n >> 1;
-            shift++;
-        }
-        return m << shift;
-    }
-};
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    // Test case 1
-    int m1 = 5;
-    int n1 = 7;
-    int result1 = solution.rangeBitwiseAnd(m1, n1);
-    // Test case 2
-    int m2 = 2;
-    int n2 = 3;
-    int result2 = solution.rangeBitwiseAnd(m2, n2);
-    // Test case 3
-    int m3 = 1;
-    int n3 = 2147483647;
-    int result3 = solution.rangeBitwiseAnd(m3, n3);
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Bitwise AND of Numbers Range" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
+
