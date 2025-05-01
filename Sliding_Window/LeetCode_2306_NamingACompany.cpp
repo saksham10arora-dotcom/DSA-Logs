@@ -1,43 +1,45 @@
-/**
- * Problem: Naming a Company (LeetCode 2306)
- * Link: https://leetcode.com/problems/naming-a-company/
- */
+```cpp
+// Naming A Company, https://leetcode.com/problems/naming-a-company/, 
+// Given an array of strings ideas, return the number of families of companies that can be named.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Brute force approach with O(n^2 * m) complexity
+class Solution {
+public:
+    long long numberOfNames(std::vector<std::string>& ideas) {
+        int n = ideas.size();
+        std::unordered_set<std::string> set;
+        for (const auto& idea : ideas) {
+            set.insert(idea);
+        }
+        long long count = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                std::string s1 = ideas[i];
+                std::string s2 = ideas[j];
+                std::string s3 = s1;
+                s3[0] = s2[0];
+                if (set.find(s3) == set.end()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Naming a Company" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    std::vector<std::string> ideas1 = {"coffee","donuts","time","toffee"};
+    std::cout << solution.numberOfNames(ideas1) << std::endl;  // Output: 6
+
+    std::vector<std::string> ideas2 = {"lack","back"};
+    std::cout << solution.numberOfNames(ideas2) << std::endl;  // Output: 0
+
     return 0;
 }
-
+```
