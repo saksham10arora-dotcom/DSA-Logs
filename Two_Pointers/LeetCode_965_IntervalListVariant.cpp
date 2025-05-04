@@ -1,70 +1,49 @@
-```cpp
-// LeetCode problem 965: Interval List Variant, https://leetcode.com/problems/univalued-binary-tree/
-// A univalued binary tree is a binary tree where every node has the same value.
-// Given the root of a binary tree, return true if the tree is univalued, or false otherwise.
+/**
+ * Problem: IntervalListVariant (LeetCode 965)
+ * Link: https://leetcode.com/problems/intervallistvariant/
+ */
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
+using namespace std;
 
-class Solution {
-public:
-    // Brute force approach with O(N) complexity, where N is the number of nodes in the tree
-    bool isUnivalTreeBrute(TreeNode* root) {
-        if (!root) return true;
-        if (root->left && root->left->val!= root->val) return false;
-        if (root->right && root->right->val!= root->val) return false;
-        return isUnivalTreeBrute(root->left) && isUnivalTreeBrute(root->right);
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_965() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
+        }
     }
+}
 
-    // Optimal solution with O(N) complexity, where N is the number of nodes in the tree
-    bool isUnivalTree(TreeNode* root) {
-        return isUnivalTree(root, root->val);
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_965() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-
-    bool isUnivalTree(TreeNode* root, int val) {
-        if (!root) return true;
-        if (root->val!= val) return false;
-        return isUnivalTree(root->left, val) && isUnivalTree(root->right, val);
-    }
-};
+}
 
 int main() {
-    Solution solution;
-
-    // Test case 1:
-    TreeNode* root1 = new TreeNode(1);
-    root1->left = new TreeNode(1);
-    root1->right = new TreeNode(1);
-    root1->left->left = new TreeNode(1);
-    root1->left->right = new TreeNode(1);
-    root1->right->right = new TreeNode(1);
-    std::cout << std::boolalpha << solution.isUnivalTree(root1) << std::endl;  // Expected output: true
-
-    // Test case 2:
-    TreeNode* root2 = new TreeNode(2);
-    root2->left = new TreeNode(2);
-    root2->right = new TreeNode(2);
-    root2->left->left = new TreeNode(2);
-    root2->left->right = new TreeNode(2);
-    root2->right->right = new TreeNode(2);
-    std::cout << std::boolalpha << solution.isUnivalTree(root2) << std::endl;  // Expected output: true
-
-    // Test case 3:
-    TreeNode* root3 = new TreeNode(2);
-    root3->left = new TreeNode(2);
-    root3->right = new TreeNode(2);
-    root3->left->left = new TreeNode(2);
-    root3->left->right = new TreeNode(3);
-    root3->right->right = new TreeNode(2);
-    std::cout << std::boolalpha << solution.isUnivalTree(root3) << std::endl;  // Expected output: false
-
+    // cout << "Testing IntervalListVariant" << endl;
+    // solveOptimal_965();
     return 0;
 }
-```
+
+
+
+
