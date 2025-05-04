@@ -1,6 +1,6 @@
 /**
- * Problem: PalindromePairsVariant (LeetCode 121)
- * Link: https://leetcode.com/problems/palindromepairsvariant/
+ * Problem: ValidSquareIII (LeetCode 2341)
+ * Link: https://leetcode.com/problems/validsquareiii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_121() {
+void solveBrute_2341() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_121() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_121() {
+void solveOptimal_2341() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,9 @@ void solveOptimal_121() {
 }
 
 int main() {
-    // cout << "Testing PalindromePairsVariant" << endl;
-    // solveOptimal_121();
+    // cout << "Testing ValidSquareIII" << endl;
+    // solveOptimal_2341();
     return 0;
 }
-
-
 
 
