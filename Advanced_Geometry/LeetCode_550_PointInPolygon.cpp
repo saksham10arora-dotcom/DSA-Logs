@@ -1,48 +1,57 @@
+```cpp
 /**
- * Problem: PointInPolygon (LeetCode 550)
- * Link: https://leetcode.com/problems/pointinpolygon/
+ * LeetCode 550: Point In Polygon
+ * https://leetcode.com/problems/dot-product-of-two-sparse-vectors/
+ * Given a list of (x, y) coordinates and a query point (x, y), 
+ * determine if the point is inside the polygon.
  */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_550() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach: O(n) complexity
+bool pointInPolygonBruteForce(const std::vector<std::vector<int>>& points, const std::vector<int>& query) {
+    int n = points.size();
+    int x = query[0];
+    int y = query[1];
+    int inside = 0;
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+        if (((points[i][1] > y) != (points[j][1] > y)) && 
+            (x < (points[j][0] - points[i][0]) * (y - points[i][1]) / (points[j][1] - points[i][1]) + points[i][0])) {
+            inside = !inside;
         }
     }
+    return inside;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_550() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution: O(n) complexity
+bool pointInPolygonOptimal(const std::vector<std::vector<int>>& points, const std::vector<int>& query) {
+    int n = points.size();
+    int x = query[0];
+    int y = query[1];
+    int inside = 0;
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+        if (((points[i][1] > y) != (points[j][1] > y)) && 
+            (x < (points[j][0] - points[i][0]) * (y - points[i][1]) / (points[j][1] - points[i][1]) + points[i][0])) {
+            inside = !inside;
+        }
     }
+    return inside;
 }
 
 int main() {
-    // cout << "Testing PointInPolygon" << endl;
-    // solveOptimal_550();
+    std::vector<std::vector<int>> points1 = {{1, 1}, {1, 5}, {5, 5}, {5, 1}};
+    std::vector<int> query1 = {3, 3};
+    std::cout << std::boolalpha << pointInPolygonOptimal(points1, query1) << std::endl;  // True
+
+    std::vector<std::vector<int>> points2 = {{1, 1}, {1, 5}, {5, 5}, {5, 1}};
+    std::vector<int> query2 = {0, 0};
+    std::cout << std::boolalpha << pointInPolygonOptimal(points2, query2) << std::endl;  // False
+
+    std::vector<std::vector<int>> points3 = {{1, 1}, {1, 5}, {5, 5}, {5, 1}};
+    std::vector<int> query3 = {3, 6};
+    std::cout << std::boolalpha << pointInPolygonOptimal(points3, query3) << std::endl;  // False
+
     return 0;
 }
-
-
-
+```
