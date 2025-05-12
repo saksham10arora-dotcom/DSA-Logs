@@ -1,6 +1,6 @@
 /**
- * Problem: TaskSchedulerII (LeetCode 2618)
- * Link: https://leetcode.com/problems/taskschedulerii/
+ * Problem: GenerateParenthesesVariant (Codeforces 631E)
+ * Link: https://codeforces.com/problems/generateparenthesesvariant/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_2618() {
+void solveBrute_631E() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_2618() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_2618() {
+void solveOptimal_631E() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,9 @@ void solveOptimal_2618() {
 }
 
 int main() {
-    // cout << "Testing TaskSchedulerII" << endl;
-    // solveOptimal_2618();
+    // cout << "Testing GenerateParenthesesVariant" << endl;
+    // solveOptimal_631E();
     return 0;
 }
-
-
 
 
