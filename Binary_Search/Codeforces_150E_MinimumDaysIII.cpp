@@ -1,47 +1,56 @@
-/**
- * Problem: MinimumDaysIII (Codeforces 150E)
- * Link: https://codeforces.com/problems/minimumdaysiii/
- */
+```cpp
+// Codeforces_150E_MinimumDaysIII, https://codeforces.com/contest/150/problem/E
+// Given a set of trees with different growth rates, find the minimum number of days required for all trees to reach a certain height.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: O(n * max_height) - not efficient for large inputs
+// int minDays(std::vector<int>& growthRates, int targetHeight) {
+//     int days = 0;
+//     while (true) {
+//         bool allReached = true;
+//         for (int i = 0; i < growthRates.size(); ++i) {
+//             if (growthRates[i] < targetHeight) {
+//                 growthRates[i]++;
+//                 allReached = false;
+//             }
+//         }
+//         if (allReached) break;
+//         days++;
+//     }
+//     return days;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_150E() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: O(n * log(max_height)) - using binary search
+int minDays(std::vector<int>& growthRates, int targetHeight) {
+    int low = 0, high = targetHeight;
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        bool allReached = true;
+        for (int rate : growthRates) {
+            if (rate * mid < targetHeight) {
+                allReached = false;
+                break;
+            }
         }
+        if (allReached) high = mid;
+        else low = mid + 1;
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_150E() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return low;
 }
 
 int main() {
-    // cout << "Testing MinimumDaysIII" << endl;
-    // solveOptimal_150E();
+    std::vector<int> growthRates1 = {1, 2, 3};
+    std::cout << minDays(growthRates1, 6) << std::endl;  // Output: 4
+
+    std::vector<int> growthRates2 = {1, 1, 1};
+    std::cout << minDays(growthRates2, 3) << std::endl;  // Output: 3
+
+    std::vector<int> growthRates3 = {2, 4, 6};
+    std::cout << minDays(growthRates3, 12) << std::endl;  // Output: 2
+
     return 0;
 }
-
-
+```
