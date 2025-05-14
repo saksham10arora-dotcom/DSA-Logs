@@ -1,6 +1,6 @@
 /**
- * Problem: MinimumDaysIII (Codeforces 150E)
- * Link: https://codeforces.com/problems/minimumdaysiii/
+ * Problem: CapacityToShip (LeetCode 1126)
+ * Link: https://leetcode.com/problems/capacitytoship/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_150E() {
+void solveBrute_1126() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_150E() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_150E() {
+void solveOptimal_1126() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,8 +39,8 @@ void solveOptimal_150E() {
 }
 
 int main() {
-    // cout << "Testing MinimumDaysIII" << endl;
-    // solveOptimal_150E();
+    // cout << "Testing CapacityToShip" << endl;
+    // solveOptimal_1126();
     return 0;
 }
 
