@@ -1,6 +1,6 @@
 /**
- * Problem: The K Weakest Rows in a Matrix (LeetCode 1337)
- * Link: https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+ * Problem: Special Array II (LeetCode 3152)
+ * Link: https://leetcode.com/problems/special-array-ii/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing The K Weakest Rows in a Matrix" << endl;
+    // cout << "Testing Special Array II" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
