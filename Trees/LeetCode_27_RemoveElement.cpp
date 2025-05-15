@@ -1,59 +1,44 @@
-```cpp
-// Remove Element, https://leetcode.com/problems/remove-element/, Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+/**
+ * Problem: Remove Element (LeetCode 27)
+ * Link: https://leetcode.com/problems/remove-element/
+ */
 
+#include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-class Solution {
-public:
-    // Brute force approach: O(n^2) due to shifting elements in the vector
-    int removeElementBruteForce(std::vector<int>& nums, int val) {
-        int i = 0;
-        while (i < nums.size()) {
-            if (nums[i] == val) {
-                nums.erase(nums.begin() + i);
-            } else {
-                i++;
-            }
-        }
-        return nums.size();
-    }
+using namespace std;
 
-    // Optimal solution: O(n) by using two pointers
-    int removeElementOptimal(std::vector<int>& nums, int val) {
-        int i = 0;
-        for (int j = 0; j < nums.size(); j++) {
-            if (nums[j] != val) {
-                nums[i] = nums[j];
-                i++;
-            }
-        }
-        return i;
-    }
-};
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    std::vector<int> nums1 = {3, 2, 2, 3};
-    std::cout << solution.removeElementOptimal(nums1, 3) << std::endl;  // Output: 2
-    for (int num : nums1) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    std::vector<int> nums2 = {0, 1, 2, 2, 3, 0, 4, 2};
-    std::cout << solution.removeElementOptimal(nums2, 2) << std::endl;  // Output: 5
-    for (int num : nums2) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    std::vector<int> nums3 = {2, 2, 2, 2};
-    std::cout << solution.removeElementOptimal(nums3, 2) << std::endl;  // Output: 0
-    for (int num : nums3) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Remove Element" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+

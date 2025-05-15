@@ -1,43 +1,73 @@
-/**
- * Problem: The K Weakest Rows in a Matrix (LeetCode 1337)
- * Link: https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
- */
+```cpp
+// LeetCode 1337: The K Weakest Rows In A Matrix
+// https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+// Given a matrix, where each row represents a soldier and each column represents a battle, 
+// and a value of 1 indicates that the soldier was present in that battle, 
+// return the k weakest rows in the matrix ordered from weakest to strongest.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
 #include <queue>
-#include <stack>
+#include <algorithm>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach: O(n*m) where n is the number of rows and m is the number of columns
+std::vector<int> kWeakestRowsBruteForce(std::vector<std::vector<int>>& mat, int k) {
+    std::vector<std::pair<int, int>> rows;
+    for (int i = 0; i < mat.size(); i++) {
+        int count = 0;
+        for (int j = 0; j < mat[i].size(); j++) {
+            count += mat[i][j];
+        }
+        rows.push_back({count, i});
+    }
+    std::sort(rows.begin(), rows.end());
+    std::vector<int> result;
+    for (int i = 0; i < k; i++) {
+        result.push_back(rows[i].second);
+    }
+    return result;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution: O(n*m + n log n) where n is the number of rows and m is the number of columns
+std::vector<int> kWeakestRows(std::vector<std::vector<int>>& mat, int k) {
+    std::vector<std::pair<int, int>> rows;
+    for (int i = 0; i < mat.size(); i++) {
+        int count = 0;
+        for (int j = 0; j < mat[i].size(); j++) {
+            count += mat[i][j];
+        }
+        rows.push_back({count, i});
+    }
+    std::sort(rows.begin(), rows.end());
+    std::vector<int> result;
+    for (int i = 0; i < k; i++) {
+        result.push_back(rows[i].second);
+    }
+    return result;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing The K Weakest Rows in a Matrix" << endl;
-    // solveOptimal();
-    
+    std::vector<std::vector<int>> mat1 = {{1,1,0,0,0},{1,1,1,1,0},{1,0,0,0,0},{1,1,0,0,0}};
+    std::vector<int> result1 = kWeakestRows(mat1, 3);
+    for (int i : result1) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> mat2 = {{1,0,0,0},{1,1,1,1},{1,0,0,0},{1,0,0,0}};
+    std::vector<int> result2 = kWeakestRows(mat2, 2);
+    for (int i : result2) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> mat3 = {{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+    std::vector<int> result3 = kWeakestRows(mat3, 4);
+    for (int i : result3) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
+```
