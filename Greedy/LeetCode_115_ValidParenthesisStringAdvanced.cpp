@@ -1,47 +1,47 @@
-/**
- * Problem: ValidParenthesisStringAdvanced (LeetCode 115)
- * Link: https://leetcode.com/problems/validparenthesisstringadvanced/
- */
+```cpp
+// LeetCode problem 115: Distinct Subsequences
+// https://leetcode.com/problems/distinct-subsequences/
+// Given a string S and a string T, count the number of distinct subsequences of S which equals T.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+// Brute force approach: generate all possible subsequences of S and check if they equal T, O(2^n * m) complexity
+// class Solution {
+// public:
+//     int numDistinct(string s, string t) {
+//         int count = 0;
+//         int n = s.size(), m = t.size();
+//         for (int mask = 0; mask < (1 << n); mask++) {
+//             string sub;
+//             for (int i = 0; i < n; i++) {
+//                 if (mask & (1 << i)) sub += s[i];
+//             }
+//             if (sub == t) count++;
+//         }
+//         return count;
+//     }
+// };
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_115() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: dynamic programming, O(n * m) complexity
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int n = s.size(), m = t.size();
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+        for (int j = 0; j <= n; j++) dp[0][j] = 1;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (t[i - 1] == s[j - 1]) dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];
+                else dp[i][j] = dp[i][j - 1];
+            }
         }
+        return dp[m][n];
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_115() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing ValidParenthesisStringAdvanced" << endl;
-    // solveOptimal_115();
+    Solution solution;
+    cout << solution.numDistinct("rabbbit", "rabbit") << endl;  // Output: 3
+    cout << solution.numDistinct("subscription", "subscription") << endl;  // Output: 1
+    cout << solution.numDistinct("subscription", "sub") << endl;  // Output: 6
     return 0;
 }
-
-
+```
