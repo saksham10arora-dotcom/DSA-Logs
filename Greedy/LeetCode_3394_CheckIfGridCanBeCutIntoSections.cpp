@@ -1,6 +1,6 @@
 /**
- * Problem: Maximum Path Intersection Sum in a Grid (LeetCode 3938)
- * Link: https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/
+ * Problem: Check if Grid can be Cut into Sections (LeetCode 3394)
+ * Link: https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/
  */
 
 #include <iostream>
@@ -35,11 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Maximum Path Intersection Sum in a Grid" << endl;
+    // cout << "Testing Check if Grid can be Cut into Sections" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
 
