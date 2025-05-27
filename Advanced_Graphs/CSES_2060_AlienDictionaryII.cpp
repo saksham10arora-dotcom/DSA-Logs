@@ -1,48 +1,85 @@
-/**
- * Problem: AlienDictionaryII (CSES 2060)
- * Link: https://cses.com/problems/aliendictionaryii/
- */
+```cpp
+// Alien Dictionary II, https://cses.fi/problemset/task/2060, 
+// Given a list of words, determine if there is a valid ordering of the words such that for every pair of adjacent words, 
+// the first word is a subsequence of the second word.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
 #include <queue>
+#include <unordered_map>
+#include <string>
 
-using namespace std;
+// Brute force approach: Generate all permutations of the words and check each permutation (O(n!))
+// This approach is not efficient for large inputs
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2060() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: Use topological sorting and a graph to model the relationships between the words (O(n + m))
+class Solution {
+public:
+    bool isSubsequence(const std::string& s1, const std::string& s2) {
+        int i = 0, j = 0;
+        while (i < s1.size() && j < s2.size()) {
+            if (s1[i] == s2[j]) {
+                i++;
+            }
+            j++;
         }
+        return i == s1.size();
     }
-}
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2060() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    bool alienOrder(std::vector<std::string>& words) {
+        std::unordered_map<char, std::vector<char>> graph;
+        std::unordered_map<char, int> inDegree;
+        for (const auto& word : words) {
+            for (char c : word) {
+                if (inDegree.find(c) == inDegree.end()) {
+                    inDegree[c] = 0;
+                }
+            }
+        }
+        for (int i = 0; i < words.size() - 1; i++) {
+            const auto& s1 = words[i];
+            const auto& s2 = words[i + 1];
+            if (s1.size() > s2.size() && isSubsequence(s1, s2)) {
+                return false;
+            }
+            for (int j = 0; j < std::min(s1.size(), s2.size()); j++) {
+                if (s1[j] != s2[j]) {
+                    graph[s1[j]].push_back(s2[j]);
+                    inDegree[s2[j]]++;
+                    break;
+                }
+            }
+        }
+        std::queue<char> q;
+        for (const auto& pair : inDegree) {
+            if (pair.second == 0) {
+                q.push(pair.first);
+            }
+        }
+        std::string result;
+        while (!q.empty()) {
+            char c = q.front();
+            q.pop();
+            result += c;
+            for (char neighbor : graph[c]) {
+                inDegree[neighbor]--;
+                if (inDegree[neighbor] == 0) {
+                    q.push(neighbor);
+                }
+            }
+        }
+        return result.size() == inDegree.size();
     }
-}
+};
 
 int main() {
-    // cout << "Testing AlienDictionaryII" << endl;
-    // solveOptimal_2060();
+    Solution solution;
+    std::vector<std::string> words1 = {"abc", "bca", "acb"};
+    std::cout << std::boolalpha << solution.alienOrder(words1) << std::endl;  // False
+    std::vector<std::string> words2 = {"abc", "bac", "bca"};
+    std::cout << std::boolalpha << solution.alienOrder(words2) << std::endl;  // True
+    std::vector<std::string> words3 = {"abc", "bca", "acb", "bac"};
+    std::cout << std::boolalpha << solution.alienOrder(words3) << std::endl;  // False
     return 0;
 }
-
-
-
+```
