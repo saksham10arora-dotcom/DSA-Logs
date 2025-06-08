@@ -1,6 +1,6 @@
 /**
- * Problem: MinimumWindowAdvanced (LeetCode 2919)
- * Link: https://leetcode.com/problems/minimumwindowadvanced/
+ * Problem: PowXNIII (LeetCode 66)
+ * Link: https://leetcode.com/problems/powxniii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_2919() {
+void solveBrute_66() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_2919() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_2919() {
+void solveOptimal_66() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,12 +39,10 @@ void solveOptimal_2919() {
 }
 
 int main() {
-    // cout << "Testing MinimumWindowAdvanced" << endl;
-    // solveOptimal_2919();
+    // cout << "Testing PowXNIII" << endl;
+    // solveOptimal_66();
     return 0;
 }
-
-
 
 
 
