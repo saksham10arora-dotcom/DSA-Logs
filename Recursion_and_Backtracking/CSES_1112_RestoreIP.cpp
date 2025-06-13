@@ -1,6 +1,6 @@
 /**
- * Problem: LevelOrderBottom (Codeforces 689D)
- * Link: https://codeforces.com/problems/levelorderbottom/
+ * Problem: RestoreIP (CSES 1112)
+ * Link: https://cses.com/problems/restoreip/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_689D() {
+void solveBrute_1112() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_689D() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_689D() {
+void solveOptimal_1112() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,9 @@ void solveOptimal_689D() {
 }
 
 int main() {
-    // cout << "Testing LevelOrderBottom" << endl;
-    // solveOptimal_689D();
+    // cout << "Testing RestoreIP" << endl;
+    // solveOptimal_1112();
     return 0;
 }
-
 
 
