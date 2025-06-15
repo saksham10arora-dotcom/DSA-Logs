@@ -1,6 +1,6 @@
 /**
- * Problem: Create Binary Tree From Descriptions (LeetCode 2196)
- * Link: https://leetcode.com/problems/create-binary-tree-from-descriptions/
+ * Problem: Redistribute Characters to Make All Strings Equal (LeetCode 1897)
+ * Link: https://leetcode.com/problems/redistribute-characters-to-make-all-strings-equal/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Create Binary Tree From Descriptions" << endl;
+    // cout << "Testing Redistribute Characters to Make All Strings Equal" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
