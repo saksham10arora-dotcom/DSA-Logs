@@ -1,6 +1,6 @@
 /**
- * Problem: Maximum Path Intersection Sum in a Grid (LeetCode 3938)
- * Link: https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/
+ * Problem: Sort Integers by The Number of 1 Bits (LeetCode 1356)
+ * Link: https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/
  */
 
 #include <iostream>
@@ -35,12 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Maximum Path Intersection Sum in a Grid" << endl;
+    // cout << "Testing Sort Integers by The Number of 1 Bits" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
-
 
