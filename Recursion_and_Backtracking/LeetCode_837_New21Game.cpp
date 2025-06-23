@@ -1,6 +1,6 @@
 /**
- * Problem: Subtree of Another Tree (LeetCode 572)
- * Link: https://leetcode.com/problems/subtree-of-another-tree/
+ * Problem: New 21 Game (LeetCode 837)
+ * Link: https://leetcode.com/problems/new-21-game/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Subtree of Another Tree" << endl;
+    // cout << "Testing New 21 Game" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
