@@ -1,6 +1,6 @@
 /**
- * Problem: MaximumXORII (CSES 1512)
- * Link: https://cses.com/problems/maximumxorii/
+ * Problem: AsteroidCollisionOptimized (Codeforces 608A)
+ * Link: https://codeforces.com/problems/asteroidcollisionoptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1512() {
+void solveBrute_608A() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1512() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1512() {
+void solveOptimal_608A() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,9 @@ void solveOptimal_1512() {
 }
 
 int main() {
-    // cout << "Testing MaximumXORII" << endl;
-    // solveOptimal_1512();
+    // cout << "Testing AsteroidCollisionOptimized" << endl;
+    // solveOptimal_608A();
     return 0;
 }
-
-
 
 
