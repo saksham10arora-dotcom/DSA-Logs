@@ -1,6 +1,6 @@
 /**
- * Problem: CountOfRangeSum (Codeforces 514E)
- * Link: https://codeforces.com/problems/countofrangesum/
+ * Problem: StockSpannerOptimized (LeetCode 1379)
+ * Link: https://leetcode.com/problems/stockspanneroptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_514E() {
+void solveBrute_1379() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_514E() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_514E() {
+void solveOptimal_1379() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,9 @@ void solveOptimal_514E() {
 }
 
 int main() {
-    // cout << "Testing CountOfRangeSum" << endl;
-    // solveOptimal_514E();
+    // cout << "Testing StockSpannerOptimized" << endl;
+    // solveOptimal_1379();
     return 0;
 }
-
-
 
 
