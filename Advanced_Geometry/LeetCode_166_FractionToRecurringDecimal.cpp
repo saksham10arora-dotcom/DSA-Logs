@@ -1,43 +1,74 @@
-/**
- * Problem: Fraction to Recurring Decimal (LeetCode 166)
- * Link: https://leetcode.com/problems/fraction-to-recurring-decimal/
- */
+```cpp
+// Fraction To Recurring Decimal, https://leetcode.com/problems/fraction-to-recurring-decimal/
+// Given a numerator and a denominator, return the fraction as a decimal string.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+class Solution {
+public:
+    // Brute force approach with O(n) complexity, where n is the number of digits in the decimal representation
+    std::string fractionToDecimal(int numerator, int denominator) {
+        if (numerator == 0) return "0";
+        std::string result;
+        if ((numerator < 0) ^ (denominator < 0)) result += "-";
+        long long num = std::abs((long long)numerator);
+        long long den = std::abs((long long)denominator);
+        result += std::to_string(num / den);
+        long long remainder = num % den;
+        if (remainder == 0) return result;
+        result += ".";
+        std::unordered_map<long long, int> map;
+        while (remainder != 0 && map.find(remainder) == map.end()) {
+            map[remainder] = result.size();
+            remainder *= 10;
+            result += std::to_string(remainder / den);
+            remainder %= den;
+        }
+        if (remainder != 0) {
+            int index = map[remainder];
+            result.insert(index, 1, '(');
+            result += ")";
+        }
+        return result;
+    }
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+    // Optimal solution with O(log(n)) complexity, where n is the number of digits in the decimal representation
+    std::string fractionToDecimalOptimal(int numerator, int denominator) {
+        if (numerator == 0) return "0";
+        std::string result;
+        if ((numerator < 0) ^ (denominator < 0)) result += "-";
+        long long num = std::abs((long long)numerator);
+        long long den = std::abs((long long)denominator);
+        result += std::to_string(num / den);
+        long long remainder = num % den;
+        if (remainder == 0) return result;
+        result += ".";
+        std::unordered_map<long long, int> map;
+        while (remainder != 0 && map.find(remainder) == map.end()) {
+            map[remainder] = result.size();
+            remainder *= 10;
+            result += std::to_string(remainder / den);
+            remainder %= den;
+        }
+        if (remainder != 0) {
+            int index = map[remainder];
+            result.insert(index, 1, '(');
+            result += ")";
+        }
+        return result;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Fraction to Recurring Decimal" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    std::cout << solution.fractionToDecimal(1, 2) << std::endl;  // Output: "0.5"
+    std::cout << solution.fractionToDecimal(2, 3) << std::endl;  // Output: "0.(6)"
+    std::cout << solution.fractionToDecimal(4, 11) << std::endl;  // Output: "0.(36)"
+    std::cout << solution.fractionToDecimalOptimal(1, 2) << std::endl;  // Output: "0.5"
+    std::cout << solution.fractionToDecimalOptimal(2, 3) << std::endl;  // Output: "0.(6)"
+    std::cout << solution.fractionToDecimalOptimal(4, 11) << std::endl;  // Output: "0.(36)"
     return 0;
 }
-
+```
