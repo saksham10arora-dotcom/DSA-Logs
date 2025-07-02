@@ -1,6 +1,6 @@
 /**
- * Problem: Fraction to Recurring Decimal (LeetCode 166)
- * Link: https://leetcode.com/problems/fraction-to-recurring-decimal/
+ * Problem: Non-decreasing Subsequences (LeetCode 491)
+ * Link: https://leetcode.com/problems/non-decreasing-subsequences/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Fraction to Recurring Decimal" << endl;
+    // cout << "Testing Non-decreasing Subsequences" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
