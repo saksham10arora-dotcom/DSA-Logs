@@ -1,6 +1,6 @@
 /**
- * Problem: PathWithMinimumVariant (LeetCode 1208)
- * Link: https://leetcode.com/problems/pathwithminimumvariant/
+ * Problem: IntersectionOptimized (Codeforces 1285E)
+ * Link: https://codeforces.com/problems/intersectionoptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1208() {
+void solveBrute_1285E() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1208() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1208() {
+void solveOptimal_1285E() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,11 @@ void solveOptimal_1208() {
 }
 
 int main() {
-    // cout << "Testing PathWithMinimumVariant" << endl;
-    // solveOptimal_1208();
+    // cout << "Testing IntersectionOptimized" << endl;
+    // solveOptimal_1285E();
     return 0;
 }
+
 
 
 
