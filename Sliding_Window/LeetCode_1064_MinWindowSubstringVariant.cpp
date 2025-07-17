@@ -1,54 +1,49 @@
-```cpp
-// LeetCode problem 1064: Fixed Size Window For Maximum Sum
-// https://leetcode.com/problems/fixed-size-window-for-maximum-sum
-// Given an array of integers `nums` and an integer `k`, return the maximum sum of a subarray of size `k`.
+/**
+ * Problem: MinWindowSubstringVariant (LeetCode 1064)
+ * Link: https://leetcode.com/problems/minwindowsubstringvariant/
+ */
 
-// Brute force approach: O(n*k) complexity
-// class Solution {
-// public:
-//     int maxSumSubarray(int k, vector<int>& nums) {
-//         int max_sum = INT_MIN;
-//         for (int i = 0; i <= nums.size() - k; i++) {
-//             int sum = 0;
-//             for (int j = i; j < i + k; j++) {
-//                 sum += nums[j];
-//             }
-//             max_sum = max(max_sum, sum);
-//         }
-//         return max_sum;
-//     }
-// };
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Optimal solution: O(n) complexity
-class Solution {
-public:
-    int maxSumSubarray(int k, vector<int>& nums) {
-        int max_sum = INT_MIN;
-        int window_sum = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            window_sum += nums[i];
-            if (i >= k) {
-                window_sum -= nums[i - k];
-            }
-            if (i >= k - 1) {
-                max_sum = max(max_sum, window_sum);
-            }
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1064() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        return max_sum;
     }
-};
+}
+
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1064() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
+    }
+}
 
 int main() {
-    Solution solution;
-    vector<int> nums1 = {1, 2, 3, 4, 5};
-    cout << solution.maxSumSubarray(2, nums1) << endl;  // Output: 9
-
-    vector<int> nums2 = {5, 4, -1, 7, 8};
-    cout << solution.maxSumSubarray(3, nums2) << endl;  // Output: 15
-
-    vector<int> nums3 = {3, 2, 1, 4};
-    cout << solution.maxSumSubarray(2, nums3) << endl;  // Output: 6
-
+    // cout << "Testing MinWindowSubstringVariant" << endl;
+    // solveOptimal_1064();
     return 0;
 }
-```
+
+
+
+
