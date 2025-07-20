@@ -1,48 +1,49 @@
-/**
- * Problem: MaximumProductOptimized (CSES 1202)
- * Link: https://cses.com/problems/maximumproductoptimized/
- */
+```cpp
+// Maximum Product Optimized, https://cses.fi/problemset/task/1202, 
+// Given an array of integers, find the maximum product of a subarray.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1202() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n^2) complexity
+int maxProductBruteForce(const std::vector<int>& arr) {
+    int maxProduct = arr[0];
+    for (int i = 0; i < arr.size(); ++i) {
+        int product = 1;
+        for (int j = i; j < arr.size(); ++j) {
+            product *= arr[j];
+            maxProduct = std::max(maxProduct, product);
         }
     }
+    return maxProduct;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1202() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n) complexity
+int maxProductOptimized(const std::vector<int>& arr) {
+    int maxProduct = arr[0];
+    int minProduct = arr[0];
+    int result = arr[0];
+    for (int i = 1; i < arr.size(); ++i) {
+        if (arr[i] < 0) {
+            std::swap(maxProduct, minProduct);
+        }
+        maxProduct = std::max(arr[i], maxProduct * arr[i]);
+        minProduct = std::min(arr[i], minProduct * arr[i]);
+        result = std::max(result, maxProduct);
     }
+    return result;
 }
 
 int main() {
-    // cout << "Testing MaximumProductOptimized" << endl;
-    // solveOptimal_1202();
+    std::vector<int> test1 = {-2, 3, -4};
+    std::vector<int> test2 = {1, 2, 3, 0, -3, -2, -1};
+    std::vector<int> test3 = {0, -2, 3, -4, 2};
+
+    std::cout << "Test 1: " << maxProductOptimized(test1) << std::endl;
+    std::cout << "Test 2: " << maxProductOptimized(test2) << std::endl;
+    std::cout << "Test 3: " << maxProductOptimized(test3) << std::endl;
+
     return 0;
 }
-
-
-
+```
