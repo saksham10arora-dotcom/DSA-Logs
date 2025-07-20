@@ -1,6 +1,6 @@
 /**
- * Problem: MaximumProductOptimized (CSES 1202)
- * Link: https://cses.com/problems/maximumproductoptimized/
+ * Problem: MinimumDaysIII (LeetCode 757)
+ * Link: https://leetcode.com/problems/minimumdaysiii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1202() {
+void solveBrute_757() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1202() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1202() {
+void solveOptimal_757() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,8 +39,8 @@ void solveOptimal_1202() {
 }
 
 int main() {
-    // cout << "Testing MaximumProductOptimized" << endl;
-    // solveOptimal_1202();
+    // cout << "Testing MinimumDaysIII" << endl;
+    // solveOptimal_757();
     return 0;
 }
 
