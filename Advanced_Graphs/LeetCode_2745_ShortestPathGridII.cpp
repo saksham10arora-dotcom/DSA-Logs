@@ -1,6 +1,6 @@
 /**
- * Problem: DesignTwitterVariant (LeetCode 1472)
- * Link: https://leetcode.com/problems/designtwittervariant/
+ * Problem: ShortestPathGridII (LeetCode 2745)
+ * Link: https://leetcode.com/problems/shortestpathgridii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1472() {
+void solveBrute_2745() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1472() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1472() {
+void solveOptimal_2745() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,9 @@ void solveOptimal_1472() {
 }
 
 int main() {
-    // cout << "Testing DesignTwitterVariant" << endl;
-    // solveOptimal_1472();
+    // cout << "Testing ShortestPathGridII" << endl;
+    // solveOptimal_2745();
     return 0;
 }
-
 
 
