@@ -1,6 +1,6 @@
 /**
- * Problem: Construct Uniform Parity Array II (LeetCode 3876)
- * Link: https://leetcode.com/problems/construct-uniform-parity-array-ii/
+ * Problem: Find Median from Data Stream (LeetCode 295)
+ * Link: https://leetcode.com/problems/find-median-from-data-stream/
  */
 
 #include <iostream>
@@ -35,12 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Construct Uniform Parity Array II" << endl;
+    // cout << "Testing Find Median from Data Stream" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
-
 
