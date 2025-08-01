@@ -1,6 +1,6 @@
 /**
- * Problem: Create Binary Tree From Descriptions (LeetCode 2196)
- * Link: https://leetcode.com/problems/create-binary-tree-from-descriptions/
+ * Problem: Partition Array into Disjoint Intervals (LeetCode 915)
+ * Link: https://leetcode.com/problems/partition-array-into-disjoint-intervals/
  */
 
 #include <iostream>
@@ -35,11 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Create Binary Tree From Descriptions" << endl;
+    // cout << "Testing Partition Array into Disjoint Intervals" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
 
