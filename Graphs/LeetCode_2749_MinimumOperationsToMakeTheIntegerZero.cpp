@@ -1,42 +1,44 @@
-```cpp
-// LeetCode problem 2749: Minimum Operations To Make The Integer Zero
-// https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/
-// Given an integer n, return the minimum number of operations to make the integer zero.
+/**
+ * Problem: Minimum Operations to Make the Integer Zero (LeetCode 2749)
+ * Link: https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/
+ */
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach: O(n) complexity
-int minOperationsBruteForce(int n) {
-    int operations = 0;
-    while (n > 0) {
-        if (n % 2 == 1) {
-            n -= 1;
-        } else {
-            n /= 2;
-        }
-        operations++;
-    }
-    return operations;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution: O(log n) complexity
-int minOperations(int n) {
-    int operations = 0;
-    while (n > 0) {
-        if (n % 2 == 1) {
-            n -= 1;
-        } else {
-            n /= 2;
-        }
-        operations++;
-    }
-    return operations;
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::cout << minOperations(39) << std::endl;  // Output: 6
-    std::cout << minOperations(54) << std::endl;  // Output: 7
-    std::cout << minOperations(9) << std::endl;   // Output: 4
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Minimum Operations to Make the Integer Zero" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
