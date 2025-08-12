@@ -1,6 +1,6 @@
 /**
- * Problem: WordSearchIIIII (Codeforces 1559D)
- * Link: https://codeforces.com/problems/wordsearchiiiii/
+ * Problem: ValidSquareII (LeetCode 638)
+ * Link: https://leetcode.com/problems/validsquareii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1559D() {
+void solveBrute_638() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1559D() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1559D() {
+void solveOptimal_638() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,10 @@ void solveOptimal_1559D() {
 }
 
 int main() {
-    // cout << "Testing WordSearchIIIII" << endl;
-    // solveOptimal_1559D();
+    // cout << "Testing ValidSquareII" << endl;
+    // solveOptimal_638();
     return 0;
 }
-
 
 
 
