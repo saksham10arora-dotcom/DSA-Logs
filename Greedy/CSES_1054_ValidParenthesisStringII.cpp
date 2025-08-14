@@ -1,47 +1,36 @@
-/**
- * Problem: ValidParenthesisStringII (CSES 1054)
- * Link: https://cses.com/problems/validparenthesisstringii/
- */
+```cpp
+// Problem: Valid Parenthesis String II
+// Link: https://cses.fi/problemset/task/1054
+// Description: Given a string of parentheses, determine if it is valid.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <stack>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: Generate all possible valid parenthesis strings and check if the given string is among them (O(2^n) complexity)
+// However, this approach is inefficient and not practical for large inputs.
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1054() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: Use a stack to keep track of the opening parentheses and check if the corresponding closing parentheses are present (O(n) complexity)
+bool isValid(const std::string& s) {
+    std::stack<char> stack;
+    for (char c : s) {
+        if (c == '(') {
+            stack.push(c);
+        } else if (c == ')') {
+            if (stack.empty()) {
+                return false;
+            }
+            stack.pop();
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1054() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return stack.empty();
 }
 
 int main() {
-    // cout << "Testing ValidParenthesisStringII" << endl;
-    // solveOptimal_1054();
+    std::cout << std::boolalpha;
+    std::cout << isValid("()") << std::endl;  // True
+    std::cout << isValid(")(") << std::endl;  // False
+    std::cout << isValid("((()))") << std::endl;  // True
     return 0;
 }
-
-
+```
