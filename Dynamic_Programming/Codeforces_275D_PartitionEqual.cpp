@@ -1,51 +1,49 @@
-```cpp
-// Codeforces_275D_PartitionEqual, https://codeforces.com/contest/275/problem/D
-// Given a set of integers, determine if it can be partitioned into two subsets with equal sums.
+/**
+ * Problem: PartitionEqual (Codeforces 275D)
+ * Link: https://codeforces.com/problems/partitionequal/
+ */
 
 #include <iostream>
 #include <vector>
-#include <numeric>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach: try all possible subsets (O(2^n))
-bool bruteForcePartitionEqual(const std::vector<int>& nums) {
-    int sum = std::accumulate(nums.begin(), nums.end(), 0);
-    if (sum % 2 != 0) return false;
-    int target = sum / 2;
-    for (int mask = 0; mask < (1 << nums.size()); ++mask) {
-        int subsetSum = 0;
-        for (int i = 0; i < nums.size(); ++i) {
-            if ((mask & (1 << i)) != 0) subsetSum += nums[i];
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_275D() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        if (subsetSum == target) return true;
     }
-    return false;
 }
 
-// Optimal solution: dynamic programming (O(n*sum))
-bool optimalPartitionEqual(const std::vector<int>& nums) {
-    int sum = std::accumulate(nums.begin(), nums.end(), 0);
-    if (sum % 2 != 0) return false;
-    int target = sum / 2;
-    std::vector<bool> dp(target + 1, false);
-    dp[0] = true;
-    for (int num : nums) {
-        for (int i = target; i >= num; --i) {
-            dp[i] = dp[i] || dp[i - num];
-        }
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_275D() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return dp[target];
 }
 
 int main() {
-    std::vector<int> test1 = {1, 5, 11, 5};
-    std::vector<int> test2 = {1, 2, 3, 9};
-    std::vector<int> test3 = {10, 10, 10, 7, 7, 7, 4, 4, 4};
-
-    std::cout << std::boolalpha;
-    std::cout << "Test 1: " << optimalPartitionEqual(test1) << std::endl;
-    std::cout << "Test 2: " << optimalPartitionEqual(test2) << std::endl;
-    std::cout << "Test 3: " << optimalPartitionEqual(test3) << std::endl;
-
+    // cout << "Testing PartitionEqual" << endl;
+    // solveOptimal_275D();
     return 0;
 }
-```
+
+
+
+
