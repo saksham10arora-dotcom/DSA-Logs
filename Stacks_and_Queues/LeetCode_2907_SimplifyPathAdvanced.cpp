@@ -1,6 +1,6 @@
 /**
- * Problem: ProductExceptSelfII (LeetCode 861)
- * Link: https://leetcode.com/problems/productexceptselfii/
+ * Problem: SimplifyPathAdvanced (LeetCode 2907)
+ * Link: https://leetcode.com/problems/simplifypathadvanced/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_861() {
+void solveBrute_2907() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_861() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_861() {
+void solveOptimal_2907() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,13 +39,10 @@ void solveOptimal_861() {
 }
 
 int main() {
-    // cout << "Testing ProductExceptSelfII" << endl;
-    // solveOptimal_861();
+    // cout << "Testing SimplifyPathAdvanced" << endl;
+    // solveOptimal_2907();
     return 0;
 }
-
-
-
 
 
 
