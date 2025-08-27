@@ -1,50 +1,53 @@
-/**
- * Problem: ProductExceptSelfII (LeetCode 861)
- * Link: https://leetcode.com/problems/productexceptselfii/
- */
+```cpp
+// Product of Array Except Self II, https://leetcode.com/problems/product-of-array-except-self/
+// Given an array of integers, return an array of the same length where each element at index i is the product of all the numbers in the original array except the one at i.
 
-#include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <numeric>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_861() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n^2) complexity
+std::vector<int> productExceptSelfBruteForce(std::vector<int>& nums) {
+    std::vector<int> result(nums.size(), 1);
+    for (int i = 0; i < nums.size(); i++) {
+        for (int j = 0; j < nums.size(); j++) {
+            if (i != j) {
+                result[i] *= nums[j];
+            }
         }
     }
+    return result;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_861() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n) complexity
+std::vector<int> productExceptSelf(std::vector<int>& nums) {
+    int n = nums.size();
+    std::vector<int> result(n, 1);
+    // Calculate prefix product
+    for (int i = 1; i < n; i++) {
+        result[i] = result[i - 1] * nums[i - 1];
     }
+    // Calculate suffix product and multiply with prefix product
+    int suffixProduct = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        result[i] *= suffixProduct;
+        suffixProduct *= nums[i];
+    }
+    return result;
 }
 
 int main() {
-    // cout << "Testing ProductExceptSelfII" << endl;
-    // solveOptimal_861();
+    std::vector<int> nums1 = {1, 2, 3, 4};
+    std::vector<int> result1 = productExceptSelf(nums1);
+    // Expected output: [24, 12, 8, 6]
+
+    std::vector<int> nums2 = {2, 3, 4, 5};
+    std::vector<int> result2 = productExceptSelf(nums2);
+    // Expected output: [60, 40, 30, 24]
+
+    std::vector<int> nums3 = {10, 20, 30, 40};
+    std::vector<int> result3 = productExceptSelf(nums3);
+    // Expected output: [24000, 12000, 8000, 6000]
+
     return 0;
 }
-
-
-
-
-
+```
