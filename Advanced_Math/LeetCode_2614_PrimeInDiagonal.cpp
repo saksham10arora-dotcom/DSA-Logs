@@ -1,6 +1,6 @@
 /**
- * Problem: Add Digits (LeetCode 258)
- * Link: https://leetcode.com/problems/add-digits/
+ * Problem: Prime In Diagonal (LeetCode 2614)
+ * Link: https://leetcode.com/problems/prime-in-diagonal/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Add Digits" << endl;
+    // cout << "Testing Prime In Diagonal" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
