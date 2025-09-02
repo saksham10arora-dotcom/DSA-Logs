@@ -1,43 +1,51 @@
+```cpp
 /**
- * Problem: Add Digits (LeetCode 258)
- * Link: https://leetcode.com/problems/add-digits/
+ * LeetCode Problem 258: Add Digits
+ * https://leetcode.com/problems/add-digits/
+ * Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
  */
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach with O(n) complexity where n is the number of digits in num
+class Solution {
+public:
+    int addDigits(int num) {
+        while (num >= 10) {
+            int sum = 0;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+        return num;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(1) complexity using mathematical formula
+class SolutionOptimal {
+public:
+    int addDigits(int num) {
+        if (num == 0) return 0;
+        return (num - 1) % 9 + 1;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Add Digits" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    SolutionOptimal solutionOptimal;
+
+    std::cout << "Brute force approach:" << std::endl;
+    std::cout << solution.addDigits(38) << std::endl;  // Output: 2
+    std::cout << solution.addDigits(0) << std::endl;   // Output: 0
+    std::cout << solution.addDigits(9) << std::endl;   // Output: 9
+
+    std::cout << "\nOptimal solution:" << std::endl;
+    std::cout << solutionOptimal.addDigits(38) << std::endl;  // Output: 2
+    std::cout << solutionOptimal.addDigits(0) << std::endl;   // Output: 0
+    std::cout << solutionOptimal.addDigits(9) << std::endl;   // Output: 9
+
     return 0;
 }
-
+```
