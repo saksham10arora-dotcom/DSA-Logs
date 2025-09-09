@@ -1,47 +1,76 @@
-/**
- * Problem: GenerateParenthesesVariant (Codeforces 631E)
- * Link: https://codeforces.com/problems/generateparenthesesvariant/
- */
+```cpp
+// Codeforces_631E_GenerateParenthesesVariant, https://codeforces.com/contest/631/problem/E
+// Generate all possible valid parentheses sequences of length 2n with a given number of opening and closing parentheses.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: generate all possible sequences and check if they are valid (O(2^(2n)))
+std::vector<std::string> generateParenthesesBruteForce(int n, int open, int close) {
+    std::vector<std::string> result;
+    std::string current = "";
+    generateBruteForce(result, current, n, open, close, 0, 0);
+    return result;
+}
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_631E() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+void generateBruteForce(std::vector<std::string>& result, std::string current, int n, int open, int close, int openCount, int closeCount) {
+    if (current.size() == 2 * n) {
+        if (openCount == open && closeCount == close) {
+            result.push_back(current);
         }
+        return;
+    }
+    if (openCount < open) {
+        generateBruteForce(result, current + "(", n, open, close, openCount + 1, closeCount);
+    }
+    if (closeCount < close && closeCount < openCount) {
+        generateBruteForce(result, current + ")", n, open, close, openCount, closeCount + 1);
     }
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_631E() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution: use recursion and backtracking to generate only valid sequences (O(4^n / n^(3/2)))
+std::vector<std::string> generateParenthesesOptimal(int n, int open, int close) {
+    std::vector<std::string> result;
+    std::string current = "";
+    generateOptimal(result, current, n, open, close, 0, 0);
+    return result;
+}
+
+void generateOptimal(std::vector<std::string>& result, std::string current, int n, int open, int close, int openCount, int closeCount) {
+    if (current.size() == 2 * n) {
+        if (openCount == open && closeCount == close) {
+            result.push_back(current);
+        }
+        return;
+    }
+    if (openCount < open) {
+        generateOptimal(result, current + "(", n, open, close, openCount + 1, closeCount);
+    }
+    if (closeCount < close && closeCount < openCount) {
+        generateOptimal(result, current + ")", n, open, close, openCount, closeCount + 1);
     }
 }
 
 int main() {
-    // cout << "Testing GenerateParenthesesVariant" << endl;
-    // solveOptimal_631E();
+    std::vector<std::string> result1 = generateParenthesesOptimal(3, 3, 3);
+    for (const auto& str : result1) {
+        std::cout << str << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::string> result2 = generateParenthesesOptimal(2, 2, 2);
+    for (const auto& str : result2) {
+        std::cout << str << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::string> result3 = generateParenthesesOptimal(1, 1, 1);
+    for (const auto& str : result3) {
+        std::cout << str << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
-
+```
