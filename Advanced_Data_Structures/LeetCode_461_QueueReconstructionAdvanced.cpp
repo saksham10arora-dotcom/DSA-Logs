@@ -1,6 +1,6 @@
 /**
- * Problem: SurroundedRegionsVariant (LeetCode 1658)
- * Link: https://leetcode.com/problems/surroundedregionsvariant/
+ * Problem: QueueReconstructionAdvanced (LeetCode 461)
+ * Link: https://leetcode.com/problems/queuereconstructionadvanced/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1658() {
+void solveBrute_461() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1658() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1658() {
+void solveOptimal_461() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,11 @@ void solveOptimal_1658() {
 }
 
 int main() {
-    // cout << "Testing SurroundedRegionsVariant" << endl;
-    // solveOptimal_1658();
+    // cout << "Testing QueueReconstructionAdvanced" << endl;
+    // solveOptimal_461();
     return 0;
 }
+
 
 
 
