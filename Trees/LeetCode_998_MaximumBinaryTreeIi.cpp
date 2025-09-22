@@ -1,63 +1,44 @@
-```cpp
-// Maximum Binary Tree II, https://leetcode.com/problems/maximum-binary-tree-ii/
-// Given the root of a binary tree and an integer value, insert a new node with the given value into the tree.
-// The new node should be inserted in the first empty left child or right child of a leaf node with the same value.
+/**
+ * Problem: Maximum Binary Tree II (LeetCode 998)
+ * Link: https://leetcode.com/problems/maximum-binary-tree-ii/
+ */
 
-// Brute force approach: O(n) time complexity, O(n) space complexity
-// class Solution {
-// public:
-//     TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
-//         if (!root) return new TreeNode(val);
-//         if (val > root->val) {
-//             TreeNode* newNode = new TreeNode(val);
-//             newNode->left = root;
-//             return newNode;
-//         }
-//         root->right = insertIntoMaxTree(root->right, val);
-//         return root;
-//     }
-// };
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Optimal solution: O(n) time complexity, O(n) space complexity
-class Solution {
-public:
-    TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
-        if (!root) return new TreeNode(val);
-        if (val > root->val) {
-            TreeNode* newNode = new TreeNode(val);
-            newNode->left = root;
-            return newNode;
-        }
-        root->right = insertIntoMaxTree(root->right, val);
-        return root;
-    }
-};
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    // Test case 1:
-    TreeNode* root1 = new TreeNode(4);
-    root1->left = new TreeNode(1);
-    root1->right = new TreeNode(3);
-    root1->right->left = new TreeNode(1);
-    root1->right->right = new TreeNode(2);
-    TreeNode* result1 = solution.insertIntoMaxTree(root1, 5);
-    // Test case 2:
-    TreeNode* root2 = new TreeNode(5);
-    root2->left = new TreeNode(2);
-    root2->right = new TreeNode(3);
-    root2->left->left = new TreeNode(0);
-    root2->left->right = new TreeNode(3);
-    root2->right->right = new TreeNode(2);
-    TreeNode* result2 = solution.insertIntoMaxTree(root2, 4);
-    // Test case 3:
-    TreeNode* root3 = new TreeNode(5);
-    root3->left = new TreeNode(2);
-    root3->right = new TreeNode(3);
-    root3->left->left = new TreeNode(0);
-    root3->left->right = new TreeNode(3);
-    root3->right->right = new TreeNode(2);
-    TreeNode* result3 = solution.insertIntoMaxTree(root3, 6);
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Maximum Binary Tree II" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
