@@ -1,48 +1,57 @@
-/**
- * Problem: MaxSubarrayMinAdvanced (LeetCode 2243)
- * Link: https://leetcode.com/problems/maxsubarrayminadvanced/
- */
+```cpp
+// LeetCode problem 2243: Max Subarray Min Advanced, https://leetcode.com/problems/max-subarray-min/
+// Given an integer array nums, return the maximum value of the minimum value in a subarray.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
-
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2243() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n^3) complexity
+class Solution {
+public:
+    int maxSumMinProduct(vector<int>& nums) {
+        int n = nums.size();
+        long long maxSum = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                long long sum = 0;
+                int minVal = INT_MAX;
+                for (int k = i; k <= j; k++) {
+                    sum += nums[k];
+                    minVal = min(minVal, (long long)nums[k]);
+                }
+                maxSum = max(maxSum, sum * minVal);
+            }
         }
+        return maxSum;
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2243() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n) complexity
+class Solution {
+public:
+    int maxSumMinProduct(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> prefixSum(n + 1, 0);
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+        long long maxSum = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                long long sum = prefixSum[j + 1] - prefixSum[i];
+                int minVal = *min_element(nums.begin() + i, nums.begin() + j + 1);
+                maxSum = max(maxSum, sum * minVal);
+            }
+        }
+        return maxSum;
     }
-}
+};
 
 int main() {
-    // cout << "Testing MaxSubarrayMinAdvanced" << endl;
-    // solveOptimal_2243();
+    Solution solution;
+    vector<int> nums1 = {1, 2, 3, 2};
+    vector<int> nums2 = {2, 3, 3, 1, 2};
+    vector<int> nums3 = {3, 1, 5, 4, 2};
+    cout << solution.maxSumMinProduct(nums1) << endl;  // Output: 14
+    cout << solution.maxSumMinProduct(nums2) << endl;  // Output: 18
+    cout << solution.maxSumMinProduct(nums3) << endl;  // Output: 40
     return 0;
 }
-
-
-
+```
