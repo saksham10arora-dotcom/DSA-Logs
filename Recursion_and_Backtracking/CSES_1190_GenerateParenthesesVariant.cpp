@@ -1,6 +1,6 @@
 /**
- * Problem: IntersectionOptimized (Codeforces 1649E)
- * Link: https://codeforces.com/problems/intersectionoptimized/
+ * Problem: GenerateParenthesesVariant (CSES 1190)
+ * Link: https://cses.com/problems/generateparenthesesvariant/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1649E() {
+void solveBrute_1190() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1649E() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1649E() {
+void solveOptimal_1190() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,13 +39,9 @@ void solveOptimal_1649E() {
 }
 
 int main() {
-    // cout << "Testing IntersectionOptimized" << endl;
-    // solveOptimal_1649E();
+    // cout << "Testing GenerateParenthesesVariant" << endl;
+    // solveOptimal_1190();
     return 0;
 }
-
-
-
-
 
 
