@@ -1,6 +1,6 @@
 /**
- * Problem: SnakesAndLaddersIII (LeetCode 1746)
- * Link: https://leetcode.com/problems/snakesandladdersiii/
+ * Problem: FindDuplicatesOptimized (LeetCode 783)
+ * Link: https://leetcode.com/problems/findduplicatesoptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1746() {
+void solveBrute_783() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1746() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1746() {
+void solveOptimal_783() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,9 @@ void solveOptimal_1746() {
 }
 
 int main() {
-    // cout << "Testing SnakesAndLaddersIII" << endl;
-    // solveOptimal_1746();
+    // cout << "Testing FindDuplicatesOptimized" << endl;
+    // solveOptimal_783();
     return 0;
 }
-
 
 
