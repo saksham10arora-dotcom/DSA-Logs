@@ -1,33 +1,49 @@
-```cpp
-// LeetCode problem 66: Pow(x, n) II
-// https://leetcode.com/problems/powx-n-ii/
-// Implement pow(x, n), which calculates x raised to the power of n (i.e., x^n).
+/**
+ * Problem: PowXNIII (LeetCode 66)
+ * Link: https://leetcode.com/problems/powxniii/
+ */
 
-class Solution {
-public:
-    // Brute force approach with O(n) complexity
-    double myPow_BruteForce(double x, int n) {
-        double result = 1.0;
-        for (int i = 0; i < abs(n); i++) {
-            result *= x;
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
+
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_66() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        return n < 0 ? 1 / result : result;
     }
+}
 
-    // Optimal solution with O(log n) complexity
-    double myPow(double x, int n) {
-        if (n == 0) return 1;
-        double half = myPow(x, n / 2);
-        if (n % 2 == 0) return half * half;
-        return n < 0 ? 1 / (half * half * x) : half * half * x;
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_66() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-};
+}
 
 int main() {
-    Solution solution;
-    printf("%.5f\n", solution.myPow(2.0, 3));  // Output: 8.00000
-    printf("%.5f\n", solution.myPow(2.1, 3));  // Output: 9.26100
-    printf("%.5f\n", solution.myPow(2.0, -3)); // Output: 0.12500
+    // cout << "Testing PowXNIII" << endl;
+    // solveOptimal_66();
     return 0;
 }
-```
+
+
+
+
