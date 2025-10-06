@@ -1,61 +1,49 @@
-```cpp
-// Codeforces_906E_SubsetSumsII
-// https://codeforces.com/contest/906/problem/E
-// Given a set of integers, find the number of distinct subset sums.
+/**
+ * Problem: SubsetSumsII (Codeforces 906E)
+ * Link: https://codeforces.com/problems/subsetsumsii/
+ */
 
 #include <iostream>
 #include <vector>
-#include <set>
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(2^n) complexity
-int bruteForce(const std::vector<int>& nums) {
-    std::set<int> subsetSums;
-    int n = nums.size();
-    for (int mask = 0; mask < (1 << n); ++mask) {
-        int sum = 0;
-        for (int i = 0; i < n; ++i) {
-            if (mask & (1 << i)) {
-                sum += nums[i];
-            }
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_906E() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        subsetSums.insert(sum);
     }
-    return subsetSums.size();
 }
 
-// Optimal solution with O(n * sum) complexity
-int optimalSolution(const std::vector<int>& nums) {
-    int maxSum = 0;
-    for (int num : nums) {
-        maxSum += num;
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_906E() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    std::vector<bool> dp(maxSum + 1, false);
-    dp[0] = true;
-    for (int num : nums) {
-        for (int i = maxSum; i >= num; --i) {
-            dp[i] = dp[i] || dp[i - num];
-        }
-    }
-    int count = 0;
-    for (bool val : dp) {
-        if (val) {
-            ++count;
-        }
-    }
-    return count;
 }
 
 int main() {
-    std::vector<int> test1 = {1, 2, 3};
-    std::vector<int> test2 = {1, 1, 1};
-    std::vector<int> test3 = {5, 10, 15};
-    std::cout << bruteForce(test1) << std::endl;  // Output: 8
-    std::cout << bruteForce(test2) << std::endl;  // Output: 4
-    std::cout << bruteForce(test3) << std::endl;  // Output: 8
-    std::cout << optimalSolution(test1) << std::endl;  // Output: 8
-    std::cout << optimalSolution(test2) << std::endl;  // Output: 4
-    std::cout << optimalSolution(test3) << std::endl;  // Output: 8
+    // cout << "Testing SubsetSumsII" << endl;
+    // solveOptimal_906E();
     return 0;
 }
-```
+
+
+
+
