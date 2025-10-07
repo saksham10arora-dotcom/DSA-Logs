@@ -1,6 +1,6 @@
 /**
- * Problem: Number of Pairs of Interchangeable Rectangles (LeetCode 2001)
- * Link: https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/
+ * Problem: Sliding Puzzle (LeetCode 773)
+ * Link: https://leetcode.com/problems/sliding-puzzle/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Number of Pairs of Interchangeable Rectangles" << endl;
+    // cout << "Testing Sliding Puzzle" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
