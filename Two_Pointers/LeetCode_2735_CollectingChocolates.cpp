@@ -1,6 +1,6 @@
 /**
- * Problem: Image Smoother (LeetCode 661)
- * Link: https://leetcode.com/problems/image-smoother/
+ * Problem: Collecting Chocolates (LeetCode 2735)
+ * Link: https://leetcode.com/problems/collecting-chocolates/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Image Smoother" << endl;
+    // cout << "Testing Collecting Chocolates" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
