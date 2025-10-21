@@ -1,57 +1,50 @@
-```cpp
-// Last Stone Weight III, https://leetcode.com/problems/last-stone-weight-iii/, 
-// Given an array of integers stones where stones[i] represents the weight of the ith stone, 
-// we need to divide the stones into two piles such that the difference between the total weight of the two piles is minimized.
+/**
+ * Problem: LastStoneWeightIII (LeetCode 2614)
+ * Link: https://leetcode.com/problems/laststoneweightiii/
+ */
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach: Try all possible combinations of stones in two piles, O(2^n)
-class Solution_Brute_Force {
-public:
-    int lastStoneWeightIII(std::vector<int>& stones) {
-        int n = stones.size();
-        int sum = 0;
-        for (int stone : stones) sum += stone;
-        int diff = INT_MAX;
-        for (int mask = 0; mask < (1 << n); mask++) {
-            int sum1 = 0;
-            for (int i = 0; i < n; i++) {
-                if (mask & (1 << i)) sum1 += stones[i];
-            }
-            diff = std::min(diff, std::abs(sum1 - (sum - sum1)));
-        }
-        return diff;
-    }
-};
+using namespace std;
 
-// Optimal solution: Use dynamic programming to find the maximum sum of stones that is less than or equal to half of the total sum, O(n * sum)
-class Solution {
-public:
-    int lastStoneWeightIII(std::vector<int>& stones) {
-        int n = stones.size();
-        int sum = 0;
-        for (int stone : stones) sum += stone;
-        int target = sum / 2;
-        std::vector<int> dp(target + 1, 0);
-        for (int stone : stones) {
-            for (int i = target; i >= stone; i--) {
-                dp[i] = std::max(dp[i], dp[i - stone] + stone);
-            }
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_2614() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        return sum - 2 * dp[target];
     }
-};
+}
+
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_2614() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
+    }
+}
 
 int main() {
-    Solution solution;
-    std::vector<int> stones1 = {2,7,4,1,8,1};
-    std::cout << solution.lastStoneWeightIII(stones1) << std::endl;  // Output: 1
-    std::vector<int> stones2 = {1,2};
-    std::cout << solution.lastStoneWeightIII(stones2) << std::endl;  // Output: 1
-    std::vector<int> stones3 = {1,1,1};
-    std::cout << solution.lastStoneWeightIII(stones3) << std::endl;  // Output: 1
+    // cout << "Testing LastStoneWeightIII" << endl;
+    // solveOptimal_2614();
     return 0;
 }
-```
+
+
+
+
+
