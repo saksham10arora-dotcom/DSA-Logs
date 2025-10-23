@@ -1,6 +1,6 @@
 /**
- * Problem: WordSearchIIII (LeetCode 1638)
- * Link: https://leetcode.com/problems/wordsearchiiii/
+ * Problem: RangeSum2DOptimized (Codeforces 1209D)
+ * Link: https://codeforces.com/problems/rangesum2doptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1638() {
+void solveBrute_1209D() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1638() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1638() {
+void solveOptimal_1209D() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,12 +39,10 @@ void solveOptimal_1638() {
 }
 
 int main() {
-    // cout << "Testing WordSearchIIII" << endl;
-    // solveOptimal_1638();
+    // cout << "Testing RangeSum2DOptimized" << endl;
+    // solveOptimal_1209D();
     return 0;
 }
-
-
 
 
 
