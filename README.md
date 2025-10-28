@@ -10,8 +10,7 @@ Each day, I aim to:
 - Solve at least one LeetCode problem  
 - Reflect and document the learning  
 
-Learning in public keeps me accountable, consistent, and focused on long-term mastery.  
-> Consistency makes complexity simple ⚡  
+  Learning in public keeps me accountable, consistent, and focused on long-term mastery.  
 
 
 ## 📬 Connect  
