@@ -15,4 +15,4 @@ Learning in public keeps me accountable, consistent, and focused on long-term ma
 
 ## 📬 Connect  
 🐦 [Twitter](https://x.com/SakshamA10)  
-💼 [LinkedIn](https://linkedin.com/in/YOUR_LINKEDIN)
+💼 [LinkedIn](https://www.linkedin.com/in/saksham-arora10/)
