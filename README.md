@@ -12,21 +12,6 @@ Each day, I aim to:
 
 Learning in public keeps me accountable, consistent, and focused on long-term mastery.  
 
-**Folder:** [DSA/](DSA)  
-
-#### 🔹 Linked List  
-- Creation from array  
-- Display (iterative and recursive)  
-- Reverse using recursion  
-- Count and sum of nodes  
-- Search (linear and recursive)  
-
-Upcoming:  
-- Stack  
-- Queue  
-- Trees  
-- Graphs  
-
 ## 📬 Connect  
 🐦 [Twitter](https://x.com/SakshamA10)  
 💼 [LinkedIn](https://www.linkedin.com/in/saksham-arora10/)
