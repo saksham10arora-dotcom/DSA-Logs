@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <iostream>
 // Structure definition
 struct Node {
     int data;
@@ -48,10 +48,59 @@ void display(struct Node *p) {
     }
     printf("\n");
 }
+void RecDisplay(struct Node *p){
+    if p!= NULL{
+        printf("%d",p->data);
+        RecDisplay(p->next);
+    }
+}
+void RRDisplay(struct Node *p){
+    if p!= NULL{
+        RRDisplay(p->next);
+        printf("%d",p->data);   
+    }
+}
+int count(struct Node *p){
+    c = 0;
+    while p{
+        c++;
+        p = p->next;
+        return c;
+    }
+}
 
-// ------------------------------------------
-// 🧠 main function
-// ------------------------------------------
+int Rcount(struct Node *p){
+    int c;
+    if p{
+        return 1+(Rcount(p->next));
+            }
+    else return 0;
+}
+
+int sum(struct Node*p){
+    s = 0;
+    while p{
+        s = s+p->data;
+        p = p->next;
+        return s;
+]
+int Rsum(struct Node*p){
+    if p{
+        return p->data + Rsum(p->next);
+    else{
+        return 0;
+    }
+}
+int max(struct Node*p){
+    max = MIN_INT;
+    while p{
+        if (p->data > max){
+            max = p->data;
+            p = p->next;
+    return max;
+int Rmax(struct Node*p){
+        if p->data > 
+        
 int main() {
     int A[] = {3, 5, 7, 10, 25, 8, 32, 2};
 
