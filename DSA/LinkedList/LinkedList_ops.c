@@ -99,7 +99,63 @@ int max(struct Node*p){
             p = p->next;
     return max;
 int Rmax(struct Node*p){
-        if p->data > 
+        if (p != NULL){
+            return MIN_INT;
+        }
+        x = Rmax(p->next);
+        if (x > p->data){
+            return x;
+        }else{
+            return (p->data)
+            }
+Node*search(Node*p, int key){
+    while p{
+        if (p->data == key){
+            return p;
+        else{
+            p = p->next;
+        }
+    return NULL;
+        }
+Node*Rsearch(struct Node*p,int key){
+    if p == 0{
+        return NULL;
+    if (p->data == key){
+        return (p);
+    Rsearch(struct Node*p->next,key);}
+
+Node*Isearch(struct Node*p, int key){    
+    struct Node*q = NULL;
+    while p{
+        if (p->data == key){
+            q->next = p->next;
+            p->next = first;
+            first = p;
+            return p;
+        q = p;
+        p = p->next;
+        }
+    }
+
+void insert(struct Node*p, int x, int pos){
+    struct Node*t
+    if (pos == 0){
+    t = new Node();
+    t->data = x;
+    t->next = first;
+    first = t;
+
+    
+        
+    
+            
+    
+    
+        
+
+              
+            
+      
         
 int main() {
     int A[] = {3, 5, 7, 10, 25, 8, 32, 2};
