@@ -1,43 +1,70 @@
-/**
- * Problem: Queue Reconstruction by Height (LeetCode 406)
- * Link: https://leetcode.com/problems/queue-reconstruction-by-height/
- */
+```cpp
+// LeetCode problem 406: Queue Reconstruction By Height, https://leetcode.com/problems/queue-reconstruction-by-height/
+// Given the array of people where people[i] = [hi, ki] represents a person of height hi and in front of and including them ki other people with the same or greater height.
+// Reconstruct and return the queue that is represented by the input array.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach with O(n^2) complexity
+// std::vector<std::vector<int>> reconstructQueue(std::vector<std::vector<int>>& people) {
+//     std::vector<std::vector<int>> result;
+//     for (auto& person : people) {
+//         int count = 0;
+//         for (int i = 0; i < result.size(); ++i) {
+//             if (result[i][0] >= person[0]) {
+//                 count++;
+//             }
+//             if (count == person[1]) {
+//                 result.insert(result.begin() + i, person);
+//                 break;
+//             }
+//         }
+//         if (count < person[1]) {
+//             result.push_back(person);
+//         }
+//     }
+//     return result;
+// }
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution with O(n^2) complexity
+std::vector<std::vector<int>> reconstructQueue(std::vector<std::vector<int>>& people) {
+    std::sort(people.begin(), people.end(), [](const std::vector<int>& a, const std::vector<int>& b) {
+        if (a[0] == b[0]) {
+            return a[1] < b[1];
+        }
+        return a[0] > b[0];
+    });
+    std::vector<std::vector<int>> result;
+    for (auto& person : people) {
+        result.insert(result.begin() + person[1], person);
+    }
+    return result;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Queue Reconstruction by Height" << endl;
-    // solveOptimal();
-    
+    std::vector<std::vector<int>> people1 = {{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}};
+    std::vector<std::vector<int>> result1 = reconstructQueue(people1);
+    for (auto& person : result1) {
+        std::cout << "[" << person[0] << ", " << person[1] << "] ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> people2 = {{6, 0}, {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}};
+    std::vector<std::vector<int>> result2 = reconstructQueue(people2);
+    for (auto& person : result2) {
+        std::cout << "[" << person[0] << ", " << person[1] << "] ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> people3 = {{1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}};
+    std::vector<std::vector<int>> result3 = reconstructQueue(people3);
+    for (auto& person : result3) {
+        std::cout << "[" << person[0] << ", " << person[1] << "] ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
+```
