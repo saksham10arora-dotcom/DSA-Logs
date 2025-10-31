@@ -1,6 +1,6 @@
 /**
- * Problem: Queue Reconstruction by Height (LeetCode 406)
- * Link: https://leetcode.com/problems/queue-reconstruction-by-height/
+ * Problem: Maximize Expression of Three Elements (LeetCode 3745)
+ * Link: https://leetcode.com/problems/maximize-expression-of-three-elements/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Queue Reconstruction by Height" << endl;
+    // cout << "Testing Maximize Expression of Three Elements" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
