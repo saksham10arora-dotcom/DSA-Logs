@@ -139,11 +139,24 @@ Node*Isearch(struct Node*p, int key){
 
 void insert(struct Node*p, int x, int pos){
     struct Node*t
-    if (pos == 0){
     t = new Node();
     t->data = x;
-    t->next = first;
-    first = t;
+    if (pos == 0){
+        t->next = first;
+        first = t;}
+    else{
+        if (pos > 0){
+            for (int i = 0; i<pos-1; i++){
+            p = p->next;}
+            t->next = p->next;
+            p->next = t;
+            
+    }
+void insertatlast(struct Node*p, int x, int pos){
+    if (pos<0 || pos > count(p)){
+        return NULL;
+    for (int i = 0; 
+        
 
     
         
