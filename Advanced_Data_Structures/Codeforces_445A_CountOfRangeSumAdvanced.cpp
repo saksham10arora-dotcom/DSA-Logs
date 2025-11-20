@@ -1,6 +1,6 @@
 /**
- * Problem: MinWindowSubstringOptimized (LeetCode 1144)
- * Link: https://leetcode.com/problems/minwindowsubstringoptimized/
+ * Problem: CountOfRangeSumAdvanced (Codeforces 445A)
+ * Link: https://codeforces.com/problems/countofrangesumadvanced/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1144() {
+void solveBrute_445A() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1144() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1144() {
+void solveOptimal_445A() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,11 +39,10 @@ void solveOptimal_1144() {
 }
 
 int main() {
-    // cout << "Testing MinWindowSubstringOptimized" << endl;
-    // solveOptimal_1144();
+    // cout << "Testing CountOfRangeSumAdvanced" << endl;
+    // solveOptimal_445A();
     return 0;
 }
-
 
 
 
