@@ -1,48 +1,49 @@
-/**
- * Problem: MinimumDaysII (LeetCode 2398)
- * Link: https://leetcode.com/problems/minimumdaysii/
- */
+```cpp
+// LeetCode problem 2398: Minimum Days to Make the Array Decreasing
+// https://leetcode.com/problems/minimum-days-to-make-the-array-decreasing/
+// Given an array of integers, find the minimum number of days to make the array decreasing.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: O(2^n) complexity
+// int minDays(std::vector<int>& nums) {
+//     int n = nums.size();
+//     int ans = 0;
+//     for (int i = 0; i < n; i++) {
+//         for (int j = i + 1; j < n; j++) {
+//             if (nums[j] >= nums[i]) {
+//                 nums[j]--;
+//                 ans++;
+//             }
+//         }
+//     }
+//     return ans;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2398() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
+// Optimal solution: O(n) complexity
+int minDays(std::vector<int>& nums) {
+    int n = nums.size();
     int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+    for (int i = 1; i < n; i++) {
+        if (nums[i] >= nums[i - 1]) {
+            ans += nums[i] - nums[i - 1] + 1;
+            nums[i] = nums[i - 1] - 1;
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2398() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return ans;
 }
 
 int main() {
-    // cout << "Testing MinimumDaysII" << endl;
-    // solveOptimal_2398();
+    std::vector<int> nums1 = {5, 4, 3, 2, 1};
+    std::vector<int> nums2 = {3, 1, 4};
+    std::vector<int> nums3 = {2, 2, 2};
+
+    std::cout << minDays(nums1) << std::endl;  // Output: 0
+    std::cout << minDays(nums2) << std::endl;  // Output: 2
+    std::cout << minDays(nums3) << std::endl;  // Output: 3
+
     return 0;
 }
-
-
-
+```
