@@ -1,6 +1,6 @@
 /**
- * Problem: RightSideViewII (LeetCode 1405)
- * Link: https://leetcode.com/problems/rightsideviewii/
+ * Problem: WordSearchIIOptimized (CSES 1593)
+ * Link: https://cses.com/problems/wordsearchiioptimized/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1405() {
+void solveBrute_1593() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1405() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1405() {
+void solveOptimal_1593() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,8 +39,8 @@ void solveOptimal_1405() {
 }
 
 int main() {
-    // cout << "Testing RightSideViewII" << endl;
-    // solveOptimal_1405();
+    // cout << "Testing WordSearchIIOptimized" << endl;
+    // solveOptimal_1593();
     return 0;
 }
 
