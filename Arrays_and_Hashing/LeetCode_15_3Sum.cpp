@@ -1,6 +1,6 @@
 /**
- * Problem: Minimum Length of String After Operations (LeetCode 3223)
- * Link: https://leetcode.com/problems/minimum-length-of-string-after-operations/
+ * Problem: 3Sum (LeetCode 15)
+ * Link: https://leetcode.com/problems/3sum/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Minimum Length of String After Operations" << endl;
+    // cout << "Testing 3Sum" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
