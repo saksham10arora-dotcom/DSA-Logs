@@ -1,6 +1,6 @@
 /**
- * Problem: Shopping Offers (LeetCode 638)
- * Link: https://leetcode.com/problems/shopping-offers/
+ * Problem: Count The Number of Winning Sequences (LeetCode 3320)
+ * Link: https://leetcode.com/problems/count-the-number-of-winning-sequences/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Shopping Offers" << endl;
+    // cout << "Testing Count The Number of Winning Sequences" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
