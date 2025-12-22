@@ -1,6 +1,6 @@
 /**
- * Problem: Count Different Palindromic Subsequences (LeetCode 730)
- * Link: https://leetcode.com/problems/count-different-palindromic-subsequences/
+ * Problem: Count Substrings That Differ by One Character (LeetCode 1638)
+ * Link: https://leetcode.com/problems/count-substrings-that-differ-by-one-character/
  */
 
 #include <iostream>
@@ -35,11 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Count Different Palindromic Subsequences" << endl;
+    // cout << "Testing Count Substrings That Differ by One Character" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
 
