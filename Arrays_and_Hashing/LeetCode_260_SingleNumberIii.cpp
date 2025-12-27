@@ -1,6 +1,6 @@
 /**
- * Problem: Longest Increasing Path in a Matrix (LeetCode 329)
- * Link: https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
+ * Problem: Single Number III (LeetCode 260)
+ * Link: https://leetcode.com/problems/single-number-iii/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Longest Increasing Path in a Matrix" << endl;
+    // cout << "Testing Single Number III" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
