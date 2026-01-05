@@ -1,43 +1,52 @@
-/**
- * Problem: Find the Count of Numbers Which Are Not Special (LeetCode 3233)
- * Link: https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/
- */
+```cpp
+// LeetCode problem 3233: Find The Count Of Numbers Which Are Not Special
+// https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/
+// Given an array of integers, find the count of numbers which are not special.
+// A special number is a number that has exactly one 1-bit in its binary representation.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+#include <bitset>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach with O(n) complexity
+int countNonSpecialNumbersBruteForce(const std::vector<int>& nums) {
+    int count = 0;
+    for (const auto& num : nums) {
+        std::bitset<32> binary(num);
+        int ones = binary.count();
+        if (ones!= 1) {
+            count++;
+        }
+    }
+    return count;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution with O(n) complexity
+int countNonSpecialNumbersOptimal(const std::vector<int>& nums) {
+    int count = 0;
+    for (const auto& num : nums) {
+        if (__builtin_popcount(num)!= 1) {
+            count++;
+        }
+    }
+    return count;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Find the Count of Numbers Which Are Not Special" << endl;
-    // solveOptimal();
-    
+    std::vector<int> test1 = {2, 3, 5, 7};
+    std::vector<int> test2 = {1, 2, 4, 8};
+    std::vector<int> test3 = {10, 20, 30, 40};
+
+    std::cout << "Brute force approach:" << std::endl;
+    std::cout << "Test case 1: " << countNonSpecialNumbersBruteForce(test1) << std::endl;
+    std::cout << "Test case 2: " << countNonSpecialNumbersBruteForce(test2) << std::endl;
+    std::cout << "Test case 3: " << countNonSpecialNumbersBruteForce(test3) << std::endl;
+
+    std::cout << "\nOptimal solution:" << std::endl;
+    std::cout << "Test case 1: " << countNonSpecialNumbersOptimal(test1) << std::endl;
+    std::cout << "Test case 2: " << countNonSpecialNumbersOptimal(test2) << std::endl;
+    std::cout << "Test case 3: " << countNonSpecialNumbersOptimal(test3) << std::endl;
+
     return 0;
 }
-
+```
