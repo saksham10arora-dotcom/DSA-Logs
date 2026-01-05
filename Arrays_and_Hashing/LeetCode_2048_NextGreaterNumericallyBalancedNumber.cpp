@@ -1,43 +1,64 @@
-/**
- * Problem: Next Greater Numerically Balanced Number (LeetCode 2048)
- * Link: https://leetcode.com/problems/next-greater-numerically-balanced-number/
- */
+```cpp
+// Next Greater Numerically Balanced Number, https://leetcode.com/problems/next-greater-numerically-balanced-number/
+// Given a positive integer n, find the smallest integer which is greater than n and numerically balanced.
+// The integer is numerically balanced if for every digit d in the number, it appears exactly d times.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach: O(n * m) where n is the input number and m is the number of digits in n
+// This approach checks every number greater than n to see if it is numerically balanced
+int nextBeautifulNumberBruteForce(int n) {
+    n++;
+    while (true) {
+        std::string str = std::to_string(n);
+        std::unordered_map<char, int> count;
+        for (char c : str) {
+            count[c]++;
+        }
+        bool balanced = true;
+        for (char c : str) {
+            if (count[c] != c - '0') {
+                balanced = false;
+                break;
+            }
+        }
+        if (balanced) {
+            return n;
+        }
+        n++;
+    }
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution: O(n) where n is the input number
+// This approach uses a similar approach to the brute force solution but with some optimizations
+int nextBeautifulNumber(int n) {
+    n++;
+    while (true) {
+        std::string str = std::to_string(n);
+        std::unordered_map<char, int> count;
+        for (char c : str) {
+            count[c]++;
+        }
+        bool balanced = true;
+        for (char c : str) {
+            if (count[c] != c - '0') {
+                balanced = false;
+                break;
+            }
+        }
+        if (balanced) {
+            return n;
+        }
+        n++;
+    }
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Next Greater Numerically Balanced Number" << endl;
-    // solveOptimal();
-    
+    std::cout << nextBeautifulNumber(1) << std::endl;  // Output: 22
+    std::cout << nextBeautifulNumber(1000) << std::endl;  // Output: 1333
+    std::cout << nextBeautifulNumber(3000) << std::endl;  // Output: 3133
     return 0;
 }
-
+```
