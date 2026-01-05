@@ -1,6 +1,6 @@
 /**
- * Problem: Find the Count of Numbers Which Are Not Special (LeetCode 3233)
- * Link: https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/
+ * Problem: Minimum Suffix Flips (LeetCode 1529)
+ * Link: https://leetcode.com/problems/minimum-suffix-flips/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Find the Count of Numbers Which Are Not Special" << endl;
+    // cout << "Testing Minimum Suffix Flips" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
