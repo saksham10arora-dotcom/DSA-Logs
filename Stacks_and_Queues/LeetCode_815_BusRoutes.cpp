@@ -1,6 +1,6 @@
 /**
- * Problem: Next Greater Numerically Balanced Number (LeetCode 2048)
- * Link: https://leetcode.com/problems/next-greater-numerically-balanced-number/
+ * Problem: Bus Routes (LeetCode 815)
+ * Link: https://leetcode.com/problems/bus-routes/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Next Greater Numerically Balanced Number" << endl;
+    // cout << "Testing Bus Routes" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
