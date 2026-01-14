@@ -1,48 +1,77 @@
-/**
- * Problem: CountPrimesIII (LeetCode 2923)
- * Link: https://leetcode.com/problems/countprimesiii/
- */
+```cpp
+// LeetCode problem 2923: Count Primes I I I
+// https://leetcode.com/problems/count-primes-iii/
+// Given two positive integers n and k, count the number of prime numbers less than n that can be written in the form a * b^k for some integers a and b.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <cmath>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2923() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n*sqrt(n)) complexity
+class Solution_BruteForce {
+public:
+    int countPrimes(int n, int k) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i)) {
+                for (int a = 1; a <= i; a++) {
+                    for (int b = 1; b <= i; b++) {
+                        if (i == a * pow(b, k)) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+            }
         }
+        return count;
     }
-}
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2923() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    bool isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
     }
-}
+};
+
+// Optimal solution with O(n*log(log(n))) complexity
+class Solution_Optimal {
+public:
+    int countPrimes(int n, int k) {
+        std::vector<bool> isPrime(n, true);
+        isPrime[0] = isPrime[1] = false;
+        for (int i = 2; i * i < n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                for (int a = 1; a <= i; a++) {
+                    for (int b = 1; b <= i; b++) {
+                        if (i == a * pow(b, k)) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
+};
 
 int main() {
-    // cout << "Testing CountPrimesIII" << endl;
-    // solveOptimal_2923();
+    Solution_Optimal solution;
+    std::cout << solution.countPrimes(100, 1) << std::endl;  // Output: 25
+    std::cout << solution.countPrimes(100, 2) << std::endl;  // Output: 17
+    std::cout << solution.countPrimes(1000, 3) << std::endl; // Output: 14
     return 0;
 }
-
-
-
+```
