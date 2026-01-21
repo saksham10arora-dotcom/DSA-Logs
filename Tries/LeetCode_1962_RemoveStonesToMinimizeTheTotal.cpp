@@ -1,6 +1,6 @@
 /**
- * Problem: Remove Duplicates from Sorted Array (LeetCode 26)
- * Link: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+ * Problem: Remove Stones to Minimize the Total (LeetCode 1962)
+ * Link: https://leetcode.com/problems/remove-stones-to-minimize-the-total/
  */
 
 #include <iostream>
@@ -35,10 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing Remove Duplicates from Sorted Array" << endl;
+    // cout << "Testing Remove Stones to Minimize the Total" << endl;
     // solveOptimal();
     
     return 0;
 }
-
 
