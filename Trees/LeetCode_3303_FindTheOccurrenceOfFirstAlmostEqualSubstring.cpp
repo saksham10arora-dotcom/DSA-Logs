@@ -1,6 +1,6 @@
 /**
- * Problem: The K Weakest Rows in a Matrix (LeetCode 1337)
- * Link: https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+ * Problem: Find the Occurrence of First Almost Equal Substring (LeetCode 3303)
+ * Link: https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/
  */
 
 #include <iostream>
@@ -35,11 +35,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // cout << "Testing The K Weakest Rows in a Matrix" << endl;
+    // cout << "Testing Find the Occurrence of First Almost Equal Substring" << endl;
     // solveOptimal();
     
     return 0;
 }
-
-
 
