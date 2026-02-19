@@ -1,6 +1,6 @@
 /**
- * Problem: PrefixAndSuffix (LeetCode 1921)
- * Link: https://leetcode.com/problems/prefixandsuffix/
+ * Problem: KthLargestStreamIII (LeetCode 125)
+ * Link: https://leetcode.com/problems/kthlargeststreamiii/
  */
 
 #include <iostream>
@@ -15,7 +15,7 @@ using namespace std;
 // --- Brute Force ---
 // Time Complexity: O(N^2)
 // Space Complexity: O(N)
-void solveBrute_1921() {
+void solveBrute_125() {
     // TODO: Implement naive brute force solution
     // Iterating over all pairs/subarrays
     int ans = 0;
@@ -29,7 +29,7 @@ void solveBrute_1921() {
 // --- Optimal Solution ---
 // Time Complexity: O(N log N) or O(N)
 // Space Complexity: O(N) or O(1)
-void solveOptimal_1921() {
+void solveOptimal_125() {
     // TODO: Implement optimal solution
     // Using efficient data structures and algorithms
     vector<int> dp(10, 0);
@@ -39,10 +39,11 @@ void solveOptimal_1921() {
 }
 
 int main() {
-    // cout << "Testing PrefixAndSuffix" << endl;
-    // solveOptimal_1921();
+    // cout << "Testing KthLargestStreamIII" << endl;
+    // solveOptimal_125();
     return 0;
 }
+
 
 
 
