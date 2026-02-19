@@ -1,47 +1,52 @@
-/**
- * Problem: PrefixAndSuffix (LeetCode 1921)
- * Link: https://leetcode.com/problems/prefixandsuffix/
- */
+```cpp
+// LeetCode problem 1921: Prefix And Suffix, https://leetcode.com/problems/eliminate-maximum-number-of-rounded-rectangles/
+// Given an array of integers nums where every element is either 0 or 1, return the maximum number of elements that can be made equal to 1.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1921() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(2^n) complexity
+class SolutionBruteForce {
+public:
+    int eliminateMaximum(std::vector<int>& nums) {
+        int n = nums.size();
+        int maxCount = 0;
+        for (int mask = 0; mask < (1 << n); mask++) {
+            int count = 0;
+            for (int i = 0; i < n; i++) {
+                if ((mask & (1 << i)) && nums[i] != 0) {
+                    count++;
+                }
+            }
+            maxCount = std::max(maxCount, count);
         }
+        return maxCount;
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1921() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n log n) complexity
+class SolutionOptimal {
+public:
+    int eliminateMaximum(std::vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int time = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= time) {
+                return i;
+            }
+            time++;
+        }
+        return n;
     }
-}
+};
 
 int main() {
-    // cout << "Testing PrefixAndSuffix" << endl;
-    // solveOptimal_1921();
-    return 0;
-}
-
-
+    SolutionOptimal solution;
+    std::vector<int> nums1 = {3, 2, 3};
+    std::vector<int> nums2 = {2, 2, 1, 2};
+    std::vector<int> nums3 = {1, 1, 1};
+    std::cout << solution.eliminateMaximum(nums1) << std::endl;  // Output: 3
+    std::cout << solution.eliminateMaximum(nums2) << std::endl;  // Output: 2
+    std::cout << solution.eliminateMaximum(nums3) << std::endl;  // Output:
