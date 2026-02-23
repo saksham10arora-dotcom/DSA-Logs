@@ -1,61 +1,52 @@
-/**
- * Problem: Valid Palindrome (LeetCode 125)
- * Link: https://leetcode.com/problems/valid-palindrome/
- */
+```cpp
+// LeetCode problem 125: Valid Palindrome, https://leetcode.com/problems/valid-palindrome/
+// A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
+// it reads the same backward as forward. Return true if the given string is a palindrome. Otherwise, return false.
 
-#include <iostream>
-#include <string>
-#include <cctype>
+// Brute force approach: Create a new string with only alphanumeric characters and compare it with its reverse. O(n) + O(n) = O(2n) = O(n)
+// class Solution {
+// public:
+//     bool isPalindrome(string s) {
+//         string str;
+//         for (char c : s) {
+//             if (isalnum(c)) {
+//                 str += tolower(c);
+//             }
+//         }
+//         string rev = str;
+//         reverse(rev.begin(), rev.end());
+//         return str == rev;
+//     }
+// };
 
-using namespace std;
-
-// --- Optimal Solution (Two Pointers) ---
-// Time Complexity: O(N)
-// Space Complexity: O(1)
-bool isPalindrome(string s) {
-    int left = 0, right = s.length() - 1;
-    while (left < right) {
-        if (!isalnum(s[left])) {
-            left++;
-        } else if (!isalnum(s[right])) {
-            right--;
-        } else {
-            if (tolower(s[left]) != tolower(s[right])) return false;
-            left++;
-            right--;
+// Optimal solution: Use two pointers to compare characters from both ends. O(n)
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left = 0, right = s.size() - 1;
+        while (left < right) {
+            if (!isalnum(s[left])) {
+                left++;
+            } else if (!isalnum(s[right])) {
+                right--;
+            } else {
+                if (tolower(s[left]) != tolower(s[right])) {
+                    return false;
+                }
+                left++;
+                right--;
+            }
         }
+        return true;
     }
-    return true;
-}
+};
 
 int main() {
-    string s = "A man, a plan, a canal: Panama";
-    cout << (isPalindrome(s) ? "True" : "False") << endl;
+    Solution solution;
+    cout << boolalpha;
+    cout << solution.isPalindrome("A man, a plan, a canal: Panama") << endl;  // True
+    cout << solution.isPalindrome("Not a palindrome") << endl;  // False
+    cout << solution.isPalindrome("Was it a car or a cat I saw?") << endl;  // True
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
