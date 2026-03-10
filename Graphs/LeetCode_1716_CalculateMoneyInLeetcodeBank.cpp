@@ -1,42 +1,44 @@
-```cpp
-// LeetCode problem 1716: Calculate Money In Leetcode Bank
-// https://leetcode.com/problems/calculate-money-in-leetcode-bank/
-// Calculate the total amount of money in the LeetCode bank after n days.
+/**
+ * Problem: Calculate Money in Leetcode Bank (LeetCode 1716)
+ * Link: https://leetcode.com/problems/calculate-money-in-leetcode-bank/
+ */
 
-class Solution {
-public:
-    int totalMoney(int n) {
-        // Brute force approach: O(n) complexity
-        // int total = 0;
-        // for (int i = 1; i <= n; i++) {
-        //     int week = (i - 1) / 7;
-        //     total += week + (i - week * 7);
-        // }
-        // return total;
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-        // Optimal solution: O(1) complexity
-        int total = 0;
-        int weeks = n / 7;
-        int remainingDays = n % 7;
-        int startWeek = 1;
-        int endWeek = startWeek + weeks - 1;
-        total += (weeks * 7) * (startWeek + endWeek) / 2;
-        total += (remainingDays * (remainingDays + 1)) / 2 + remainingDays * weeks;
-        return total;
-    }
-};
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    // Test case 1:
-    int n1 = 4;
-    int result1 = solution.totalMoney(n1);
-    // Test case 2:
-    int n2 = 10;
-    int result2 = solution.totalMoney(n2);
-    // Test case 3:
-    int n3 = 20;
-    int result3 = solution.totalMoney(n3);
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Calculate Money in Leetcode Bank" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+

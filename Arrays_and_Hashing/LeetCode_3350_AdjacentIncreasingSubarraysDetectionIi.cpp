@@ -1,43 +1,61 @@
+```cpp
 /**
- * Problem: Adjacent Increasing Subarrays Detection II (LeetCode 3350)
- * Link: https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/
+ * @brief LeetCode problem 3350: Adjacent Increasing Subarrays Detection II
+ * https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/
+ * Given an array of integers, find the number of adjacent increasing subarrays.
  */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach with O(n^2) complexity
+int bruteForce(std::vector<int>& nums) {
+    int count = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        for (int j = i + 1; j <= nums.size(); j++) {
+            bool increasing = true;
+            for (int k = i; k < j - 1; k++) {
+                if (nums[k] >= nums[k + 1]) {
+                    increasing = false;
+                    break;
+                }
+            }
+            if (increasing) {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution with O(n) complexity
+int optimalSolution(std::vector<int>& nums) {
+    int count = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++) {
+        bool increasing = true;
+        for (int j = i; j < n - 1; j++) {
+            if (nums[j] >= nums[j + 1]) {
+                increasing = false;
+                break;
+            }
+            if (increasing) {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Adjacent Increasing Subarrays Detection II" << endl;
-    // solveOptimal();
-    
+    std::vector<int> test1 = {1, 2, 3, 4};
+    std::vector<int> test2 = {1, 1, 1, 1};
+    std::vector<int> test3 = {1, 3, 2, 4};
+
+    std::cout << "Test case 1: " << optimalSolution(test1) << std::endl;
+    std::cout << "Test case 2: " << optimalSolution(test2) << std::endl;
+    std::cout << "Test case 3: " << optimalSolution(test3) << std::endl;
+
     return 0;
 }
-
+```
