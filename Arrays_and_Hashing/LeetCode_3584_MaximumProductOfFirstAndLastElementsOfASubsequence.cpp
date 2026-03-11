@@ -1,52 +1,44 @@
-```cpp
-// Maximum Product Of First And Last Elements Of A Subsequence, https://leetcode.com/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/
-// Given an array of integers, find the maximum product of the first and last elements of a subsequence.
+/**
+ * Problem: Maximum Product of First and Last Elements of a Subsequence (LeetCode 3584)
+ * Link: https://leetcode.com/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/
+ */
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach: generate all possible subsequences and calculate the product of the first and last elements
-// O(2^n * n) complexity
-int maxProductBruteForce(std::vector<int>& nums) {
-    int maxProduct = 0;
-    int n = nums.size();
-    for (int mask = 1; mask < (1 << n); mask++) {
-        std::vector<int> subsequence;
-        for (int i = 0; i < n; i++) {
-            if ((mask & (1 << i)) != 0) {
-                subsequence.push_back(nums[i]);
-            }
-        }
-        if (!subsequence.empty()) {
-            maxProduct = std::max(maxProduct, subsequence[0] * subsequence.back());
-        }
-    }
-    return maxProduct;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution: use dynamic programming to store the maximum product of the first and last elements of a subsequence
-// O(n^2) complexity
-int maxProduct(std::vector<int>& nums) {
-    int n = nums.size();
-    int maxProduct = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            maxProduct = std::max(maxProduct, nums[i] * nums[j]);
-        }
-    }
-    return maxProduct;
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::vector<int> nums1 = {1, 2, 3, 4, 5};
-    std::vector<int> nums2 = {-1, -2, -3, -4, -5};
-    std::vector<int> nums3 = {1, -2, 3, -4, 5};
-
-    std::cout << "Maximum product of first and last elements of a subsequence for nums1: " << maxProduct(nums1) << std::endl;
-    std::cout << "Maximum product of first and last elements of a subsequence for nums2: " << maxProduct(nums2) << std::endl;
-    std::cout << "Maximum product of first and last elements of a subsequence for nums3: " << maxProduct(nums3) << std::endl;
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Maximum Product of First and Last Elements of a Subsequence" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
