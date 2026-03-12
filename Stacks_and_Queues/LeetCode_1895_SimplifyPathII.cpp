@@ -1,47 +1,60 @@
-/**
- * Problem: SimplifyPathII (LeetCode 1895)
- * Link: https://leetcode.com/problems/simplifypathii/
- */
+```cpp
+// LeetCode problem 1895: Simplify Path II
+// https://leetcode.com/problems/simplify-path-ii/
+// Given a string path, which is an absolute path (starting with a leading slash '/') that starts at the root directory of a file system, 
+// you need to simplify it by removing any redundant '/' and making it the shortest possible absolute path.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
+#include <sstream>
 
-using namespace std;
+// Brute force approach with O(n^2) complexity
+// std::string simplifyPathBruteForce(const std::string& path) {
+//     std::vector<std::string> components;
+//     std::stringstream ss(path);
+//     std::string component;
+//     while (std::getline(ss, component, '/')) {
+//         if (component == "..") {
+//             if (!components.empty()) {
+//                 components.pop_back();
+//             }
+//         } else if (component != "" && component != ".") {
+//             components.push_back(component);
+//         }
+//     }
+//     std::string simplifiedPath;
+//     for (const auto& c : components) {
+//         simplifiedPath += "/" + c;
+//     }
+//     return simplifiedPath;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1895() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution with O(n) complexity
+std::string simplifyPath(const std::string& path) {
+    std::vector<std::string> stack;
+    std::stringstream ss(path);
+    std::string component;
+    while (std::getline(ss, component, '/')) {
+        if (component == "..") {
+            if (!stack.empty()) {
+                stack.pop_back();
+            }
+        } else if (component != "" && component != ".") {
+            stack.push_back(component);
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1895() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    std::string simplifiedPath;
+    for (const auto& c : stack) {
+        simplifiedPath += "/" + c;
     }
+    return simplifiedPath.empty() ? "/" : simplifiedPath;
 }
 
 int main() {
-    // cout << "Testing SimplifyPathII" << endl;
-    // solveOptimal_1895();
+    std::cout << simplifyPath("/home/") << std::endl;  // Output: "/home"
+    std::cout << simplifyPath("/../") << std::endl;  // Output: "/"
+    std::cout << simplifyPath("/home//foo/") << std::endl;  // Output: "/home/foo"
     return 0;
 }
-
-
+```
