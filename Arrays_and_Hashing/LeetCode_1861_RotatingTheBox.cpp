@@ -1,64 +1,44 @@
-```cpp
-// Rotating The Box, https://leetcode.com/problems/rotating-the-box/, 
-// Given a 2D array of size m x n representing a box, rotate the box by 90 degrees clockwise.
+/**
+ * Problem: Rotating the Box (LeetCode 1861)
+ * Link: https://leetcode.com/problems/rotating-the-box/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach with O(m*n) complexity
-std::vector<std::vector<char>> rotateTheBoxBruteForce(std::vector<std::vector<char>>& box) {
-    int m = box.size();
-    int n = box[0].size();
-    std::vector<std::vector<char>> result(n, std::vector<char>(m));
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            result[j][m - i - 1] = box[i][j];
-        }
-    }
-    return result;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution with O(m*n) complexity
-std::vector<std::vector<char>> rotateTheBox(std::vector<std::vector<char>>& box) {
-    int m = box.size();
-    int n = box[0].size();
-    std::vector<std::vector<char>> result(n, std::vector<char>(m));
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            result[j][m - i - 1] = box[i][j];
-        }
-    }
-    return result;
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::vector<std::vector<char>> box1 = {{'#', '#', '*'}, {'#', '.', '#'}, {'*', '.', '.'}};
-    std::vector<std::vector<char>> result1 = rotateTheBox(box1);
-    for (const auto& row : result1) {
-        for (char c : row) {
-            std::cout << c << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::vector<std::vector<char>> box2 = {{'#', '.', '#'}};
-    std::vector<std::vector<char>> result2 = rotateTheBox(box2);
-    for (const auto& row : result2) {
-        for (char c : row) {
-            std::cout << c << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::vector<std::vector<char>> box3 = {{'#'}};
-    std::vector<std::vector<char>> result3 = rotateTheBox(box3);
-    for (const auto& row : result3) {
-        for (char c : row) {
-            std::cout << c << " ";
-        }
-        std::cout << std::endl;
-    }
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Rotating the Box" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+

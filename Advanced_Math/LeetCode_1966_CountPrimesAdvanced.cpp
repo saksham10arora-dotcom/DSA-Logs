@@ -1,48 +1,57 @@
-/**
- * Problem: CountPrimesAdvanced (LeetCode 1966)
- * Link: https://leetcode.com/problems/countprimesadvanced/
- */
+```cpp
+// LeetCode problem 1966: Count Primes Advanced
+// https://leetcode.com/problems/count-primes/
+// Given an integer n, return the number of prime numbers that are less than or equal to n.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1966() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n*sqrt(n)) complexity
+class Solution_BruteForce {
+public:
+    int countPrimes(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            bool isPrime = true;
+            for (int j = 2; j * j <= i; j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) count++;
         }
+        return count;
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1966() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n*log(log(n))) complexity
+class Solution_Optimal {
+public:
+    int countPrimes(int n) {
+        if (n <= 2) return 0;
+        std::vector<bool> isPrime(n, true);
+        isPrime[0] = isPrime[1] = false;
+        for (int i = 2; i * i < n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        int count = 0;
+        for (bool prime : isPrime) {
+            if (prime) count++;
+        }
+        return count;
     }
-}
+};
 
 int main() {
-    // cout << "Testing CountPrimesAdvanced" << endl;
-    // solveOptimal_1966();
+    Solution_Optimal solution;
+    std::cout << solution.countPrimes(10) << std::endl;  // Output: 4
+    std::cout << solution.countPrimes(20) << std::endl;  // Output: 8
+    std::cout << solution.countPrimes(100) << std::endl; // Output: 25
     return 0;
 }
-
-
-
+```
