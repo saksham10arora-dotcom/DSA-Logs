@@ -1,49 +1,39 @@
-/**
- * Problem: MaxVowelsIII (LeetCode 537)
- * Link: https://leetcode.com/problems/maxvowelsiii/
- */
+```cpp
+// LeetCode problem 537: Complex Number Multiplication
+// https://leetcode.com/problems/complex-number-multiplication/
+// Given two complex numbers, return their product.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+// Brute force approach: O(1) complexity
+// class Solution {
+// public:
+//     string complexNumberMultiply(string a, string b) {
+//         int realA, imagA, realB, imagB;
+//         sscanf(a.c_str(), "%d+%di", &realA, &imagA);
+//         sscanf(b.c_str(), "%d+%di", &realB, &imagB);
+//         int real = realA * realB - imagA * imagB;
+//         int imag = realA * imagB + realB * imagA;
+//         return to_string(real) + "+" + to_string(imag) + "i";
+//     }
+// };
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_537() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
-        }
+// Optimal solution: O(1) complexity
+class Solution {
+public:
+    string complexNumberMultiply(string a, string b) {
+        int realA, imagA, realB, imagB;
+        sscanf(a.c_str(), "%d+%di", &realA, &imagA);
+        sscanf(b.c_str(), "%d+%di", &realB, &imagB);
+        int real = realA * realB - imagA * imagB;
+        int imag = realA * imagB + realB * imagA;
+        return to_string(real) + "+" + to_string(imag) + "i";
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_537() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing MaxVowelsIII" << endl;
-    // solveOptimal_537();
+    Solution solution;
+    printf("%s\n", solution.complexNumberMultiply("1+1i", "1+1i").c_str());  // Output: "0+2i"
+    printf("%s\n", solution.complexNumberMultiply("1+2i", "1+3i").c_str());  // Output: "-5+5i"
+    printf("%s\n", solution.complexNumberMultiply("1+2i", "2+3i").c_str());  // Output: "-4+7i"
     return 0;
 }
-
-
-
-
+```
