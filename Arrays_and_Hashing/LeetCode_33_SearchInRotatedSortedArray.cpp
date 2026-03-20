@@ -1,43 +1,59 @@
-/**
- * Problem: Search in Rotated Sorted Array (LeetCode 33)
- * Link: https://leetcode.com/problems/search-in-rotated-sorted-array/
- */
+```cpp
+// Search In Rotated Sorted Array, https://leetcode.com/problems/search-in-rotated-sorted-array/
+// Given the sorted rotated array nums of unique elements, return the index of the target element if it is present in the array, otherwise return -1.
 
-#include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+#include <iostream>
 
-using namespace std;
+// Brute force approach with O(n) complexity
+class SolutionBrute {
+public:
+    int search(std::vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(log n) complexity
+class Solution {
+public:
+    int search(std::vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[left] <= nums[mid]) {
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Search in Rotated Sorted Array" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    std::vector<int> nums1 = {4, 5, 6, 7, 0, 1, 2};
+    std::cout << solution.search(nums1, 0) << std::endl;  // Output: 4
+    std::vector<int> nums2 = {4, 5, 6, 7, 0, 1, 2};
+    std::cout << solution.search(nums2, 3) << std::endl;  // Output: -1
+    std::vector<int> nums3 = {1};
+    std::cout << solution.search(nums3, 0) << std::endl;  // Output: -1
     return 0;
 }
-
+```
