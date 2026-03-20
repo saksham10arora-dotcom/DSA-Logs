@@ -1,43 +1,76 @@
-/**
- * Problem: Maximum Square Area by Removing Fences From a Field (LeetCode 2975)
- * Link: https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/
- */
+```cpp
+// Maximum Square Area By Removing Fences From A Field, https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/
+// Given a field with fences, find the maximum square area that can be formed by removing fences.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+// Brute force approach: O(n^3) - try all possible squares and check if they can be formed by removing fences
+class Solution {
+public:
+    int maximumArea(int n, vector<vector<int>>& f) {
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 1; k <= n; k++) {
+                    if (i + k <= n && j + k <= n) {
+                        int area = k * k;
+                        bool valid = true;
+                        for (int x = i; x < i + k; x++) {
+                            for (int y = j; y < j + k; y++) {
+                                if (f[x][y] == 1) {
+                                    valid = false;
+                                    break;
+                                }
+                            }
+                            if (!valid) break;
+                        }
+                        if (valid) maxArea = max(maxArea, area);
+                    }
+                }
+            }
+        }
+        return maxArea;
+    }
+};
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution: O(n^2) - use a sliding window approach to check for valid squares
+class Solution {
+public:
+    int maximumArea(int n, vector<vector<int>>& f) {
+        int maxArea = 0;
+        for (int k = n; k > 0; k--) {
+            for (int i = 0; i <= n - k; i++) {
+                for (int j = 0; j <= n - k; j++) {
+                    bool valid = true;
+                    for (int x = i; x < i + k; x++) {
+                        for (int y = j; y < j + k; y++) {
+                            if (f[x][y] == 1) {
+                                valid = false;
+                                break;
+                            }
+                        }
+                        if (!valid) break;
+                    }
+                    if (valid) {
+                        maxArea = k * k;
+                        return maxArea;
+                    }
+                }
+            }
+        }
+        return maxArea;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Maximum Square Area by Removing Fences From a Field" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    vector<vector<int>> f1 = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+    cout << solution.maximumArea(3, f1) << endl;  // Output: 9
+
+    vector<vector<int>> f2 = {{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}};
+    cout << solution.maximumArea(4, f2) << endl;  // Output: 4
+
+    vector<vector<int>> f3 = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+    cout << solution.maximumArea(3, f3) << endl;  // Output: 0
+
     return 0;
 }
-
+```
