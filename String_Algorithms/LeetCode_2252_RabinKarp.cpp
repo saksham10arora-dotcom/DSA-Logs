@@ -1,48 +1,88 @@
-/**
- * Problem: RabinKarp (LeetCode 2252)
- * Link: https://leetcode.com/problems/rabinkarp/
- */
+```cpp
+// Rabin Karp, https://leetcode.com/problems/rabin-karp/, 
+// Given a string s and a pattern p, find all the occurrences of the pattern in the string.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2252() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n*m) complexity
+std::vector<int> findAnagramsBruteForce(const std::string& s, const std::string& p) {
+    std::vector<int> result;
+    int n = s.size(), m = p.size();
+    for (int i = 0; i <= n - m; i++) {
+        bool match = true;
+        for (int j = 0; j < m; j++) {
+            if (s[i + j] != p[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            result.push_back(i);
         }
     }
+    return result;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2252() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n+m) complexity
+std::vector<int> findAnagrams(const std::string& s, const std::string& p) {
+    std::vector<int> result;
+    int n = s.size(), m = p.size();
+    if (n < m) return result;
+    const int base = 26;
+    int pHash = 0, sHash = 0;
+    int power = 1;
+    for (int i = 0; i < m - 1; i++) {
+        power = (power * base) % 101;
     }
+    for (int i = 0; i < m; i++) {
+        pHash = (pHash * base + p[i] - 'a') % 101;
+        sHash = (sHash * base + s[i] - 'a') % 101;
+    }
+    for (int i = 0; i <= n - m; i++) {
+        if (pHash == sHash) {
+            bool match = true;
+            for (int j = 0; j < m; j++) {
+                if (s[i + j] != p[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                result.push_back(i);
+            }
+        }
+        if (i < n - m) {
+            sHash = ((sHash - (s[i] - 'a') * power) * base + s[i + m] - 'a') % 101;
+            if (sHash < 0) sHash += 101;
+        }
+    }
+    return result;
 }
 
 int main() {
-    // cout << "Testing RabinKarp" << endl;
-    // solveOptimal_2252();
+    std::vector<int> result1 = findAnagrams("abxaba", "ab");
+    std::cout << "Result 1: ";
+    for (int i : result1) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<int> result2 = findAnagrams("abab", "ab");
+    std::cout << "Result 2: ";
+    for (int i : result2) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<int> result3 = findAnagrams("aaaa", "aa");
+    std::cout << "Result 3: ";
+    for (int i : result3) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
-
-
+```
