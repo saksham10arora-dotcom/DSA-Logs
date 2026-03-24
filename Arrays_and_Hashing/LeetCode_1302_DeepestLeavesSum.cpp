@@ -1,78 +1,44 @@
-```cpp
-// LeetCode problem 1302: Deepest Leaves Sum, https://leetcode.com/problems/deepest-leaves-sum/
-// Given the root of a binary tree, return the sum of the values of its deepest leaves.
+/**
+ * Problem: Deepest Leaves Sum (LeetCode 1302)
+ * Link: https://leetcode.com/problems/deepest-leaves-sum/
+ */
 
-// Brute force approach: O(n) time complexity, O(n) space complexity
-class Solution {
-public:
-    int deepestLeavesSum(TreeNode* root) {
-        if (!root) return 0;
-        std::queue<std::pair<TreeNode*, int>> q;
-        q.push({root, 0});
-        int deepestLevel = -1;
-        int sum = 0;
-        while (!q.empty()) {
-            auto node = q.front().first;
-            int level = q.front().second;
-            q.pop();
-            if (level > deepestLevel) {
-                deepestLevel = level;
-                sum = node->val;
-            } else if (level == deepestLevel) {
-                sum += node->val;
-            }
-            if (node->left) q.push({node->left, level + 1});
-            if (node->right) q.push({node->right, level + 1});
-        }
-        return sum;
-    }
-};
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Optimal solution: O(n) time complexity, O(n) space complexity
-class Solution {
-public:
-    int deepestLeavesSum(TreeNode* root) {
-        if (!root) return 0;
-        std::queue<std::pair<TreeNode*, int>> q;
-        q.push({root, 0});
-        int deepestLevel = -1;
-        int sum = 0;
-        while (!q.empty()) {
-            int size = q.size();
-            int levelSum = 0;
-            for (int i = 0; i < size; i++) {
-                auto node = q.front().first;
-                int level = q.front().second;
-                q.pop();
-                if (level > deepestLevel) {
-                    deepestLevel = level;
-                    sum = node->val;
-                } else if (level == deepestLevel) {
-                    sum += node->val;
-                }
-                levelSum += node->val;
-                if (node->left) q.push({node->left, level + 1});
-                if (node->right) q.push({node->right, level + 1});
-            }
-            if (deepestLevel == q.front().second - 1) {
-                sum = levelSum;
-            }
-        }
-        return sum;
-    }
-};
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    TreeNode* root1 = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3));
-    std::cout << solution.deepestLeavesSum(root1) << std::endl;  // Output: 9
-
-    TreeNode* root2 = new TreeNode(6, new TreeNode(7, new TreeNode(2, new TreeNode(7), new TreeNode(1)), new TreeNode(7)), new TreeNode(8, new TreeNode(1), new TreeNode(0)));
-    std::cout << solution.deepestLeavesSum(root2) << std::endl;  // Output: 8
-
-    TreeNode* root3 = new TreeNode(1);
-    std::cout << solution.deepestLeavesSum(root3) << std::endl;  // Output: 1
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Deepest Leaves Sum" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
