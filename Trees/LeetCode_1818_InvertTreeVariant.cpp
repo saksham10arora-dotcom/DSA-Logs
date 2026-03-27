@@ -1,49 +1,59 @@
-/**
- * Problem: InvertTreeVariant (LeetCode 1818)
- * Link: https://leetcode.com/problems/inverttreevariant/
- */
+```cpp
+// LeetCode problem 1818: Minimum Absolute Sum Difference
+// https://leetcode.com/problems/minimum-absolute-sum-difference/
+// Given an integer array and a target value, find the minimum absolute sum difference.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <cmath>
 
-using namespace std;
+class Solution {
+public:
+    int minAbsoluteSumDiff(std::vector<int>& nums, int target) {
+        // Brute force approach with O(n^2) complexity
+        // int minDiff = INT_MAX;
+        // for (int i = 0; i < nums.size(); i++) {
+        //     for (int j = 0; j < nums.size(); j++) {
+        //         int diff = std::abs(nums[i] - target);
+        //         int newDiff = std::abs(nums[j] - target);
+        //         minDiff = std::min(minDiff, std::abs(diff - newDiff));
+        //     }
+        // }
+        // return minDiff;
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1818() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+        // Optimal solution with O(n log n) complexity
+        std::vector<int> sortedNums = nums;
+        std::sort(sortedNums.begin(), sortedNums.end());
+        int minDiff = INT_MAX;
+        for (int num : nums) {
+            int diff = std::abs(num - target);
+            auto it = std::lower_bound(sortedNums.begin(), sortedNums.end(), target);
+            if (it!= sortedNums.end()) {
+                minDiff = std::min(minDiff, std::abs(*it - target));
+            }
+            if (it!= sortedNums.begin()) {
+                minDiff = std::min(minDiff, std::abs(*std::prev(it) - target));
+            }
         }
+        return minDiff;
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1818() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing InvertTreeVariant" << endl;
-    // solveOptimal_1818();
+    Solution solution;
+    std::vector<int> nums1 = {1, 7, 5};
+    int target1 = 2;
+    std::cout << solution.minAbsoluteSumDiff(nums1, target1) << std::endl;
+
+    std::vector<int> nums2 = {2, 3, 5};
+    int target2 = 6;
+    std::cout << solution.minAbsoluteSumDiff(nums2, target2) << std::endl;
+
+    std::vector<int> nums3 = {4, 7, 6};
+    int target3 = 7;
+    std::cout << solution.minAbsoluteSumDiff(nums3, target3) << std::endl;
+
     return 0;
 }
-
-
-
-
+```
