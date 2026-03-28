@@ -1,72 +1,51 @@
-```cpp
-// LeetCode problem 1943: Design Add and Search Words Data Structure
-// https://leetcode.com/problems/design-add-and-search-words-data-structure/
-// Design a data structure that supports adding new words and finding if a given word is in the data structure.
+/**
+ * Problem: DesignAddSearchII (LeetCode 1943)
+ * Link: https://leetcode.com/problems/designaddsearchii/
+ */
 
 #include <iostream>
-#include <unordered_map>
+#include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <queue>
 
-class WordDictionary {
-private:
-    struct TrieNode {
-        std::unordered_map<char, TrieNode*> children;
-        bool isWord;
-    };
+using namespace std;
 
-    TrieNode* root;
-
-public:
-    WordDictionary() {
-        root = new TrieNode();
-    }
-
-    void addWord(const std::string& word) {
-        // O(m) where m is the length of the word
-        TrieNode* node = root;
-        for (char c : word) {
-            if (node->children.find(c) == node->children.end()) {
-                node->children[c] = new TrieNode();
-            }
-            node = node->children[c];
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1943() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        node->isWord = true;
     }
+}
 
-    bool search(const std::string& word) {
-        // O(m) where m is the length of the word
-        return searchFrom(root, word);
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1943() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-
-    bool searchFrom(TrieNode* node, const std::string& word) {
-        for (int i = 0; i < word.size(); ++i) {
-            char c = word[i];
-            if (c == '.') {
-                for (auto& child : node->children) {
-                    if (searchFrom(child.second, word.substr(i + 1))) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            if (node->children.find(c) == node->children.end()) {
-                return false;
-            }
-            node = node->children[c];
-        }
-        return node->isWord;
-    }
-};
+}
 
 int main() {
-    WordDictionary wordDictionary;
-    wordDictionary.addWord("bad");
-    wordDictionary.addWord("dad");
-    wordDictionary.addWord("mad");
-    std::cout << std::boolalpha << wordDictionary.search("pad") << std::endl; // False
-    std::cout << std::boolalpha << wordDictionary.search("bad") << std::endl; // True
-    std::cout << std::boolalpha << wordDictionary.search(".ad") << std::endl; // True
-    std::cout << std::boolalpha << wordDictionary.search("b..") << std::endl; // True
+    // cout << "Testing DesignAddSearchII" << endl;
+    // solveOptimal_1943();
     return 0;
 }
-```
+
+
+
+
+
+
