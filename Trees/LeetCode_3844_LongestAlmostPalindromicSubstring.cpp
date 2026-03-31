@@ -1,43 +1,67 @@
-/**
- * Problem: Longest Almost-Palindromic Substring (LeetCode 3844)
- * Link: https://leetcode.com/problems/longest-almost-palindromic-substring/
- */
+```cpp
+// LeetCode problem 3844: Longest Almost Palindromic Substring
+// https://leetcode.com/problems/longest-almost-palindromic-substring/
+// Given a string s, return the length of the longest almost palindromic substring.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach with O(n^3) complexity
+class SolutionBruteForce {
+public:
+    int longestAlmostPalindromicSubstring(std::string s) {
+        int n = s.size();
+        int maxLen = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                std::string substr = s.substr(i, j - i);
+                int diff = 0;
+                for (int k = 0; k < substr.size() / 2; k++) {
+                    if (substr[k]!= substr[substr.size() - 1 - k]) {
+                        diff++;
+                    }
+                }
+                if (diff <= 1 && substr.size() > maxLen) {
+                    maxLen = substr.size();
+                }
+            }
+        }
+        return maxLen;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(n^2) complexity
+class SolutionOptimal {
+public:
+    int longestAlmostPalindromicSubstring(std::string s) {
+        int n = s.size();
+        int maxLen = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                std::string substr = s.substr(i, j - i);
+                int diff = 0;
+                int left = 0, right = substr.size() - 1;
+                while (left < right) {
+                    if (substr[left]!= substr[right]) {
+                        diff++;
+                    }
+                    left++;
+                    right--;
+                }
+                if (diff <= 1 && substr.size() > maxLen) {
+                    maxLen = substr.size();
+                }
+            }
+        }
+        return maxLen;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Longest Almost-Palindromic Substring" << endl;
-    // solveOptimal();
-    
+    SolutionOptimal solution;
+    std::cout << solution.longestAlmostPalindromicSubstring("abc") << std::endl;  // Output: 2
+    std::cout << solution.longestAlmostPalindromicSubstring("aba") << std::endl;  // Output: 3
+    std::cout << solution.longestAlmostPalindromicSubstring("abccba") << std::endl;  // Output: 6
     return 0;
 }
-
+```
