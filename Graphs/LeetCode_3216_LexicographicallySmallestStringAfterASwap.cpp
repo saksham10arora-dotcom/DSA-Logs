@@ -1,58 +1,44 @@
-```cpp
-// LeetCode problem 3216: Lexicographically Smallest String After A Swap
-// https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/
-// Given a string s and an integer k, find the lexicographically smallest string after applying the given operations.
+/**
+ * Problem: Lexicographically Smallest String After a Swap (LeetCode 3216)
+ * Link: https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/
+ */
 
 #include <iostream>
-#include <string>
+#include <vector>
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach with O(n^2) complexity
-std::string lexicographicallySmallestStringBruteForce(std::string s, int k) {
-    for (int i = 0; i < s.length(); i++) {
-        for (int j = i + 1; j < s.length(); j++) {
-            if (s[i] > s[j] && k > 0) {
-                std::swap(s[i], s[j]);
-                k--;
-            }
-        }
-    }
-    return s;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution with O(n) complexity
-std::string lexicographicallySmallestStringOptimal(std::string s, int k) {
-    int n = s.length();
-    for (int i = 0; i < n; i++) {
-        char minChar = s[i];
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++) {
-            if (s[j] < minChar) {
-                minChar = s[j];
-                minIndex = j;
-            }
-        }
-        if (minIndex != i && k > 0) {
-            std::swap(s[i], s[minIndex]);
-            k--;
-        }
-    }
-    return s;
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::string s1 = "11112";
-    int k1 = 4;
-    std::cout << "Lexicographically smallest string after applying operations: " << lexicographicallySmallestStringOptimal(s1, k1) << std::endl;
-
-    std::string s2 = "00110";
-    int k2 = 1;
-    std::cout << "Lexicographically smallest string after applying operations: " << lexicographicallySmallestStringOptimal(s2, k2) << std::endl;
-
-    std::string s3 = "11111";
-    int k3 = 10;
-    std::cout << "Lexicographically smallest string after applying operations: " << lexicographicallySmallestStringOptimal(s3, k3) << std::endl;
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Lexicographically Smallest String After a Swap" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
