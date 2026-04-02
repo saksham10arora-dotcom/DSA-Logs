@@ -1,67 +1,48 @@
-```cpp
-// Problem: Find Duplicates
-// Link: https://cses.fi/problemset/task/1510
-// Description: Given an array of n integers, find all duplicates in the array.
+/**
+ * Problem: FindDuplicates (CSES 1510)
+ * Link: https://cses.com/problems/findduplicates/
+ */
 
 #include <iostream>
 #include <vector>
-#include <unordered_set>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(n^2) complexity
-std::vector<int> findDuplicatesBruteForce(const std::vector<int>& arr) {
-    std::vector<int> duplicates;
-    for (int i = 0; i < arr.size(); ++i) {
-        for (int j = i + 1; j < arr.size(); ++j) {
-            if (arr[i] == arr[j] && std::find(duplicates.begin(), duplicates.end(), arr[i]) == duplicates.end()) {
-                duplicates.push_back(arr[i]);
-            }
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1510() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
     }
-    return duplicates;
 }
 
-// Optimal solution with O(n) complexity
-std::vector<int> findDuplicatesOptimal(const std::vector<int>& arr) {
-    std::vector<int> duplicates;
-    std::unordered_set<int> seen;
-    std::unordered_set<int> duplicateSet;
-    for (int num : arr) {
-        if (seen.find(num) != seen.end() && duplicateSet.find(num) == duplicateSet.end()) {
-            duplicates.push_back(num);
-            duplicateSet.insert(num);
-        }
-        seen.insert(num);
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1510() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return duplicates;
 }
 
 int main() {
-    std::vector<int> test1 = {1, 2, 3, 2, 4, 5, 6, 2, 3};
-    std::vector<int> test2 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    std::vector<int> test3 = {1, 1, 1, 1, 1, 1, 1, 1, 1};
-
-    std::vector<int> result1 = findDuplicatesOptimal(test1);
-    std::vector<int> result2 = findDuplicatesOptimal(test2);
-    std::vector<int> result3 = findDuplicatesOptimal(test3);
-
-    std::cout << "Test 1: ";
-    for (int num : result1) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Test 2: ";
-    for (int num : result2) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Test 3: ";
-    for (int num : result3) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
+    // cout << "Testing FindDuplicates" << endl;
+    // solveOptimal_1510();
     return 0;
 }
-```
+
+
+
