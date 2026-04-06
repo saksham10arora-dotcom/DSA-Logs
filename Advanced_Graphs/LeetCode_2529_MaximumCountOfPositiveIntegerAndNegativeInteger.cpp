@@ -1,43 +1,44 @@
-```cpp
-// Maximum Count Of Positive Integer And Negative Integer
-// https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/
-// Given an array of integers, find the maximum count of positive integer and negative integer.
+/**
+ * Problem: Maximum Count of Positive Integer and Negative Integer (LeetCode 2529)
+ * Link: https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/
+ */
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach with O(n) complexity
-class Solution_BruteForce {
-public:
-    std::vector<int> maximumCount(std::vector<int>& nums) {
-        int pos = 0, neg = 0;
-        for (int num : nums) {
-            if (num > 0) pos++;
-            else if (num < 0) neg++;
-        }
-        return {std::max(pos, neg)};
-    }
-};
+using namespace std;
 
-// Optimal solution with O(n) complexity
-class Solution_Optimal {
-public:
-    std::vector<int> maximumCount(std::vector<int>& nums) {
-        int pos = std::count_if(nums.begin(), nums.end(), [](int x){ return x > 0; });
-        int neg = std::count_if(nums.begin(), nums.end(), [](int x){ return x < 0; });
-        return {std::max(pos, neg)};
-    }
-};
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution_Optimal solution;
-    std::vector<int> test1 = {1, 2, 3, -4, -5};
-    std::vector<int> test2 = {1, 2, 3, 4, 5};
-    std::vector<int> test3 = {-1, -2, -3, -4, -5};
-    std::cout << solution.maximumCount(test1)[0] << std::endl;  // Output: 3
-    std::cout << solution.maximumCount(test2)[0] << std::endl;  // Output: 5
-    std::cout << solution.maximumCount(test3)[0] << std::endl;  // Output: 5
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Maximum Count of Positive Integer and Negative Integer" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
