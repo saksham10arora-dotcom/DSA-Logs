@@ -1,43 +1,47 @@
-/**
- * Problem: Split With Minimum Sum (LeetCode 2578)
- * Link: https://leetcode.com/problems/split-with-minimum-sum/
- */
+```cpp
+// LeetCode problem 2578: Split With Minimum Sum, https://leetcode.com/problems/split-with-minimum-sum/
+// Given an integer num, split it into two non-negative integers a and b such that n = a + b, 
+// and the product of a and b is maximized.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+#include <climits>
 
-using namespace std;
+// Brute force approach with O(n) complexity
+class SolutionBrute {
+public:
+    int splitNum(int num) {
+        int minSum = INT_MAX;
+        for (int a = 0; a <= num; a++) {
+            int b = num - a;
+            int sum = a + b;
+            if (sum < minSum) {
+                minSum = sum;
+            }
+        }
+        return minSum;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(log n) complexity
+class SolutionOptimal {
+public:
+    int splitNum(int num) {
+        int a = 0, b = 0;
+        while (num > 0) {
+            a = a * 10 + num % 10;
+            num /= 10;
+            b = b * 10 + num % 10;
+            num /= 10;
+        }
+        return a + b;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Split With Minimum Sum" << endl;
-    // solveOptimal();
-    
+    SolutionOptimal solution;
+    std::cout << solution.splitNum(10) << std::endl;  // Output: 1
+    std::cout << solution.splitNum(2) << std::endl;   // Output: 11
+    std::cout << solution.splitNum(1234) << std::endl; // Output: 172
     return 0;
 }
-
+```

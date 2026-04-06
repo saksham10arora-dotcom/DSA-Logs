@@ -1,43 +1,77 @@
-```cpp
-// Best Time to Buy and Sell Stock, https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
-// Given an array of integers representing the daily stock prices, find the maximum possible profit.
+/**
+ * Problem: Best Time to Buy and Sell Stock (LeetCode 121)
+ * Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+ */
 
-class Solution {
-public:
-    // Brute force approach: O(n^2) complexity
-    int maxProfitBruteForce(vector<int>& prices) {
-        int maxProfit = 0;
-        for (int i = 0; i < prices.size(); i++) {
-            for (int j = i + 1; j < prices.size(); j++) {
-                maxProfit = max(maxProfit, prices[j] - prices[i]);
-            }
-        }
-        return maxProfit;
-    }
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-    // Optimal solution: O(n) complexity
-    int maxProfit(vector<int>& prices) {
-        if (prices.empty()) return 0;
-        int minPrice = prices[0];
-        int maxProfit = 0;
-        for (int i = 1; i < prices.size(); i++) {
-            minPrice = min(minPrice, prices[i]);
-            maxProfit = max(maxProfit, prices[i] - minPrice);
-        }
-        return maxProfit;
+using namespace std;
+
+// --- Optimal Solution (Sliding Window / Kadane's Idea) ---
+// Time Complexity: O(N)
+// Space Complexity: O(1)
+int maxProfit(vector<int>& prices) {
+    int minPrice = 1e9;
+    int maxP = 0;
+    for (int price : prices) {
+        minPrice = min(minPrice, price);
+        maxP = max(maxP, price - minPrice);
     }
-};
+    return maxP;
+}
 
 int main() {
-    Solution solution;
-    vector<int> prices1 = {7, 1, 5, 3, 6, 4};
-    vector<int> prices2 = {7, 6, 4, 3, 1};
-    vector<int> prices3 = {2, 4, 1};
-
-    cout << "Max Profit 1: " << solution.maxProfit(prices1) << endl;  // Output: 5
-    cout << "Max Profit 2: " << solution.maxProfit(prices2) << endl;  // Output: 0
-    cout << "Max Profit 3: " << solution.maxProfit(prices3) << endl;  // Output: 2
-
+    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    cout << "Max Profit: " << maxProfit(prices) << endl;
     return 0;
 }
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
