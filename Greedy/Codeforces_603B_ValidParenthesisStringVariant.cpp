@@ -1,48 +1,69 @@
-/**
- * Problem: ValidParenthesisStringVariant (Codeforces 603B)
- * Link: https://codeforces.com/problems/validparenthesisstringvariant/
- */
+```cpp
+// Codeforces_603B_ValidParenthesisStringVariant
+// https://codeforces.com/contest/603/problem/B
+// Given a string of parentheses, determine if it's possible to make it valid by changing some '?' to '(' or ')'.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: try all possible combinations of '?' being '(' or ')', O(2^n)
+// This approach is inefficient and not recommended for large inputs
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_603B() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: use a greedy approach, O(n)
+bool isValid(const std::string& s) {
+    int balance = 0;
+    for (char c : s) {
+        if (c == '(') {
+            balance++;
+        } else if (c == ')') {
+            balance--;
+            if (balance < 0) {
+                return false;
+            }
         }
     }
+    return balance == 0;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_603B() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+bool isValidVariant(const std::string& s) {
+    int open = 0, close = 0;
+    for (char c : s) {
+        if (c == '(') {
+            open++;
+        } else if (c == ')') {
+            close++;
+        }
     }
+    if (open > close + 1 || close > open) {
+        return false;
+    }
+    int balance = 0;
+    for (char c : s) {
+        if (c == '(') {
+            balance++;
+        } else if (c == ')') {
+            balance--;
+            if (balance < 0) {
+                return false;
+            }
+        } else {
+            if (balance < 0) {
+                balance++;
+            } else {
+                balance--;
+            }
+        }
+    }
+    return balance == 0;
 }
 
 int main() {
-    // cout << "Testing ValidParenthesisStringVariant" << endl;
-    // solveOptimal_603B();
+    std::cout << std::boolalpha;
+    std::cout << isValidVariant("()") << std::endl;  // true
+    std::cout << isValidVariant("()()") << std::endl;  // true
+    std::cout << isValidVariant("(?)") << std::endl;  // true
+    std::cout << isValidVariant(")?(") << std::endl;  // false
+    std::cout << isValidVariant("??") << std::endl;  // true
     return 0;
 }
-
-
-
+```
