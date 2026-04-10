@@ -1,48 +1,107 @@
-/**
- * Problem: KMPMatcher (LeetCode 2350)
- * Link: https://leetcode.com/problems/kmpmatcher/
- */
+```cpp
+// LeetCode problem 2350: K M P Matcher
+// https://leetcode.com/problems/k-m-p-matcher/
+// The KMP (Knuth-Morris-Pratt) matcher is a string searching algorithm that efficiently searches for occurrences of a word within a main string.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(n*m) complexity
+class KMPMatcherBruteForce {
+public:
+    std::vector<int> kmpMatcher(const std::string& s, const std::string& p) {
+        std::vector<int> result;
+        for (int i = 0; i <= s.size() - p.size(); i++) {
+            bool match = true;
+            for (int j = 0; j < p.size(); j++) {
+                if (s[i + j] != p[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+};
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2350() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution with O(n+m) complexity
+class KMPMatcherOptimal {
+public:
+    std::vector<int> kmpMatcher(const std::string& s, const std::string& p) {
+        std::vector<int> lps(p.size(), 0);
+        computeLPSArray(p, lps);
+        std::vector<int> result;
+        int i = 0, j = 0;
+        while (i < s.size()) {
+            if (p[j] == s[i]) {
+                i++;
+                j++;
+            }
+            if (j == p.size()) {
+                result.push_back(i - j);
+                j = lps[j - 1];
+            } else if (i < s.size() && p[j] != s[i]) {
+                if (j != 0) {
+                    j = lps[j - 1];
+                } else {
+                    i++;
+                }
+            }
+        }
+        return result;
+    }
+
+    void computeLPSArray(const std::string& p, std::vector<int>& lps) {
+        int length = 0;
+        lps[0] = 0;
+        int i = 1;
+        while (i < p.size()) {
+            if (p[i] == p[length]) {
+                length++;
+                lps[i] = length;
+                i++;
+            } else {
+                if (length != 0) {
+                    length = lps[length - 1];
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2350() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing KMPMatcher" << endl;
-    // solveOptimal_2350();
+    KMPMatcherOptimal matcher;
+    std::string s = "abxabcabcaby";
+    std::string p = "abcaby";
+    std::vector<int> result = matcher.kmpMatcher(s, p);
+    for (int i : result) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    s = "hello";
+    p = "ll";
+    result = matcher.kmpMatcher(s, p);
+    for (int i : result) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    s = "aaaaa";
+    p = "bba";
+    result = matcher.kmpMatcher(s, p);
+    for (int i : result) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
-
-
+```
