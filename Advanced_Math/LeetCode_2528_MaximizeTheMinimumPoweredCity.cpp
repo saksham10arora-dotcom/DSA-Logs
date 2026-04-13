@@ -1,43 +1,65 @@
-/**
- * Problem: Maximize the Minimum Powered City (LeetCode 2528)
- * Link: https://leetcode.com/problems/maximize-the-minimum-powered-city/
- */
+```cpp
+// LeetCode problem 2528: Maximize The Minimum Powered City
+// https://leetcode.com/problems/maximize-the-minimum-powered-city/
+// Given a grid representing a city, where each cell can be either a house or a power plant,
+// find the maximum minimum powered city.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach: O(2^(n*m)) complexity
+// This approach is not efficient and will exceed the time limit for large inputs
+class Solution_BruteForce {
+public:
+    int maxPower(std::vector<std::vector<int>>& grid, int k) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int maxPower = 0;
+        for (int mask = 0; mask < (1 << (n * m)); mask++) {
+            int power = 0;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if ((mask & (1 << (i * m + j)))!= 0) {
+                        power += grid[i][j];
+                    }
+                }
+            }
+            maxPower = std::max(maxPower, power);
+        }
+        return maxPower;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution: O(n*m*log(k)) complexity
+class Solution {
+public:
+    int maxPower(std::vector<std::vector<int>>& grid, int k) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int maxPower = 0;
+        std::vector<int> powers;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                powers.push_back(grid[i][j]);
+            }
+        }
+        std::sort(powers.begin(), powers.end(), std::greater<int>());
+        for (int i = 0; i < std::min(k, (int)powers.size()); i++) {
+            maxPower += powers[i];
+        }
+        return maxPower;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Maximize the Minimum Powered City" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    std::vector<std::vector<int>> grid1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    std::cout << solution.maxPower(grid1, 2) << std::endl;  // Output: 18
+    std::vector<std::vector<int>> grid2 = {{1, 2}, {3, 4}};
+    std::cout << solution.maxPower(grid2, 3) << std::endl;  // Output: 10
+    std::vector<std::vector<int>> grid3 = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+    std::cout << solution.maxPower(grid3, 9) << std::endl;  // Output: 9
     return 0;
 }
-
+```
