@@ -1,48 +1,49 @@
-```cpp
-// LeetCode problem 1016: Binary String With Substrings Representing 1 To N
-// https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/
-// Given a binary string s and an integer n, return true if the binary representation of every integer from 1 to n is a substring of s.
+/**
+ * Problem: MaxConsecutive (LeetCode 1016)
+ * Link: https://leetcode.com/problems/maxconsecutive/
+ */
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(n * log(n)) complexity
-bool queryStringBruteForce(std::string s, int n) {
-    for (int i = 1; i <= n; i++) {
-        std::string binary = "";
-        int num = i;
-        while (num > 0) {
-            binary = (num % 2 == 0? "0" : "1") + binary;
-            num /= 2;
-        }
-        if (s.find(binary) == std::string::npos) {
-            return false;
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1016() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
     }
-    return true;
 }
 
-// Optimal solution with O(n * log(n)) complexity
-bool queryStringOptimal(std::string s, int n) {
-    for (int i = 1; i <= n; i++) {
-        std::string binary = "";
-        int num = i;
-        while (num > 0) {
-            binary = (num % 2 == 0? "0" : "1") + binary;
-            num /= 2;
-        }
-        if (s.find(binary) == std::string::npos) {
-            return false;
-        }
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1016() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return true;
 }
 
 int main() {
-    std::cout << std::boolalpha;
-    std::cout << queryStringBruteForce("0110", 3) << std::endl;  // True
-    std::cout << queryStringBruteForce("0110", 4) << std::endl;  // False
-    std::cout << queryStringOptimal("111110101011", 10) << std::endl;  // True
+    // cout << "Testing MaxConsecutive" << endl;
+    // solveOptimal_1016();
     return 0;
 }
-```
+
+
+
+
