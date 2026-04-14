@@ -1,48 +1,44 @@
-```cpp
-// LeetCode problem 3917: Count Indices With Opposite Parity
-// https://leetcode.com/problems/count-indices-with-opposite-parity/
-// Given an integer array nums, return the number of indices i such that nums[i] and i have opposite parity.
+/**
+ * Problem: Count Indices With Opposite Parity (LeetCode 3917)
+ * Link: https://leetcode.com/problems/count-indices-with-opposite-parity/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach with O(n) complexity
-int countIndicesWithOppositeParityBruteForce(std::vector<int>& nums) {
-    int count = 0;
-    for (int i = 0; i < nums.size(); i++) {
-        if ((nums[i] % 2)!= (i % 2)) {
-            count++;
-        }
-    }
-    return count;
+using namespace std;
+
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
 }
 
-// Optimal solution with O(n) complexity
-int countIndicesWithOppositeParityOptimal(std::vector<int>& nums) {
-    int count = 0;
-    for (int i = 0; i < nums.size(); i++) {
-        if ((nums[i] & 1)!= (i & 1)) {
-            count++;
-        }
-    }
-    return count;
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
 }
 
 int main() {
-    std::vector<int> nums1 = {2, 1, 3, 4};
-    std::vector<int> nums2 = {1, 2, 3, 4};
-    std::vector<int> nums3 = {4, 3, 2, 1};
-
-    std::cout << "Brute force approach:" << std::endl;
-    std::cout << "Test case 1: " << countIndicesWithOppositeParityBruteForce(nums1) << std::endl;
-    std::cout << "Test case 2: " << countIndicesWithOppositeParityBruteForce(nums2) << std::endl;
-    std::cout << "Test case 3: " << countIndicesWithOppositeParityBruteForce(nums3) << std::endl;
-
-    std::cout << "\nOptimal solution:" << std::endl;
-    std::cout << "Test case 1: " << countIndicesWithOppositeParityOptimal(nums1) << std::endl;
-    std::cout << "Test case 2: " << countIndicesWithOppositeParityOptimal(nums2) << std::endl;
-    std::cout << "Test case 3: " << countIndicesWithOppositeParityOptimal(nums3) << std::endl;
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Count Indices With Opposite Parity" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
