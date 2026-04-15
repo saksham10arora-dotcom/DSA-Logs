@@ -1,43 +1,29 @@
-/**
- * Problem: XOR Operation in an Array (LeetCode 1486)
- * Link: https://leetcode.com/problems/xor-operation-in-an-array/
- */
+```cpp
+// LeetCode problem 1486: Xor Operation In An Array, https://leetcode.com/problems/xor-operation-in-an-array/
+// Given an integer n and an integer start, define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.
+// Return the bitwise XOR of all elements in nums.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+class Solution {
+public:
+    // Brute force approach with O(n) complexity
+    int xorOperation_Brute(int n, int start) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result ^= (start + 2 * i);
+        }
+        return result;
+    }
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+    // Optimal solution with O(n) complexity
+    int xorOperation(int n, int start) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result ^= (start + 2 * i);
+        }
+        return result;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing XOR Operation in an Array" << endl;
-    // solveOptimal();
-    
-    return 0;
-}
-
+    Solution solution;
+    // Test case
