@@ -1,64 +1,53 @@
-```cpp
-// LeetCode problem 208: Implement Trie, https://leetcode.com/problems/implement-trie/
-// A Trie (prefix tree) is a tree-like data structure, which is often used to store a dynamic set or associative array where the keys are usually strings.
+/**
+ * Problem: Implement Trie (Prefix Tree) (LeetCode 208)
+ * Link: https://leetcode.com/problems/implement-trie-prefix-tree/
+ */
 
-// Brute force approach: Using a hash map to store all words and check if a word is in the map, O(n) complexity for search and insert operations
-// class Trie {
-//     unordered_map<string, bool> words;
-// public:
-//     void insert(string word) {
-//         words[word] = true;
-//     }
-//     bool search(string word) {
-//         return words.count(word);
-//     }
-//     bool startsWith(string prefix) {
-//         for (auto& w : words) {
-//             if (w.first.find(prefix) == 0) return true;
-//         }
-//         return false;
-//     }
-// };
+#include <iostream>
+#include <string>
 
-// Optimal solution: Using a Trie data structure with a nested unordered_map to store characters and their corresponding child nodes, O(m) complexity for search, insert and startsWith operations where m is the length of the word
-class TrieNode {
-public:
-    unordered_map<char, TrieNode*> children;
-    bool isEndOfWord;
-    TrieNode() : isEndOfWord(false) {}
+using namespace std;
+
+struct Node {
+    Node* links[26];
+    bool flag = false;
+    bool containsKey(char ch) { return links[ch - 'a'] != NULL; }
+    void put(char ch, Node* node) { links[ch - 'a'] = node; }
+    Node* get(char ch) { return links[ch - 'a']; }
+    void setEnd() { flag = true; }
+    bool isEnd() { return flag; }
 };
 
 class Trie {
-    TrieNode* root;
+    Node* root;
 public:
-    Trie() : root(new TrieNode()) {}
+    Trie() { root = new Node(); }
+    
     void insert(string word) {
-        TrieNode* node = root;
-        for (char c : word) {
-            if (!node->children.count(c)) {
-                node->children[c] = new TrieNode();
+        Node* node = root;
+        for (char ch : word) {
+            if (!node->containsKey(ch)) {
+                node->put(ch, new Node());
             }
-            node = node->children[c];
+            node = node->get(ch);
         }
-        node->isEndOfWord = true;
+        node->setEnd();
     }
+    
     bool search(string word) {
-        TrieNode* node = root;
-        for (char c : word) {
-            if (!node->children.count(c)) {
-                return false;
-            }
-            node = node->children[c];
+        Node* node = root;
+        for (char ch : word) {
+            if (!node->containsKey(ch)) return false;
+            node = node->get(ch);
         }
-        return node->isEndOfWord;
+        return node->isEnd();
     }
+    
     bool startsWith(string prefix) {
-        TrieNode* node = root;
-        for (char c : prefix) {
-            if (!node->children.count(c)) {
-                return false;
-            }
-            node = node->children[c];
+        Node* node = root;
+        for (char ch : prefix) {
+            if (!node->containsKey(ch)) return false;
+            node = node->get(ch);
         }
         return true;
     }
@@ -67,11 +56,18 @@ public:
 int main() {
     Trie trie;
     trie.insert("apple");
-    cout << boolalpha << trie.search("apple") << endl;   // True
-    cout << boolalpha << trie.search("app") << endl;     // False
-    cout << boolalpha << trie.startsWith("app") << endl; // True
-    trie.insert("app");
-    cout << boolalpha << trie.search("app") << endl;     // True
+    cout << trie.search("apple") << endl;   // true
+    cout << trie.search("app") << endl;     // false
+    cout << trie.startsWith("app") << endl; // true
     return 0;
 }
-```
+
+
+
+
+
+
+
+
+
+
