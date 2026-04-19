@@ -1,43 +1,30 @@
-/**
- * Problem: Find the Largest Area of Square Inside Two Rectangles (LeetCode 3047)
- * Link: https://leetcode.com/problems/find-the-largest-area-of-square-inside-two-rectangles/
- */
+```cpp
+// LeetCode problem 3047: Find The Largest Area Of Square Inside Two Rectangles
+// https://leetcode.com/problems/find-the-largest-area-of-square-inside-two-rectangles/
+// Given two rectangles, find the largest area of a square that can be inscribed in both rectangles.
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach: O(n^2) complexity
+int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+    int overlap_x = std::max(0, std::min(ax2, bx2) - std::max(ax1, bx1));
+    int overlap_y = std::max(0, std::min(ay2, by2) - std::max(ay1, by1));
+    return overlap_x * overlap_y;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution: O(1) complexity
+int largestAreaOfSquareInsideRectangles(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+    int x = std::min(ax2, bx2) - std::max(ax1, bx1);
+    int y = std::min(ay2, by2) - std::max(ay1, by1);
+    int side = std::min(x, y);
+    return side * side;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Find the Largest Area of Square Inside Two Rectangles" << endl;
-    // solveOptimal();
-    
+    std::cout << largestAreaOfSquareInsideRectangles(0, 0, 2, 2, 1, 1, 3, 3) << std::endl;  // Output: 1
+    std::cout << largestAreaOfSquareInsideRectangles(0, 0, 2, 2, 1, 0, 2, 2) << std::endl;  // Output: 1
+    std::cout << largestAreaOfSquareInsideRectangles(-3, -2, 2, 2, -2, -2, 3, 3) << std::endl;  // Output: 16
     return 0;
 }
-
+```
