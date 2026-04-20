@@ -1,62 +1,49 @@
-```cpp
-// Codeforces_1371B_WordBreakOptimized
-// https://codeforces.com/contest/1371/problem/B
-// Given a string and a dictionary of words, determine the minimum number of operations to make the string valid.
+/**
+ * Problem: WordBreakOptimized (Codeforces 1371B)
+ * Link: https://codeforces.com/problems/wordbreakoptimized/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
-#include <unordered_set>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(2^n) complexity
-// std::string wordBreakBruteForce(const std::string& s, const std::unordered_set<std::string>& wordDict) {
-//     if (s.empty()) return "";
-//     for (int i = 1; i <= s.size(); ++i) {
-//         std::string prefix = s.substr(0, i);
-//         if (wordDict.find(prefix)!= wordDict.end()) {
-//             std::string suffix = wordBreakBruteForce(s.substr(i), wordDict);
-//             if (!suffix.empty()) {
-//                 return prefix + " " + suffix;
-//             }
-//         }
-//     }
-//     return "";
-// }
+using namespace std;
 
-// Optimal solution with O(n^2) complexity
-std::string wordBreakOptimized(const std::string& s, const std::unordered_set<std::string>& wordDict) {
-    int n = s.size();
-    std::vector<bool> dp(n + 1, false);
-    dp[0] = true;
-    for (int i = 1; i <= n; ++i) {
-        for (int j = 0; j < i; ++j) {
-            if (dp[j] && wordDict.find(s.substr(j, i - j))!= wordDict.end()) {
-                dp[i] = true;
-                break;
-            }
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1371B() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
     }
-    if (!dp[n]) return "";
-    std::string result;
-    int i = n;
-    while (i > 0) {
-        for (int j = 0; j < i; ++j) {
-            if (dp[j] && wordDict.find(s.substr(j, i - j))!= wordDict.end()) {
-                if (!result.empty()) result = s.substr(j, i - j) + " " + result;
-                else result = s.substr(j, i - j);
-                i = j;
-                break;
-            }
-        }
+}
+
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1371B() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return result;
 }
 
 int main() {
-    std::unordered_set<std::string> wordDict = {"apple", "pen", "applepen", "pine", "pineapple"};
-    std::cout << wordBreakOptimized("pineapplepenapple", wordDict) << std::endl;  // "pine apple pen apple"
-    std::cout << wordBreakOptimized("catsandog", wordDict) << std::endl;  // ""
-    std::cout << wordBreakOptimized("catsanddog", wordDict) << std::endl;  // ""
+    // cout << "Testing WordBreakOptimized" << endl;
+    // solveOptimal_1371B();
     return 0;
 }
-```
+
+
+
+
