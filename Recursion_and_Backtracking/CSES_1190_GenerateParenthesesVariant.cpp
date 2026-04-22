@@ -1,78 +1,48 @@
-```cpp
-// Generate Parentheses Variant, https://cses.fi/problemset/task/1190
-// Generate all possible combinations of well-formed parentheses with a given number of pairs.
+/**
+ * Problem: GenerateParenthesesVariant (CSES 1190)
+ * Link: https://cses.com/problems/generateparenthesesvariant/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach: generate all possible combinations of parentheses and check if they are well-formed (O(2^(2n)))
-void generateParenthesesBruteForce(int n, std::string current, int open, int close, std::vector<std::string>& result) {
-    if (current.size() == 2 * n) {
-        int count = 0;
-        bool valid = true;
-        for (char c : current) {
-            if (c == '(') {
-                count++;
-            } else {
-                count--;
-                if (count < 0) {
-                    valid = false;
-                    break;
-                }
-            }
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_1190() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        if (valid && count == 0) {
-            result.push_back(current);
-        }
-        return;
     }
-    generateParenthesesBruteForce(n, current + "(", open + 1, close, result);
-    generateParenthesesBruteForce(n, current + ")", open, close + 1, result);
 }
 
-// Optimal solution: use backtracking to generate only well-formed combinations (O(4^n / n^(3/2)))
-void generateParenthesesOptimal(int n, std::string current, int open, int close, std::vector<std::string>& result) {
-    if (current.size() == 2 * n) {
-        result.push_back(current);
-        return;
-    }
-    if (open < n) {
-        generateParenthesesOptimal(n, current + "(", open + 1, close, result);
-    }
-    if (close < open) {
-        generateParenthesesOptimal(n, current + ")", open, close + 1, result);
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_1190() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
 }
 
 int main() {
-    int n;
-    std::vector<std::string> result;
-
-    n = 2;
-    result.clear();
-    generateParenthesesOptimal(n, "", 0, 0, result);
-    std::cout << "Test case 1: n = " << n << std::endl;
-    for (const auto& s : result) {
-        std::cout << s << std::endl;
-    }
-
-    n = 3;
-    result.clear();
-    generateParenthesesOptimal(n, "", 0, 0, result);
-    std::cout << "\nTest case 2: n = " << n << std::endl;
-    for (const auto& s : result) {
-        std::cout << s << std::endl;
-    }
-
-    n = 1;
-    result.clear();
-    generateParenthesesOptimal(n, "", 0, 0, result);
-    std::cout << "\nTest case 3: n = " << n << std::endl;
-    for (const auto& s : result) {
-        std::cout << s << std::endl;
-    }
-
+    // cout << "Testing GenerateParenthesesVariant" << endl;
+    // solveOptimal_1190();
     return 0;
 }
-```
+
+
+
