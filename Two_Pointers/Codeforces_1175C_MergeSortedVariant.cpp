@@ -1,47 +1,62 @@
-/**
- * Problem: MergeSortedVariant (Codeforces 1175C)
- * Link: https://codeforces.com/problems/mergesortedvariant/
- */
+```cpp
+// Codeforces_1175C_MergeSortedVariant
+// https://codeforces.com/contest/1175/problem/C
+// Given two sorted arrays, find the number of pairs (a, b) such that a^2 + b^2 = c^2.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(n^2) complexity
+// int countPairs(std::vector<int>& a, std::vector<int>& b) {
+//     int count = 0;
+//     for (int i = 0; i < a.size(); i++) {
+//         for (int j = 0; j < b.size(); j++) {
+//             int c = a[i] * a[i] + b[j] * b[j];
+//             int sqrt_c = std::sqrt(c);
+//             if (sqrt_c * sqrt_c == c) {
+//                 count++;
+//             }
+//         }
+//     }
+//     return count;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1175C() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution with O(n log n) complexity
+int countPairs(std::vector<int>& a, std::vector<int>& b) {
+    std::vector<int> squares;
+    for (int i = 0; i < a.size(); i++) {
+        squares.push_back(a[i] * a[i]);
+    }
+    for (int i = 0; i < b.size(); i++) {
+        squares.push_back(b[i] * b[i]);
+    }
+    std::sort(squares.begin(), squares.end());
+    int count = 0;
+    for (int i = 0; i < a.size(); i++) {
+        for (int j = 0; j < b.size(); j++) {
+            int c = a[i] * a[i] + b[j] * b[j];
+            if (std::binary_search(squares.begin(), squares.end(), c)) {
+                count++;
+            }
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1175C() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return count;
 }
 
 int main() {
-    // cout << "Testing MergeSortedVariant" << endl;
-    // solveOptimal_1175C();
+    std::vector<int> a1 = {1, 2, 3};
+    std::vector<int> b1 = {4, 5, 6};
+    std::cout << countPairs(a1, b1) << std::endl;
+
+    std::vector<int> a2 = {1, 2, 3, 4};
+    std::vector<int> b2 = {5, 6, 7, 8};
+    std::cout << countPairs(a2, b2) << std::endl;
+
+    std::vector<int> a3 = {1, 2};
+    std::vector<int> b3 = {3, 4};
+    std::cout << countPairs(a3, b3) << std::endl;
+
     return 0;
 }
-
-
+```
