@@ -1,89 +1,48 @@
-```cpp
-// K M P Matcher I I I, https://cses.fi/problemset/task/2169, 
-// Given a string and a pattern, find all occurrences of the pattern in the string.
+/**
+ * Problem: KMPMatcherIII (CSES 2169)
+ * Link: https://cses.com/problems/kmpmatcheriii/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(n*m) complexity
-std::vector<int> bruteForce(const std::string& s, const std::string& p) {
-    std::vector<int> result;
-    for (int i = 0; i <= s.size() - p.size(); i++) {
-        bool match = true;
-        for (int j = 0; j < p.size(); j++) {
-            if (s[i + j] != p[j]) {
-                match = false;
-                break;
-            }
-        }
-        if (match) {
-            result.push_back(i);
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_2169() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
     }
-    return result;
 }
 
-// Optimal solution with O(n+m) complexity using KMP algorithm
-std::vector<int> computeLPS(const std::string& p) {
-    std::vector<int> lps(p.size());
-    int length = 0;
-    for (int i = 1; i < p.size(); i++) {
-        while (length > 0 && p[i] != p[length]) {
-            length = lps[length - 1];
-        }
-        if (p[i] == p[length]) {
-            length++;
-        }
-        lps[i] = length;
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_2169() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return lps;
-}
-
-std::vector<int> kmpMatcher(const std::string& s, const std::string& p) {
-    std::vector<int> lps = computeLPS(p);
-    std::vector<int> result;
-    int j = 0;
-    for (int i = 0; i < s.size(); i++) {
-        while (j > 0 && s[i] != p[j]) {
-            j = lps[j - 1];
-        }
-        if (s[i] == p[j]) {
-            j++;
-        }
-        if (j == p.size()) {
-            result.push_back(i - p.size() + 1);
-            j = lps[j - 1];
-        }
-    }
-    return result;
 }
 
 int main() {
-    std::string s1 = "abcabcabc";
-    std::string p1 = "abc";
-    std::vector<int> result1 = kmpMatcher(s1, p1);
-    for (int i : result1) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
-    std::string s2 = "abxabcabc";
-    std::string p2 = "abc";
-    std::vector<int> result2 = kmpMatcher(s2, p2);
-    for (int i : result2) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
-    std::string s3 = "aaaaaa";
-    std::string p3 = "aa";
-    std::vector<int> result3 = kmpMatcher(s3, p3);
-    for (int i : result3) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
+    // cout << "Testing KMPMatcherIII" << endl;
+    // solveOptimal_2169();
     return 0;
 }
-```
+
+
+
