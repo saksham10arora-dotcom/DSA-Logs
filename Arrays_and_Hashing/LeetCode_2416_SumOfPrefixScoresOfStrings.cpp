@@ -1,63 +1,44 @@
-```cpp
-// LeetCode problem 2416: Sum Of Prefix Scores Of Strings
-// https://leetcode.com/problems/sum-of-prefix-scores-of-strings/
-// Given an array of strings words, return the sum of the prefix scores of all the strings in the array.
+/**
+ * Problem: Sum of Prefix Scores of Strings (LeetCode 2416)
+ * Link: https://leetcode.com/problems/sum-of-prefix-scores-of-strings/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-class Solution {
-public:
-    int sumPrefixScores(std::vector<std::string>& words) {
-        // Brute force approach with O(n^2 * m) complexity
-        // int sum = 0;
-        // for (const auto& word : words) {
-        //     int score = 0;
-        //     for (const auto& w : words) {
-        //         if (w.find(word) == 0) {
-        //             score++;
-        //         }
-        //     }
-        //     sum += score;
-        // }
-        // return sum;
+using namespace std;
 
-        // Optimal solution with O(n * m) complexity
-        std::unordered_map<std::string, int> prefixCount;
-        int sum = 0;
-        for (const auto& word : words) {
-            std::string prefix;
-            for (char c : word) {
-                prefix += c;
-                prefixCount[prefix]++;
-            }
-        }
-        for (const auto& word : words) {
-            std::string prefix;
-            int score = 0;
-            for (char c : word) {
-                prefix += c;
-                score += prefixCount[prefix];
-            }
-            sum += score;
-        }
-        return sum;
-    }
-};
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    std::vector<std::string> words1 = {"abc", "ab", "bc", "b"};
-    std::cout << solution.sumPrefixScores(words1) << std::endl;  // Output: 25
-
-    std::vector<std::string> words2 = {"abcd"};
-    std::cout << solution.sumPrefixScores(words2) << std::endl;  // Output: 4
-
-    std::vector<std::string> words3 = {"a", "aa", "aaa", "aaaa"};
-    std::cout << solution.sumPrefixScores(words3) << std::endl;  // Output: 15
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Sum of Prefix Scores of Strings" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
