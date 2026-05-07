@@ -1,48 +1,109 @@
-/**
- * Problem: FactorCombinationsVariant (LeetCode 351)
- * Link: https://leetcode.com/problems/factorcombinationsvariant/
- */
+```cpp
+// LeetCode problem 351: Factor Combinations Variant
+// https://leetcode.com/problems/factor-combinations-variants/
+// Numbers can be regarded as product of its factors. Write a function to return all factors combinations of a given number.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(2^n) complexity
+class Solution_BruteForce {
+public:
+    std::vector<std::vector<int>> factorCombinations(int n) {
+        std::vector<std::vector<int>> result;
+        std::vector<int> current;
+        backtrack(result, current, n, 2);
+        return result;
+    }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_351() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+    void backtrack(std::vector<std::vector<int>>& result, std::vector<int>& current, int n, int start) {
+        if (n == 1) {
+            if (!current.empty()) {
+                result.push_back(current);
+            }
+            return;
+        }
+        for (int i = start; i <= n; i++) {
+            if (n % i == 0) {
+                current.push_back(i);
+                backtrack(result, current, n / i, i);
+                current.pop_back();
+            }
         }
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_351() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(2^n) complexity
+class Solution_Optimal {
+public:
+    std::vector<std::vector<int>> factorCombinations(int n) {
+        std::vector<std::vector<int>> result;
+        std::vector<int> current;
+        backtrack(result, current, n, 2);
+        return result;
     }
-}
+
+    void backtrack(std::vector<std::vector<int>>& result, std::vector<int>& current, int n, int start) {
+        if (n == 1) {
+            if (!current.empty()) {
+                result.push_back(current);
+            }
+            return;
+        }
+        for (int i = start; i * i <= n; i++) {
+            if (n % i == 0) {
+                current.push_back(i);
+                backtrack(result, current, n / i, i);
+                current.pop_back();
+            }
+        }
+    }
+};
 
 int main() {
-    // cout << "Testing FactorCombinationsVariant" << endl;
-    // solveOptimal_351();
+    Solution_Optimal solution;
+    std::vector<std::vector<int>> result1 = solution.factorCombinations(12);
+    std::cout << "Test case 1: ";
+    for (const auto& combination : result1) {
+        std::cout << "(";
+        for (int i = 0; i < combination.size(); i++) {
+            std::cout << combination[i];
+            if (i < combination.size() - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << ") ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> result2 = solution.factorCombinations(24);
+    std::cout << "Test case 2: ";
+    for (const auto& combination : result2) {
+        std::cout << "(";
+        for (int i = 0; i < combination.size(); i++) {
+            std::cout << combination[i];
+            if (i < combination.size() - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << ") ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::vector<int>> result3 = solution.factorCombinations(37);
+    std::cout << "Test case 3: ";
+    for (const auto& combination : result3) {
+        std::cout << "(";
+        for (int i = 0; i < combination.size(); i++) {
+            std::cout << combination[i];
+            if (i < combination.size() - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << ") ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
-
-
+```
