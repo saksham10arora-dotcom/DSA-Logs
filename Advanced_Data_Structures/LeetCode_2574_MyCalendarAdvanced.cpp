@@ -1,47 +1,36 @@
-/**
- * Problem: MyCalendarAdvanced (LeetCode 2574)
- * Link: https://leetcode.com/problems/mycalendaradvanced/
- */
+```cpp
+// My Calendar III, https://leetcode.com/problems/my-calendar-iii/, 
+// Implement a MyCalendarThree class to store the events of a calendar.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <map>
 
-using namespace std;
+class MyCalendarThree {
+public:
+    std::map<int, int> events;
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2574() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+    MyCalendarThree() {}
+
+    int book(int start, int end) {
+        events[start]++;
+        events[end]--;
+        int maxEvents = 0, currentEvents = 0;
+        for (auto& event : events) {
+            currentEvents += event.second;
+            maxEvents = std::max(maxEvents, currentEvents);
         }
+        return maxEvents;
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2574() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing MyCalendarAdvanced" << endl;
-    // solveOptimal_2574();
+    MyCalendarThree calendar;
+    std::cout << calendar.book(10, 20) << std::endl;  // Output: 1
+    std::cout << calendar.book(50, 60) << std::endl;  // Output: 1
+    std::cout << calendar.book(10, 40) << std::endl;  // Output: 2
+    std::cout << calendar.book(5, 15) << std::endl;  // Output: 3
+    std::cout << calendar.book(5, 10) << std::endl;  // Output: 3
+    std::cout << calendar.book(25, 55) << std::endl;  // Output: 3
     return 0;
 }
-
-
+```
