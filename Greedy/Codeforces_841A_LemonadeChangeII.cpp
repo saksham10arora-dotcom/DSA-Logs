@@ -1,49 +1,54 @@
-/**
- * Problem: LemonadeChangeII (Codeforces 841A)
- * Link: https://codeforces.com/problems/lemonadechangeii/
- */
+```cpp
+// Codeforces_841A_LemonadeChangeII
+// https://codeforces.com/contest/841/problem/A
+// Given a number of lemons and a number of customers, determine the maximum number of customers that can be served.
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach: Try all possible combinations of serving customers (O(2^n))
+// int maxCustomers(int lemons, std::vector<int>& customers) {
+//     int maxServed = 0;
+//     for (int mask = 0; mask < (1 << customers.size()); ++mask) {
+//         int served = 0;
+//         int remainingLemons = lemons;
+//         for (int i = 0; i < customers.size(); ++i) {
+//             if ((mask & (1 << i)) && remainingLemons >= customers[i]) {
+//                 served++;
+//                 remainingLemons -= customers[i];
+//             }
+//         }
+//         maxServed = std::max(maxServed, served);
+//     }
+//     return maxServed;
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_841A() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution: Sort customers by the number of lemons they need and serve them greedily (O(n log n))
+int maxCustomers(int lemons, std::vector<int>& customers) {
+    std::sort(customers.begin(), customers.end());
+    int served = 0;
+    for (int customer : customers) {
+        if (lemons >= customer) {
+            served++;
+            lemons -= customer;
+        } else {
+            break;
         }
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_841A() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return served;
 }
 
 int main() {
-    // cout << "Testing LemonadeChangeII" << endl;
-    // solveOptimal_841A();
+    std::vector<int> test1 = {1, 2, 3};
+    std::cout << maxCustomers(5, test1) << std::endl;  // Output: 2
+
+    std::vector<int> test2 = {10, 20, 30};
+    std::cout << maxCustomers(15, test2) << std::endl;  // Output: 1
+
+    std::vector<int> test3 = {1, 1, 1, 1, 1};
+    std::cout << maxCustomers(5, test3) << std::endl;  // Output: 5
+
     return 0;
 }
-
-
-
-
+```
