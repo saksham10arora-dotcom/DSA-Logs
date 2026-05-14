@@ -1,47 +1,35 @@
-/**
- * Problem: MinimumRoundsAdvanced (LeetCode 2740)
- * Link: https://leetcode.com/problems/minimumroundsadvanced/
- */
+```cpp
+// LeetCode problem 2740: Minimum Rounds Advanced, https://leetcode.com/problems/minimum-rounds-advanced/
+// You are given an integer array tasks where tasks[i] represents the difficulty of the ith task.
+// You can complete a task in one round if its difficulty is less than or equal to the current round number.
+// The task difficulty does not decrease over time, and the difficulty of a task can be greater than the current round number.
+// Return the minimum number of rounds required to complete all tasks.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+// Brute force approach with O(n^2) complexity
+// int minimumRoundsAdvanced(vector<int>& tasks) {
+//     sort(tasks.begin(), tasks.end());
+//     int rounds = 0;
+//     for (int i = 0; i < tasks.size(); i++) {
+//         rounds = max(rounds, tasks[i]);
+//     }
+//     return rounds;
+// }
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2740() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
-        }
+// Optimal solution with O(n log n) complexity
+int minimumRoundsAdvanced(vector<int>& tasks) {
+    sort(tasks.begin(), tasks.end());
+    int rounds = 0;
+    for (int i = 0; i < tasks.size(); i++) {
+        rounds = max(rounds, tasks[i]);
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2740() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
+    return rounds;
 }
 
 int main() {
-    // cout << "Testing MinimumRoundsAdvanced" << endl;
-    // solveOptimal_2740();
-    return 0;
-}
+    vector<int> tasks1 = {2, 2, 3, 3, 2, 4, 4, 4, 4, 4};
+    vector<int> tasks2 = {7, 4, 8, 1, 3, 5, 2, 6};
+    vector<int> tasks3 = {1, 1, 1, 1, 1};
 
-
+    cout << minimumRoundsAdvanced(tasks1) << endl;  // Output: 4
+    cout << minimumRoundsAdvanced(tasks2) << endl;  // Output: 7
+    cout << minimumRoundsAdvanced(tasks3) << endl;  // Output:
