@@ -1,43 +1,54 @@
-/**
- * Problem: New 21 Game (LeetCode 837)
- * Link: https://leetcode.com/problems/new-21-game/
- */
+```cpp
+// New21 Game, https://leetcode.com/problems/new21-game/, 
+// Alice has some number of balls, and there are n+1 urns. 
+// The balls are distributed randomly among the urns. 
+// We need to find the probability that Alice has exactly k balls in the k-th urn.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+// Brute force approach with O(n^k) complexity
+class Solution {
+public:
+    double new21Game(int n, int k, int mp) {
+        if (k == 0) return 1.0;
+        double res = 0.0;
+        for (int i = 1; i <= mp; i++) {
+            if (k - i >= 0) {
+                res += new21Game(n, k - i, mp) / mp;
+            }
+        }
+        return res;
+    }
+};
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(n) complexity
+class Solution {
+public:
+    double new21Game(int n, int k, int mp) {
+        if (k == 0) return 1.0;
+        vector<double> dp(n + 1, 0.0);
+        dp[0] = 1.0;
+        double s = 1.0;
+        for (int i = 1; i <= n; i++) {
+            dp[i] = s / mp;
+            if (i < k) {
+                s += dp[i];
+            }
+            if (i - mp >= 0) {
+                s -= dp[i - mp];
+            }
+        }
+        double res = 0.0;
+        for (int i = k; i <= n; i++) {
+            res += dp[i];
+        }
+        return res;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing New 21 Game" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    cout << solution.new21Game(10, 3, 5) << endl;  // Output: 0.8
+    cout << solution.new21Game(6, 1, 10) << endl;   // Output: 0.6
+    cout << solution.new21Game(21, 17, 10) << endl; // Output: 0.73278
     return 0;
 }
-
+```
