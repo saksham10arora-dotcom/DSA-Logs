@@ -1,48 +1,52 @@
-/**
- * Problem: DecodeStringIII (LeetCode 2422)
- * Link: https://leetcode.com/problems/decodestringiii/
- */
+```cpp
+// LeetCode problem 2422: Decode String I I I, https://leetcode.com/problems/decode-string-iii/
+// Given a string s, decode it and return the decoded string.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <stack>
 #include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2422() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n) complexity
+class Solution {
+public:
+    std::string decodeString(std::string s) {
+        std::stack<std::string> strStack;
+        std::stack<int> numStack;
+        std::string res = "";
+        int num = 0;
+        for (char c : s) {
+            if (c >= '0' && c <= '9') {
+                num = num * 10 + (c - '0');
+            } else if (c == '[') {
+                strStack.push(res);
+                numStack.push(num);
+                res = "";
+                num = 0;
+            } else if (c == ']') {
+                std::string temp = res;
+                res = strStack.top();
+                strStack.pop();
+                int count = numStack.top();
+                numStack.pop();
+                while (count--) {
+                    res += temp;
+                }
+            } else {
+                res += c;
+            }
         }
+        return res;
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2422() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+// Optimal solution with O(n) complexity
+// The above solution is already optimal with O(n) complexity
 
 int main() {
-    // cout << "Testing DecodeStringIII" << endl;
-    // solveOptimal_2422();
+    Solution solution;
+    std::cout << solution.decodeString("3[a]2[bc]") << std::endl;  // Output: "aaabcbc"
+    std::cout << solution.decodeString("3[a2[c]]") << std::endl;  // Output: "accaccacc"
+    std::cout << solution.decodeString("2[abc]3[cd]ef") << std::endl;  // Output: "abcabccdcdcdef"
     return 0;
 }
-
-
-
+```
