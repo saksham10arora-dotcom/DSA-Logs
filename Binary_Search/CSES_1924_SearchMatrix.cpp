@@ -1,49 +1,61 @@
-/**
- * Problem: SearchMatrix (CSES 1924)
- * Link: https://cses.com/problems/searchmatrix/
- */
+```cpp
+// Problem: Search Matrix
+// Link: https://cses.fi/problemset/task/1924
+// Description: Search for an element in a sorted matrix.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1924() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n*m) complexity
+bool searchMatrixBruteForce(const std::vector<std::vector<int>>& matrix, int target) {
+    for (const auto& row : matrix) {
+        for (int num : row) {
+            if (num == target) {
+                return true;
+            }
         }
     }
+    return false;
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1924() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(m + n) complexity
+bool searchMatrixOptimal(const std::vector<std::vector<int>>& matrix, int target) {
+    if (matrix.empty() || matrix[0].empty()) {
+        return false;
     }
+
+    int row = 0;
+    int col = matrix[0].size() - 1;
+
+    while (row < matrix.size() && col >= 0) {
+        if (matrix[row][col] == target) {
+            return true;
+        } else if (matrix[row][col] < target) {
+            row++;
+        } else {
+            col--;
+        }
+    }
+
+    return false;
 }
 
 int main() {
-    // cout << "Testing SearchMatrix" << endl;
-    // solveOptimal_1924();
+    // Test case 1
+    std::vector<std::vector<int>> matrix1 = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix1, 5) << std::endl;  // Expected output: true
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix1, 20) << std::endl; // Expected output: false
+
+    // Test case 2
+    std::vector<std::vector<int>> matrix2 = {{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 50}};
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix2, 3) << std::endl;  // Expected output: true
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix2, 13) << std::endl; // Expected output: false
+
+    // Test case 3
+    std::vector<std::vector<int>> matrix3 = {{1}, {3}, {5}, {7}, {9}, {11}};
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix3, 9) << std::endl;  // Expected output: true
+    std::cout << std::boolalpha << searchMatrixOptimal(matrix3, 10) << std::endl; // Expected output: false
+
     return 0;
 }
-
-
-
-
+```
