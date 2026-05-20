@@ -1,57 +1,59 @@
-```cpp
-// Largest Rectangle in Histogram, https://leetcode.com/problems/largest-rectangle-in-histogram/, 
-// Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, 
-// return the area of the largest rectangle in the histogram.
+/**
+ * Problem: Largest Rectangle in Histogram (LeetCode 84)
+ * Link: https://leetcode.com/problems/largest-rectangle-in-histogram/
+ */
 
-// Brute force approach: O(n^2) complexity, for each bar, calculate the area of the rectangle with this bar as the smallest bar
-// class Solution {
-// public:
-//     int largestRectangleArea(vector<int>& heights) {
-//         int n = heights.size();
-//         int maxArea = 0;
-//         for (int i = 0; i < n; i++) {
-//             int minHeight = heights[i];
-//             for (int j = i; j < n; j++) {
-//                 minHeight = min(minHeight, heights[j]);
-//                 maxArea = max(maxArea, minHeight * (j - i + 1));
-//             }
-//         }
-//         return maxArea;
-//     }
-// };
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
 
-// Optimal solution: O(n) complexity, use a stack to store the indices of the bars
-class Solution {
-public:
-    int largestRectangleArea(vector<int>& heights) {
-        int n = heights.size();
-        int maxArea = 0;
-        stack<int> s;
-        for (int i = 0; i <= n; i++) {
-            int h = (i == n) ? 0 : heights[i];
-            while (!s.empty() && heights[s.top()] > h) {
-                int height = heights[s.top()];
-                s.pop();
-                int width = s.empty() ? i : i - s.top() - 1;
-                maxArea = max(maxArea, height * width);
-            }
-            s.push(i);
+using namespace std;
+
+// --- Optimal Solution (Monotonic Stack) ---
+// Time Complexity: O(N)
+// Space Complexity: O(N)
+int largestRectangleArea(vector<int>& heights) {
+    stack<int> st;
+    int maxA = 0;
+    int n = heights.size();
+    for (int i = 0; i <= n; i++) {
+        int h = (i == n) ? 0 : heights[i];
+        while (!st.empty() && heights[st.top()] > h) {
+            int height = heights[st.top()];
+            st.pop();
+            int width = st.empty() ? i : i - st.top() - 1;
+            maxA = max(maxA, height * width);
         }
-        return maxArea;
+        st.push(i);
     }
-};
+    return maxA;
+}
 
 int main() {
-    Solution solution;
-    vector<int> heights1 = {2,1,5,6,2,3};
-    cout << solution.largestRectangleArea(heights1) << endl;  // Output: 10
-
-    vector<int> heights2 = {2,4};
-    cout << solution.largestRectangleArea(heights2) << endl;  // Output: 4
-
-    vector<int> heights3 = {1,1};
-    cout << solution.largestRectangleArea(heights3) << endl;  // Output: 2
-
+    vector<int> heights = {2, 1, 5, 6, 2, 3};
+    cout << "Max Area: " << largestRectangleArea(heights) << endl;
     return 0;
 }
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
