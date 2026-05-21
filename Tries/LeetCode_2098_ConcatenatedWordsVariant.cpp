@@ -1,47 +1,91 @@
-/**
- * Problem: ConcatenatedWordsVariant (LeetCode 2098)
- * Link: https://leetcode.com/problems/concatenatedwordsvariant/
- */
+```cpp
+// LeetCode problem 2098: Concatenated Words Variant
+// https://leetcode.com/problems/concatenated-words-variant/
+// Given a list of strings words, return all the concatenated words in the list.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <queue>
+#include <unordered_set>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2098() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach: O(n^2 * m) where n is the number of words and m is the average length of a word
+class SolutionBrute {
+public:
+    std::vector<std::string> findAllConcatenatedWordsInADict(std::vector<std::string>& words) {
+        std::unordered_set<std::string> wordSet(words.begin(), words.end());
+        std::vector<std::string> result;
+        for (const auto& word : words) {
+            if (isConcatenated(word, wordSet)) {
+                result.push_back(word);
+            }
         }
+        return result;
     }
-}
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2098() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    bool isConcatenated(const std::string& word, const std::unordered_set<std::string>& wordSet) {
+        for (int i = 1; i < word.size(); ++i) {
+            std::string prefix = word.substr(0, i);
+            std::string suffix = word.substr(i);
+            if (wordSet.count(prefix) && (wordSet.count(suffix) || isConcatenated(suffix, wordSet))) {
+                return true;
+            }
+        }
+        return false;
     }
-}
+};
+
+// Optimal solution: O(n * m) where n is the number of words and m is the average length of a word
+class Solution {
+public:
+    std::vector<std::string> findAllConcatenatedWordsInADict(std::vector<std::string>& words) {
+        std::unordered_set<std::string> wordSet(words.begin(), words.end());
+        std::vector<std::string> result;
+        for (const auto& word : words) {
+            if (isConcatenated(word, wordSet)) {
+                result.push_back(word);
+            }
+        }
+        return result;
+    }
+
+    bool isConcatenated(const std::string& word, const std::unordered_set<std::string>& wordSet) {
+        std::vector<bool> dp(word.size() + 1, false);
+        dp[0] = true;
+        for (int i = 1; i <= word.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (dp[j] && wordSet.count(word.substr(j, i - j))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[word.size()];
+    }
+};
 
 int main() {
-    // cout << "Testing ConcatenatedWordsVariant" << endl;
-    // solveOptimal_2098();
+    Solution solution;
+    std::vector<std::string> words1 = {"cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatsdogcat"};
+    std::vector<std::string> result1 = solution.findAllConcatenatedWordsInADict(words1);
+    for (const auto& word : result1) {
+        std::cout << word << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::string> words2 = {"cat", "dog", "catdog"};
+    std::vector<std::string> result2 = solution.findAllConcatenatedWordsInADict(words2);
+    for (const auto& word : result2) {
+        std::cout << word << " ";
+    }
+    std::cout << std::endl;
+
+    std::vector<std::string> words3 = {"cat", "dog", "catdog", "dogcat"};
+    std::vector<std::string> result3 = solution.findAllConcatenatedWordsInADict(words3);
+    for (const auto& word : result3) {
+        std::cout << word << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
-
-
+```
