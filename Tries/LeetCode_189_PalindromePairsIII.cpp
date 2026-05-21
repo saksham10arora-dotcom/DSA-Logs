@@ -1,108 +1,52 @@
-```cpp
-// LeetCode problem 336: Palindrome Pairs III
-// https://leetcode.com/problems/palindrome-pairs-iii/
-// Given a list of unique words, find all pairs of indices (i, j) such that the concatenation of the words at indices i and j results in a palindrome.
+/**
+ * Problem: PalindromePairsIII (LeetCode 189)
+ * Link: https://leetcode.com/problems/palindromepairsiii/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
 #include <unordered_map>
+#include <queue>
 
-// Brute force approach: O(n^2 * m) where n is the number of words and m is the maximum length of a word
-class Solution {
-public:
-    std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
-        std::vector<std::vector<int>> result;
-        for (int i = 0; i < words.size(); i++) {
-            for (int j = 0; j < words.size(); j++) {
-                if (i != j && isPalindrome(words[i] + words[j])) {
-                    result.push_back({i, j});
-                }
-            }
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_189() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        return result;
     }
+}
 
-    bool isPalindrome(const std::string& s) {
-        int left = 0, right = s.size() - 1;
-        while (left < right) {
-            if (s[left] != s[right]) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_189() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-};
-
-// Optimal solution: O(n * m) where n is the number of words and m is the maximum length of a word
-class SolutionOptimal {
-public:
-    std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
-        std::unordered_map<std::string, int> wordMap;
-        for (int i = 0; i < words.size(); i++) {
-            wordMap[words[i]] = i;
-        }
-
-        std::vector<std::vector<int>> result;
-        for (int i = 0; i < words.size(); i++) {
-            std::string word = words[i];
-            for (int j = 0; j <= word.size(); j++) {
-                std::string prefix = word.substr(0, j);
-                std::string suffix = word.substr(j);
-                if (isPalindrome(prefix) && isPalindrome(suffix) && wordMap.find(suffix) != wordMap.end() && wordMap[suffix] != i) {
-                    result.push_back({wordMap[suffix], i});
-                }
-                if (isPalindrome(suffix) && isPalindrome(reverse(prefix)) && wordMap.find(reverse(suffix)) != wordMap.end() && wordMap[reverse(suffix)] != i) {
-                    result.push_back({i, wordMap[reverse(suffix)]});
-                }
-            }
-        }
-        return result;
-    }
-
-    bool isPalindrome(const std::string& s) {
-        int left = 0, right = s.size() - 1;
-        while (left < right) {
-            if (s[left] != s[right]) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
-    }
-
-    std::string reverse(const std::string& s) {
-        std::string result = s;
-        std::reverse(result.begin(), result.end());
-        return result;
-    }
-};
+}
 
 int main() {
-    Solution solution;
-    SolutionOptimal solutionOptimal;
-
-    std::vector<std::string> words1 = {"bat", "tab", "cat"};
-    std::vector<std::vector<int>> result1 = solutionOptimal.palindromePairs(words1);
-    for (const auto& pair : result1) {
-        std::cout << "[" << pair[0] << ", " << pair[1] << "]" << std::endl;
-    }
-
-    std::vector<std::string> words2 = {"a", ""};
-    std::vector<std::vector<int>> result2 = solutionOptimal.palindromePairs(words2);
-    for (const auto& pair : result2) {
-        std::cout << "[" << pair[0] << ", " << pair[1] << "]" << std::endl;
-    }
-
-    std::vector<std::string> words3 = {"abcd", "dcba", "lls", "s", "sssll"};
-    std::vector<std::vector<int>> result3 = solutionOptimal.palindromePairs(words3);
-    for (const auto& pair : result3) {
-        std::cout << "[" << pair[0] << ", " << pair[1] << "]" << std::endl;
-    }
-
+    // cout << "Testing PalindromePairsIII" << endl;
+    // solveOptimal_189();
     return 0;
 }
-```
+
+
+
+
+
+
+
