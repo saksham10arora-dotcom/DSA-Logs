@@ -1,43 +1,57 @@
-/**
- * Problem: Make Number of Distinct Characters Equal (LeetCode 2531)
- * Link: https://leetcode.com/problems/make-number-of-distinct-characters-equal/
- */
+```cpp
+// LeetCode problem 2531: Make Number Of Distinct Characters Equal
+// https://leetcode.com/problems/make-number-of-distinct-characters-equal/
+// Given two strings s and target, return true if you can make the number of distinct characters in s equal to the number of distinct characters in target.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach: O(n * m) where n and m are the lengths of the strings
+bool makeEqualBruteForce(std::string s, std::string target) {
+    int countS = 0;
+    int countTarget = 0;
+    std::unordered_set<char> setS;
+    std::unordered_set<char> setTarget;
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+    for (char c : s) {
+        if (setS.find(c) == setS.end()) {
+            setS.insert(c);
+            countS++;
+        }
+    }
+
+    for (char c : target) {
+        if (setTarget.find(c) == setTarget.end()) {
+            setTarget.insert(c);
+            countTarget++;
+        }
+    }
+
+    return countS == countTarget;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution: O(n + m) where n and m are the lengths of the strings
+bool makeEqualOptimal(std::string s, std::string target) {
+    std::unordered_set<char> setS;
+    std::unordered_set<char> setTarget;
+
+    for (char c : s) {
+        setS.insert(c);
+    }
+
+    for (char c : target) {
+        setTarget.insert(c);
+    }
+
+    return setS.size() == setTarget.size();
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Make Number of Distinct Characters Equal" << endl;
-    // solveOptimal();
-    
+    std::cout << std::boolalpha;
+    std::cout << makeEqualOptimal("abc", "bca") << std::endl;  // true
+    std::cout << makeEqualOptimal("abc", "cbad") << std::endl;  // false
+    std::cout << makeEqualOptimal("a", "aaaa") << std::endl;  // true
     return 0;
 }
-
+```
