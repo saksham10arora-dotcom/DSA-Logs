@@ -1,48 +1,57 @@
-/**
- * Problem: SubarraySum (LeetCode 618)
- * Link: https://leetcode.com/problems/subarraysum/
- */
+```cpp
+// LeetCode problem 618: https://leetcode.com/problems/search-insert-position/
+// Given a sorted array and a target value, return the index if the target is found. 
+// If not, return the index where it would be if it were inserted in order.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
-
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_618() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach with O(n) complexity
+class Solution_Brute {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == target) {
+                return i;
+            } else if (nums[i] > target) {
+                return i;
+            }
         }
+        return nums.size();
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_618() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(log n) complexity
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
     }
-}
+};
 
 int main() {
-    // cout << "Testing SubarraySum" << endl;
-    // solveOptimal_618();
+    Solution solution;
+    vector<int> nums1 = {1, 3, 5, 6};
+    int target1 = 5;
+    cout << solution.searchInsert(nums1, target1) << endl;  // Output: 2
+
+    vector<int> nums2 = {1, 3, 5, 6};
+    int target2 = 2;
+    cout << solution.searchInsert(nums2, target2) << endl;  // Output: 1
+
+    vector<int> nums3 = {1, 3, 5, 6};
+    int target3 = 7;
+    cout << solution.searchInsert(nums3, target3) << endl;  // Output: 4
+
     return 0;
 }
-
-
-
+```
