@@ -1,70 +1,44 @@
-```cpp
-// LeetCode problem 3295: Report Spam Message
-// https://leetcode.com/problems/report-spam-message/
-// Given a list of messages, report the spam messages.
+/**
+ * Problem: Report Spam Message (LeetCode 3295)
+ * Link: https://leetcode.com/problems/report-spam-message/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-// Brute force approach: O(n*m) where n is the number of messages and m is the average length of a message
-class Solution_BruteForce {
-public:
-    std::vector<std::string> reportSpamMessages(std::vector<std::string>& messages) {
-        std::vector<std::string> spamMessages;
-        for (const auto& message : messages) {
-            if (message.find("spam") != std::string::npos) {
-                spamMessages.push_back(message);
-            }
-        }
-        return spamMessages;
-    }
-};
+using namespace std;
 
-// Optimal solution: O(n*m) where n is the number of messages and m is the average length of a message
-class Solution_Optimal {
-public:
-    std::vector<std::string> reportSpamMessages(std::vector<std::string>& messages) {
-        std::vector<std::string> spamMessages;
-        for (const auto& message : messages) {
-            if (message.find("spam") != std::string::npos) {
-                spamMessages.push_back(message);
-            }
-        }
-        return spamMessages;
-    }
-};
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution_BruteForce bruteForce;
-    Solution_Optimal optimal;
-
-    std::vector<std::string> messages1 = {"Hello", "This is spam", "Goodbye"};
-    std::vector<std::string> messages2 = {"This is not spam", "This is spam", "This is spam again"};
-    std::vector<std::string> messages3 = {"No spam here", "No spam here either"};
-
-    std::vector<std::string> result1 = bruteForce.reportSpamMessages(messages1);
-    std::vector<std::string> result2 = optimal.reportSpamMessages(messages2);
-    std::vector<std::string> result3 = bruteForce.reportSpamMessages(messages3);
-
-    std::cout << "Brute force result 1: ";
-    for (const auto& message : result1) {
-        std::cout << message << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Optimal result 2: ";
-    for (const auto& message : result2) {
-        std::cout << message << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Brute force result 3: ";
-    for (const auto& message : result3) {
-        std::cout << message << " ";
-    }
-    std::cout << std::endl;
-
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Report Spam Message" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
