@@ -1,47 +1,44 @@
-/**
- * Problem: CoinChangeIIVariant (Codeforces 1183A)
- * Link: https://codeforces.com/problems/coinchangeiivariant/
- */
+```cpp
+// Codeforces_1183A_CoinChangeIIVariant
+// https://codeforces.com/contest/1183/problem/A
+// This problem is a variant of the classic coin change problem, where we need to find the number of ways to make change for a given amount using a set of coins.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1183A() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
-        }
-    }
+// Brute force approach: Try all possible combinations of coins to make the change
+// Time complexity: O(2^n), where n is the number of coins
+// Space complexity: O(n), for the recursive call stack
+int bruteForce(int amount, const std::vector<int>& coins, int index) {
+    if (amount == 0) return 1;
+    if (amount < 0 || index == coins.size()) return 0;
+    return bruteForce(amount - coins[index], coins, index) + bruteForce(amount, coins, index + 1);
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1183A() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution: Use dynamic programming to store the number of ways to make change for each amount
+// Time complexity: O(n*m), where n is the number of coins and m is the amount
+// Space complexity: O(m), for the dp array
+int optimalSolution(int amount, const std::vector<int>& coins) {
+    std::vector<int> dp(amount + 1, 0);
+    dp[0] = 1;
+    for (int coin : coins) {
+        for (int i = coin; i <= amount; i++) {
+            dp[i] += dp[i - coin];
+        }
     }
+    return dp[amount];
 }
 
 int main() {
-    // cout << "Testing CoinChangeIIVariant" << endl;
-    // solveOptimal_1183A();
+    std::vector<int> coins1 = {1, 2, 3};
+    std::cout << "Test case 1: " << optimalSolution(4, coins1) << std::endl;  // Output: 4
+
+    std::vector<int> coins2 = {2, 3, 5};
+    std::cout << "Test case 2: " << optimalSolution(10, coins2) << std::endl;  // Output: 4
+
+    std::vector<int> coins3 = {1, 2, 5};
+    std::cout << "Test case 3: " << optimalSolution(5, coins3) << std::endl;  // Output: 4
+
     return 0;
 }
-
-
+```
