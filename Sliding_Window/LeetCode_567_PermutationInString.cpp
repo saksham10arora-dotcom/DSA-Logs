@@ -1,58 +1,81 @@
-```cpp
-// LeetCode problem 567: Permutation In String, https://leetcode.com/problems/permutation-in-string/
-// Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1, otherwise return false.
+/**
+ * Problem: Permutation in String (LeetCode 567)
+ * Link: https://leetcode.com/problems/permutation-in-string/
+ */
 
-// Brute force approach: generate all permutations of s1 and check if any of them is a substring of s2, O(n! * m) complexity
-// class Solution {
-// public:
-//     bool checkInclusion(string s1, string s2) {
-//         vector<string> perms;
-//         permute(s1, 0, perms);
-//         for (const auto& perm : perms) {
-//             if (s2.find(perm) != string::npos) return true;
-//         }
-//         return false;
-//     }
-// private:
-//     void permute(string s, int start, vector<string>& perms) {
-//         if (start == s.size() - 1) {
-//             perms.push_back(s);
-//         } else {
-//             for (int i = start; i < s.size(); i++) {
-//                 swap(s[start], s[i]);
-//                 permute(s, start + 1, perms);
-//                 swap(s[start], s[i]);
-//             }
-//         }
-//     }
-// };
+#include <iostream>
+#include <string>
+#include <vector>
 
-// Optimal solution: use sliding window and frequency count, O(m) complexity
-class Solution {
-public:
-    bool checkInclusion(string s1, string s2) {
-        if (s1.size() > s2.size()) return false;
-        vector<int> count1(26), count2(26);
-        for (int i = 0; i < s1.size(); i++) {
-            count1[s1[i] - 'a']++;
-        }
-        for (int i = 0; i < s2.size(); i++) {
-            count2[s2[i] - 'a']++;
-            if (i >= s1.size()) {
-                count2[s2[i - s1.size()] - 'a']--;
-            }
-            if (i >= s1.size() - 1 && count1 == count2) return true;
-        }
-        return false;
+using namespace std;
+
+// --- Optimal Solution (Sliding Window with Hash Map) ---
+// Time Complexity: O(N)
+// Space Complexity: O(26)
+bool checkInclusion(string s1, string s2) {
+    if (s1.length() > s2.length()) return false;
+    vector<int> s1Count(26, 0), s2Count(26, 0);
+    for (int i = 0; i < s1.length(); i++) {
+        s1Count[s1[i] - 'a']++;
+        s2Count[s2[i] - 'a']++;
     }
-};
+    int matches = 0;
+    for (int i = 0; i < 26; i++) {
+        if (s1Count[i] == s2Count[i]) matches++;
+    }
+    int l = 0;
+    for (int r = s1.length(); r < s2.length(); r++) {
+        if (matches == 26) return true;
+        int index = s2[r] - 'a';
+        s2Count[index]++;
+        if (s1Count[index] == s2Count[index]) matches++;
+        else if (s1Count[index] + 1 == s2Count[index]) matches--;
+
+        index = s2[l] - 'a';
+        s2Count[index]--;
+        if (s1Count[index] == s2Count[index]) matches++;
+        else if (s1Count[index] - 1 == s2Count[index]) matches--;
+        l++;
+    }
+    return matches == 26;
+}
 
 int main() {
-    Solution solution;
-    cout << boolalpha;
-    cout << solution.checkInclusion("ab", "eidbaooo") << endl;  // true
-    cout << solution.checkInclusion("ab", "eidboaoo") << endl;  // false
-    cout << solution.checkInclusion("abc", "eidbaooo") << endl;  // false
+    string s1 = "ab", s2 = "eidbaooo";
+    cout << (checkInclusion(s1, s2) ? "True" : "False") << endl;
     return 0;
 }
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
