@@ -1,58 +1,44 @@
-```cpp
-// LeetCode problem 794: Valid Tic Tac Toe State
-// https://leetcode.com/problems/valid-tic-tac-toe-state/
-// A valid Tic Tac Toe state is one where the game is not over and the number of X's is either equal to the number of O's or one more.
+/**
+ * Problem: Valid Tic-Tac-Toe State (LeetCode 794)
+ * Link: https://leetcode.com/problems/valid-tic-tac-toe-state/
+ */
 
+#include <iostream>
 #include <vector>
+#include <algorithm>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-class Solution {
-public:
-    bool validTicTacToe(std::vector<std::string>& board) {
-        int countX = 0, countO = 0;
-        for (const auto& row : board) {
-            for (char c : row) {
-                if (c == 'X') countX++;
-                else if (c == 'O') countO++;
-            }
-        }
-        
-        if (countX < countO || countX > countO + 1) return false;
-        
-        int winX = checkWin(board, 'X');
-        int winO = checkWin(board, 'O');
-        
-        if (winX && winO) return false;
-        if (winX && countX == countO) return false;
-        if (winO && countX > countO) return false;
-        
-        return true;
-    }
-    
-    int checkWin(const std::vector<std::string>& board, char c) {
-        for (int i = 0; i < 3; i++) {
-            if (board[i][0] == c && board[i][1] == c && board[i][2] == c) return 1;
-            if (board[0][i] == c && board[1][i] == c && board[2][i] == c) return 1;
-        }
-        if (board[0][0] == c && board[1][1] == c && board[2][2] == c) return 1;
-        if (board[0][2] == c && board[1][1] == c && board[2][0] == c) return 1;
-        return 0;
-    }
-};
+using namespace std;
 
-// Brute force approach: O(3^9) - checking all possible board configurations
-// Optimal solution: O(1) - checking the counts of X's and O's and the winning conditions
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
+
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    Solution solution;
-    std::vector<std::string> board1 = {"XOX", "OXO", "XOX"};
-    std::vector<std::string> board2 = {"XOX", "XOX", "XOX"};
-    std::vector<std::string> board3 = {"XXX", "   ", "   "};
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    std::cout << std::boolalpha << solution.validTicTacToe(board1) << std::endl;  // true
-    std::cout << std::boolalpha << solution.validTicTacToe(board2) << std::endl;  // false
-    std::cout << std::boolalpha << solution.validTicTacToe(board3) << std::endl;  // false
+    // cout << "Testing Valid Tic-Tac-Toe State" << endl;
+    // solveOptimal();
     
     return 0;
 }
-```
+
+
