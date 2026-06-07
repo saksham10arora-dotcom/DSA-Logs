@@ -1,49 +1,48 @@
-```cpp
-// LeetCode problem 225: Super Pow Variant
-// https://leetcode.com/problems/super-pow/
-// Your task is to calculate a^(b^c) % k.
+/**
+ * Problem: SuperPowVariant (LeetCode 225)
+ * Link: https://leetcode.com/problems/superpowvariant/
+ */
 
-class Solution {
-public:
-    // Brute force approach with O(b^c) complexity
-    int superPowBruteForce(int a, vector<int>& b, int k) {
-        long long res = 1;
-        for (int i : b) {
-            res = powMod(res, 10, k) * i % k;
-        }
-        return powMod(a, res, k);
-    }
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-    // Optimal solution with O(log(b^c)) complexity
-    int superPow(int a, vector<int>& b, int k) {
-        long long res = 1;
-        for (int i : b) {
-            res = res * 10 + i;
-            res %= (k - 1);
-        }
-        return powMod(a, res, k);
-    }
+using namespace std;
 
-    long long powMod(long long a, long long b, int k) {
-        long long res = 1;
-        a %= k;
-        while (b > 0) {
-            if (b & 1) res = res * a % k;
-            a = a * a % k;
-            b >>= 1;
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_225() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
-        return res;
     }
-};
+}
+
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_225() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
+    }
+}
 
 int main() {
-    Solution solution;
-    vector<int> b1 = {3};
-    vector<int> b2 = {1, 0};
-    vector<int> b3 = {2, 0, 0};
-    cout << solution.superPow(2, b1, 11) << endl;  // Output: 8
-    cout << solution.superPow(2, b2, 3) << endl;  // Output: 0
-    cout << solution.superPow(2, b3, 5) << endl;  // Output: 3
+    // cout << "Testing SuperPowVariant" << endl;
+    // solveOptimal_225();
     return 0;
 }
-```
+
+
+
