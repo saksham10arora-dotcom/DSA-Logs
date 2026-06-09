@@ -1,48 +1,123 @@
-/**
- * Problem: SpiralMatrixVariant (CSES 1221)
- * Link: https://cses.com/problems/spiralmatrixvariant/
- */
+```cpp
+// Problem: Spiral Matrix Variant, https://cses.fi/problemset/task/1221
+// Brief description: Given a matrix of size n x m, fill it with numbers from 1 to n*m in a spiral order.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(n*m) complexity
+void bruteForceSpiral(std::vector<std::vector<int>>& matrix) {
+    int n = matrix.size();
+    int m = matrix[0].size();
+    int top = 0;
+    int bottom = n - 1;
+    int left = 0;
+    int right = m - 1;
+    int count = 1;
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1221() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+    while (top <= bottom && left <= right) {
+        // Fill from left to right
+        for (int i = left; i <= right; i++) {
+            matrix[top][i] = count++;
+        }
+        top++;
+
+        // Fill from top to bottom
+        for (int i = top; i <= bottom; i++) {
+            matrix[i][right] = count++;
+        }
+        right--;
+
+        // Fill from right to left
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--) {
+                matrix[bottom][i] = count++;
+            }
+            bottom--;
+        }
+
+        // Fill from bottom to top
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                matrix[i][left] = count++;
+            }
+            left++;
         }
     }
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1221() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution with O(n*m) complexity
+void optimalSpiral(std::vector<std::vector<int>>& matrix) {
+    int n = matrix.size();
+    int m = matrix[0].size();
+    int top = 0;
+    int bottom = n - 1;
+    int left = 0;
+    int right = m - 1;
+    int count = 1;
+
+    while (top <= bottom && left <= right) {
+        // Fill from left to right
+        for (int i = left; i <= right; i++) {
+            matrix[top][i] = count++;
+        }
+        top++;
+
+        // Fill from top to bottom
+        for (int i = top; i <= bottom; i++) {
+            matrix[i][right] = count++;
+        }
+        right--;
+
+        // Fill from right to left
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--) {
+                matrix[bottom][i] = count++;
+            }
+            bottom--;
+        }
+
+        // Fill from bottom to top
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                matrix[i][left] = count++;
+            }
+            left++;
+        }
     }
 }
 
 int main() {
-    // cout << "Testing SpiralMatrixVariant" << endl;
-    // solveOptimal_1221();
+    // Test case 1
+    std::vector<std::vector<int>> matrix1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+    optimalSpiral(matrix1);
+    for (const auto& row : matrix1) {
+        for (int num : row) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    // Test case 2
+    std::vector<std::vector<int>> matrix2 = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    optimalSpiral(matrix2);
+    for (const auto& row : matrix2) {
+        for (int num : row) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    // Test case 3
+    std::vector<std::vector<int>> matrix3 = {{0, 0}, {0, 0}};
+    optimalSpiral(matrix3);
+    for (const auto& row : matrix3) {
+        for (int num : row) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
     return 0;
 }
-
-
-
+```
