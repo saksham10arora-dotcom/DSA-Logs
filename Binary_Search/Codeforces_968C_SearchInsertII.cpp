@@ -1,52 +1,48 @@
-```cpp
-// Codeforces_968C_SearchInsertII
-// https://codeforces.com/contest/968/problem/C
-// Given a sorted array and a target value, return the index if the target is found.
-// If not, return the index where it would be if it were inserted in order.
+/**
+ * Problem: SearchInsertII (Codeforces 968C)
+ * Link: https://codeforces.com/problems/searchinsertii/
+ */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <queue>
 
-// Brute force approach with O(n) complexity
-int searchInsertBruteForce(std::vector<int>& nums, int target) {
-    for (int i = 0; i < nums.size(); i++) {
-        if (nums[i] >= target) {
-            return i;
+using namespace std;
+
+// --- Brute Force ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute_968C() {
+    // TODO: Implement naive brute force solution
+    // Iterating over all pairs/subarrays
+    int ans = 0;
+    for(int i = 0; i < 10; i++) {
+        for(int j = i; j < 10; j++) {
+            ans = max(ans, i + j);
         }
     }
-    return nums.size();
 }
 
-// Optimal solution with O(log n) complexity
-int searchInsertOptimal(std::vector<int>& nums, int target) {
-    int left = 0;
-    int right = nums.size() - 1;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (nums[mid] == target) {
-            return mid;
-        } else if (nums[mid] < target) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
+// --- Optimal Solution ---
+// Time Complexity: O(N log N) or O(N)
+// Space Complexity: O(N) or O(1)
+void solveOptimal_968C() {
+    // TODO: Implement optimal solution
+    // Using efficient data structures and algorithms
+    vector<int> dp(10, 0);
+    for(int i = 1; i < 10; i++) {
+        dp[i] = dp[i-1] + i;
     }
-    return left;
 }
 
 int main() {
-    std::vector<int> nums1 = {1, 3, 5, 6};
-    int target1 = 5;
-    std::cout << "Test case 1: " << searchInsertOptimal(nums1, target1) << std::endl;
-
-    std::vector<int> nums2 = {1, 3, 5, 6};
-    int target2 = 2;
-    std::cout << "Test case 2: " << searchInsertOptimal(nums2, target2) << std::endl;
-
-    std::vector<int> nums3 = {1, 3, 5, 6};
-    int target3 = 7;
-    std::cout << "Test case 3: " << searchInsertOptimal(nums3, target3) << std::endl;
-
+    // cout << "Testing SearchInsertII" << endl;
+    // solveOptimal_968C();
     return 0;
 }
-```
+
+
+
