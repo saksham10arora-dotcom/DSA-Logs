@@ -1,48 +1,42 @@
-/**
- * Problem: PointInPolygonOptimized (LeetCode 1898)
- * Link: https://leetcode.com/problems/pointinpolygonoptimized/
- */
+```cpp
+// LeetCode problem 1898: Point In Polygon Optimized
+// https://leetcode.com/problems/point-in-polygon-optimized/
+// Determine if a point is inside a polygon.
 
-#include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
+#include <iostream>
 
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1898() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach: O(n) complexity
+class Solution {
+public:
+    bool isPointInside(std::vector<std::vector<int>>& polygon, std::vector<int>& point) {
+        int x = point[0], y = point[1];
+        int n = polygon.size();
+        int inside = 0;
+        for (int i = 0, j = n - 1; i < n; j = i++) {
+            int xi = polygon[i][0], yi = polygon[i][1];
+            int xj = polygon[j][0], yj = polygon[j][1];
+            bool intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside ^= 1;
         }
+        return inside;
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1898() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing PointInPolygonOptimized" << endl;
-    // solveOptimal_1898();
+    Solution solution;
+    std::vector<std::vector<int>> polygon1 = {{0, 0}, {0, 5}, {5, 5}, {5, 0}};
+    std::vector<int> point1 = {3, 3};
+    std::cout << std::boolalpha << solution.isPointInside(polygon1, point1) << std::endl;  // Expected output: true
+
+    std::vector<std::vector<int>> polygon2 = {{0, 0}, {0, 5}, {5, 5}, {5, 0}};
+    std::vector<int> point2 = {6, 3};
+    std::cout << std::boolalpha << solution.isPointInside(polygon2, point2) << std::endl;  // Expected output: false
+
+    std::vector<std::vector<int>> polygon3 = {{0, 0}, {5, 0}, {5, 5}, {0, 5}};
+    std::vector<int> point3 = {3, 3};
+    std::cout << std::boolalpha << solution.isPointInside(polygon3, point3) << std::endl;  // Expected output: true
+
     return 0;
 }
-
-
-
+```
