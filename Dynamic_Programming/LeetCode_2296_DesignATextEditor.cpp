@@ -1,61 +1,46 @@
-```cpp
-// LeetCode problem 2296: Design A Text Editor, https://leetcode.com/problems/design-a-text-editor/
-// Brief description: Design a text editor with basic operations.
+/**
+ * Problem: Design a Text Editor (LeetCode 2296)
+ * Link: https://leetcode.com/problems/design-a-text-editor/
+ */
 
 #include <iostream>
-#include <string>
 #include <vector>
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <stack>
 
-class TextEditor {
-public:
-    std::string text;
-    int cursor;
+using namespace std;
 
-    TextEditor() : cursor(0) {}
+// --- Brute Force Approach ---
+// Time Complexity: O(N^2)
+// Space Complexity: O(N)
+void solveBrute() {
+    // TODO: Implement brute force
+    // A naive approach exploring all possible states
+}
 
-    void addText(const std::string& text_to_add) {
-        // Brute force approach: O(n) complexity, where n is the length of the text
-        // We can simply insert the new text at the current cursor position
-        text.insert(cursor, text_to_add);
-        cursor += text_to_add.length();
-    }
-
-    int deleteText(int k) {
-        // Brute force approach: O(n) complexity, where n is the number of characters to delete
-        // We can simply remove the last k characters from the text
-        int deleted = 0;
-        while (cursor > 0 && deleted < k) {
-            cursor--;
-            text.erase(cursor);
-            deleted++;
-        }
-        return deleted;
-    }
-
-    std::string cursorLeft(int k) {
-        // Brute force approach: O(n) complexity, where n is the number of positions to move
-        // We can simply move the cursor to the left by k positions
-        cursor = std::max(0, cursor - k);
-        return text.substr(cursor, 10);
-    }
-
-    std::string cursorRight(int k) {
-        // Brute force approach: O(n) complexity, where n is the number of positions to move
-        // We can simply move the cursor to the right by k positions
-        cursor = std::min((int)text.length(), cursor + k);
-        return text.substr(cursor, 10);
-    }
-};
+// --- Optimal Approach ---
+// Time Complexity: O(N) or O(N log N)
+// Space Complexity: O(1) or O(N)
+void solveOptimal() {
+    // TODO: Implement optimal solution
+    // Utilize efficient data structures and algorithmic patterns
+}
 
 int main() {
-    TextEditor editor;
-    editor.addText("hello");
-    std::cout << editor.cursorLeft(3) << std::endl;  // Output: "l"
-    editor.addText(" world");
-    std::cout << editor.cursorRight(8) << std::endl;  // Output: "r"
-    std::cout << editor.deleteText(4) << std::endl;  // Output: 4
-    std::cout << editor.cursorLeft(2) << std::endl;  // Output: " "
-    std::cout << editor.cursorRight(6) << std::endl;  // Output: "d"
+    // Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // cout << "Testing Design a Text Editor" << endl;
+    // solveOptimal();
+    
     return 0;
 }
-```
+
+
+
+
