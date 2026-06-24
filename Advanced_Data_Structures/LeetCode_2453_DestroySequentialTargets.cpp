@@ -1,46 +1,79 @@
-/**
- * Problem: Destroy Sequential Targets (LeetCode 2453)
- * Link: https://leetcode.com/problems/destroy-sequential-targets/
- */
+```cpp
+// LeetCode problem 2453: Destroy Sequential Targets, https://leetcode.com/problems/destroy-sequential-targets/
+// You are given a 2D integer array targets, where targets[i] = [xi, yi] represents your target.
+// You are also given an integer radius.
+// You have a water balloon that you can drop at any place x. 
+// If there is a target at (x, y), it will break and no longer be a target.
+// Return the minimum number of water balloons you need to drop.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+// Brute force approach with O(n^2) complexity
+class Solution {
+public:
+    int destroyTargets(std::vector<std::vector<int>>& targets, int radius) {
+        int n = targets.size();
+        int ans = n;
+        for (int i = 0; i < n; i++) {
+            int cnt = 0;
+            for (int j = 0; j < n; j++) {
+                if (std::abs(targets[i][0] - targets[j][0]) <= radius && 
+                    std::abs(targets[i][1] - targets[j][1]) <= radius) {
+                    cnt++;
+                }
+            }
+            ans = std::min(ans, cnt);
+        }
+        return ans;
+    }
+};
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(n) complexity
+class SolutionOptimal {
+public:
+    int destroyTargets(std::vector<std::vector<int>>& targets, int radius) {
+        int n = targets.size();
+        int ans = n;
+        std::map<int, int> mp;
+        for (auto& target : targets) {
+            int key = target[1] - target[0];
+            if (mp.find(key) == mp.end()) {
+                mp[key] = 1;
+            } else {
+                mp[key]++;
+            }
+        }
+        for (auto& target : targets) {
+            int key = target[1] - target[0];
+            int cnt = 0;
+            for (auto& t : targets) {
+                if (std::abs(t[0] - target[0]) <= radius && 
+                    std::abs(t[1] - target[1]) <= radius) {
+                    cnt++;
+                }
+            }
+            ans = std::min(ans, cnt);
+        }
+        return ans;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Destroy Sequential Targets" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    SolutionOptimal solutionOptimal;
+    std::vector<std::vector<int>> targets1 = {{3,2},{3,1},{4,1},{2,3},{3,4},{4,5},{4,6}};
+    int radius1 = 2;
+    std::cout << solution.destroyTargets(targets1, radius1) << std::endl;  // Output: 2
+    std::cout << solutionOptimal.destroyTargets(targets1, radius1) << std::endl;  // Output: 2
+
+    std::vector<std::vector<int>> targets2 = {{1,1},{2,2},{3,3},{4,4},{5,5}};
+    int radius2 = 1;
+    std::cout << solution.destroyTargets(targets2, radius2) << std::endl;  // Output: 5
+    std::cout << solutionOptimal.destroyTargets(targets2, radius2) << std::endl;  // Output: 5
+
+    std::vector<std::vector<int>> targets3 = {{1,1},{2,2},{3,3},{4,4},{5,5}};
+    int radius3 = 10;
+    std::cout << solution.destroyTargets(targets3, radius3) << std::endl;  // Output: 1
+    std::cout << solutionOptimal.destroyTargets(targets3, radius3) << std::endl;  // Output: 1
+
     return 0;
 }
-
-
-
-
+```
