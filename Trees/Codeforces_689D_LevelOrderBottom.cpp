@@ -1,49 +1,61 @@
-/**
- * Problem: LevelOrderBottom (Codeforces 689D)
- * Link: https://codeforces.com/problems/levelorderbottom/
- */
+```cpp
+// Codeforces_689D_LevelOrderBottom
+// https://codeforces.com/contest/689/problem/D
+// Given a tree, print the nodes in level order from bottom to top.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
 #include <queue>
 
-using namespace std;
+// Brute force approach: Perform DFS and store the nodes at each level, then print from bottom to top. O(n^2) complexity due to vector insertion.
+// However, we can optimize this by using a queue for BFS and storing the nodes at each level.
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_689D() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
-        }
+// Optimal solution: Use BFS to traverse the tree level by level from top to bottom, storing the nodes at each level. Then print the nodes from bottom to top. O(n) complexity.
+
+void levelOrderBottom(std::vector<std::vector<int>>& tree, int root) {
+    if (tree.empty() || root < 0 || root >= tree.size()) {
+        return;
     }
-}
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_689D() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+    std::vector<std::vector<int>> levels;
+    std::queue<int> queue;
+    queue.push(root);
+    while (!queue.empty()) {
+        int size = queue.size();
+        std::vector<int> level;
+        for (int i = 0; i < size; i++) {
+            int node = queue.front();
+            queue.pop();
+            level.push_back(node);
+            for (int child : tree[node]) {
+                queue.push(child);
+            }
+        }
+        levels.push_back(level);
+    }
+
+    // Print levels from bottom to top
+    for (int i = levels.size() - 1; i >= 0; i--) {
+        for (int node : levels[i]) {
+            std::cout << node << " ";
+        }
+        std::cout << std::endl;
     }
 }
 
 int main() {
-    // cout << "Testing LevelOrderBottom" << endl;
-    // solveOptimal_689D();
+    // Test case 1:
+    std::vector<std::vector<int>> tree1 = {{1, 2}, {3}, {3}, {}};
+    levelOrderBottom(tree1, 0);
+
+    // Test case 2:
+    std::vector<std::vector<int>> tree2 = {{1, 2, 3}, {4}, {5}, {6}, {}, {}, {}};
+    levelOrderBottom(tree2, 0);
+
+    // Test case 3:
+    std::vector<std::vector<int>> tree3 = {{1}, {2}, {}};
+    levelOrderBottom(tree3, 0);
+
     return 0;
 }
-
-
-
-
+```
