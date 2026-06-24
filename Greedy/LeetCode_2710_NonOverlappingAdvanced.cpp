@@ -1,48 +1,67 @@
-/**
- * Problem: NonOverlappingAdvanced (LeetCode 2710)
- * Link: https://leetcode.com/problems/nonoverlappingadvanced/
- */
+```cpp
+// LeetCode problem 2710: Non Overlapping Advanced, https://leetcode.com/problems/non-overlapping-advanced/
+// Given an array of intervals, find the maximum number of non-overlapping intervals.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
-
-using namespace std;
-
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2710() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Brute force approach: Generate all possible subsets of intervals and check for non-overlapping, O(2^n * n)
+class Solution {
+public:
+    int findNonOverlapping(int intervals[][2], int intervalsSize) {
+        int maxCount = 0;
+        for (int mask = 0; mask < (1 << intervalsSize); mask++) {
+            bool nonOverlapping = true;
+            int count = 0;
+            for (int i = 0; i < intervalsSize; i++) {
+                if ((mask & (1 << i)) != 0) {
+                    bool overlaps = false;
+                    for (int j = 0; j < i; j++) {
+                        if ((mask & (1 << j)) != 0 && intervals[i][0] < intervals[j][1] && intervals[j][0] < intervals[i][1]) {
+                            overlaps = true;
+                            break;
+                        }
+                    }
+                    if (!overlaps) {
+                        count++;
+                    } else {
+                        nonOverlapping = false;
+                        break;
+                    }
+                }
+            }
+            if (nonOverlapping) {
+                maxCount = std::max(maxCount, count);
+            }
         }
+        return maxCount;
     }
-}
+};
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2710() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
+// Optimal solution: Sort intervals by end time and use greedy algorithm, O(n log n)
+class SolutionOptimal {
+public:
+    int findNonOverlapping(int intervals[][2], int intervalsSize) {
+        std::sort(intervals, intervals + intervalsSize, [](int a[], int b[]) {
+            return a[1] < b[1];
+        });
+        int count = 0;
+        int lastEnd = -1;
+        for (int i = 0; i < intervalsSize; i++) {
+            if (intervals[i][0] >= lastEnd) {
+                count++;
+                lastEnd = intervals[i][1];
+            }
+        }
+        return count;
     }
-}
+};
 
 int main() {
-    // cout << "Testing NonOverlappingAdvanced" << endl;
-    // solveOptimal_2710();
+    SolutionOptimal solution;
+    int intervals1[][2] = {{1, 2}, {2, 3}, {3, 4}, {1, 3}};
+    int intervals2[][2] = {{1, 2}, {1, 2}, {1, 2}};
+    int intervals3[][2] = {{1, 2}, {2, 3}};
+    std::cout << solution.findNonOverlapping(intervals1, 4) << std::endl;  // Output: 2
+    std::cout << solution.findNonOverlapping(intervals2, 3) << std::endl;  // Output: 1
+    std::cout << solution.findNonOverlapping(intervals3, 2) << std::endl;  // Output: 2
     return 0;
 }
-
-
-
+```
