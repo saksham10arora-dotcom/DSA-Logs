@@ -1,44 +1,61 @@
-/**
- * Problem: Longest Balanced Subarray II (LeetCode 3721)
- * Link: https://leetcode.com/problems/longest-balanced-subarray-ii/
- */
+```cpp
+// LeetCode problem 3721: Longest Balanced Subarray II, https://leetcode.com/problems/longest-balanced-subarray-ii/
+// Given an array of integers, find the length of the longest balanced subarray.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
 #include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
 
-using namespace std;
+// Brute force approach: O(n^3) complexity
+class Solution_BruteForce {
+public:
+    int longestBalancedSubarray(std::vector<int>& nums) {
+        int n = nums.size();
+        int maxLength = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int sum = 0;
+                for (int k = i; k <= j; k++) {
+                    sum += nums[k];
+                }
+                if (sum == 0) {
+                    maxLength = std::max(maxLength, j - i + 1);
+                }
+            }
+        }
+        return maxLength;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution: O(n) complexity
+class Solution_Optimal {
+public:
+    int longestBalancedSubarray(std::vector<int>& nums) {
+        int n = nums.size();
+        int maxLength = 0;
+        std::unordered_map<int, int> prefixSum;
+        int sum = 0;
+        prefixSum[0] = -1;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            if (prefixSum.find(sum) != prefixSum.end()) {
+                maxLength = std::max(maxLength, i - prefixSum[sum]);
+            } else {
+                prefixSum[sum] = i;
+            }
+        }
+        return maxLength;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Longest Balanced Subarray II" << endl;
-    // solveOptimal();
-    
+    Solution_Optimal solution;
+    std::vector<int> nums1 = {1, -1, 1, -1, 1, -1};
+    std::vector<int> nums2 = {1, 1, 1, 1, 1};
+    std::vector<int> nums3 = {-1, -1, -1, -1, -1};
+    std::cout << solution.longestBalancedSubarray(nums1) << std::endl;  // Output: 6
+    std::cout << solution.longestBalancedSubarray(nums2) << std::endl;  // Output: 0
+    std::cout << solution.longestBalancedSubarray(nums3) << std::endl;  // Output: 0
     return 0;
 }
-
-
+```
