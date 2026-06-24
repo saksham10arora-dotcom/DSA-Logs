@@ -1,51 +1,63 @@
-/**
- * Problem: PartitionEqual (LeetCode 2578)
- * Link: https://leetcode.com/problems/partitionequal/
- */
+```cpp
+// LeetCode problem 2578: Partition Equal Subset Sum, https://leetcode.com/problems/partition-equal-subset-sum/
+// Given an integer array nums, return true if you can partition the array into two subsets such that the sum of elements in both subsets is equal.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(2^n) complexity
+class Solution_Brute_Force {
+public:
+    bool canPartition(std::vector<int>& nums) {
+        int sum = 0;
+        for (int num : nums) sum += num;
+        if (sum % 2 != 0) return false;
+        int target = sum / 2;
+        return dfs(nums, 0, 0, target);
+    }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_2578() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+    bool dfs(std::vector<int>& nums, int index, int sum, int target) {
+        if (sum == target) return true;
+        if (sum > target || index == nums.size()) return false;
+        return dfs(nums, index + 1, sum + nums[index], target) || dfs(nums, index + 1, sum, target);
+    }
+};
+
+// Optimal solution with O(n * sum) complexity
+class Solution_Optimal {
+public:
+    bool canPartition(std::vector<int>& nums) {
+        int sum = 0;
+        for (int num : nums) sum += num;
+        if (sum % 2 != 0) return false;
+        int target = sum / 2;
+        std::vector<bool> dp(target + 1, false);
+        dp[0] = true;
+        for (int num : nums) {
+            for (int i = target; i >= num; i--) {
+                if (dp[i - num]) dp[i] = true;
+            }
         }
+        return dp[target];
     }
-}
-
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_2578() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
+};
 
 int main() {
-    // cout << "Testing PartitionEqual" << endl;
-    // solveOptimal_2578();
+    Solution_Brute_Force solution_brute_force;
+    Solution_Optimal solution_optimal;
+
+    std::vector<int> nums1 = {1, 5, 11, 5};
+    std::cout << std::boolalpha << solution_brute_force.canPartition(nums1) << std::endl;  // true
+    std::cout << std::boolalpha << solution_optimal.canPartition(nums1) << std::endl;  // true
+
+    std::vector<int> nums2 = {1, 2, 3, 5};
+    std::cout << std::boolalpha << solution_brute_force.canPartition(nums2) << std::endl;  // false
+    std::cout << std::boolalpha << solution_optimal.canPartition(nums2) << std::endl;  // false
+
+    std::vector<int> nums3 = {10, 10, 10, 7, 7, 7, 4, 3, 3};
+    std::cout << std::boolalpha << solution_brute_force.canPartition(nums3) << std::endl;  // true
+    std::cout << std::boolalpha << solution_optimal.canPartition(nums3) << std::endl;  // true
+
     return 0;
 }
-
-
-
-
-
-
+```
