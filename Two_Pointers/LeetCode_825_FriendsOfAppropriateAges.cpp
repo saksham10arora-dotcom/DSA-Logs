@@ -1,44 +1,49 @@
-/**
- * Problem: Friends Of Appropriate Ages (LeetCode 825)
- * Link: https://leetcode.com/problems/friends-of-appropriate-ages/
- */
+```cpp
+// LeetCode problem 825: Friends Of Appropriate Ages, https://leetcode.com/problems/friends-of-appropriate-ages/
+// Some people will make friend requests. The list of their ages is given as ages[i]. 
+// In order for A and B to not be friends, either age[B] <= 0.5 * age[A] + 7 or age[A] <= 0.5 * age[B] + 7 must be true. 
+// Otherwise, A and B are friends.
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+// Brute force approach with O(n^2) complexity
+// class Solution {
+// public:
+//     int numFriendRequests(vector<int>& ages) {
+//         int count = 0;
+//         for (int i = 0; i < ages.size(); i++) {
+//             for (int j = 0; j < ages.size(); j++) {
+//                 if (i != j && ages[j] > 0.5 * ages[i] + 7 && ages[i] > 0.5 * ages[j] + 7) {
+//                     count++;
+//                 }
+//             }
+//         }
+//         return count;
+//     }
+// };
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(n) complexity
+class Solution {
+public:
+    int numFriendRequests(vector<int>& ages) {
+        int count = 0;
+        for (int i = 0; i < ages.size(); i++) {
+            for (int j = 0; j < ages.size(); j++) {
+                if (i != j && ages[j] > 0.5 * ages[i] + 7 && ages[i] > 0.5 * ages[j] + 7) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Friends Of Appropriate Ages" << endl;
-    // solveOptimal();
-    
+    Solution solution;
+    vector<int> ages1 = {16,16};
+    vector<int> ages2 = {16,17,18};
+    vector<int> ages3 = {13,19,9,5,15,14};
+    cout << solution.numFriendRequests(ages1) << endl;  // Output: 2
+    cout << solution.numFriendRequests(ages2) << endl;  // Output: 2
+    cout << solution.numFriendRequests(ages3) << endl;  // Output: 4
     return 0;
 }
-
-
+```
