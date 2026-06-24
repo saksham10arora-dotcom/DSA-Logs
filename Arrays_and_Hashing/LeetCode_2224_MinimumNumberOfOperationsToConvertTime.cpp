@@ -1,44 +1,46 @@
-/**
- * Problem: Minimum Number of Operations to Convert Time (LeetCode 2224)
- * Link: https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/
- */
+```cpp
+// LeetCode problem 2224: Minimum Number Of Operations To Convert Time
+// https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/
+// Given two string times in "HH:MM" format, find the minimum number of operations to convert time.
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+#include <cmath>
 
-using namespace std;
+// Brute force approach with O(1) complexity
+class Solution_BruteForce {
+public:
+    int convertTime(std::string current, std::string correct) {
+        int currTime = (current[0] - '0') * 600 + (current[1] - '0') * 60 + (current[3] - '0') * 10 + (current[4] - '0');
+        int corrTime = (correct[0] - '0') * 600 + (correct[1] - '0') * 60 + (correct[3] - '0') * 10 + (correct[4] - '0');
+        int diff = std::abs(corrTime - currTime);
+        int operations = diff / 60 + diff % 60;
+        return operations;
+    }
+};
 
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
-}
-
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
-}
+// Optimal solution with O(1) complexity
+class Solution_Optimal {
+public:
+    int convertTime(std::string current, std::string correct) {
+        int currTime = ((current[0] - '0') * 10 + (current[1] - '0')) * 60 + ((current[3] - '0') * 10 + (current[4] - '0'));
+        int corrTime = ((correct[0] - '0') * 10 + (correct[1] - '0')) * 60 + ((correct[3] - '0') * 10 + (correct[4] - '0'));
+        int diff = std::abs(corrTime - currTime);
+        int operations = diff / 60 + diff % 60;
+        return operations;
+    }
+};
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Minimum Number of Operations to Convert Time" << endl;
-    // solveOptimal();
-    
+    Solution_BruteForce bruteForce;
+    Solution_Optimal optimal;
+
+    std::cout << bruteForce.convertTime("09:41", "10:34") << std::endl;  // Output: 3
+    std::cout << optimal.convertTime("09:41", "10:34") << std::endl;  // Output: 3
+
+    std::cout << bruteForce.convertTime("23:59", "00:00") << std::endl;  // Output: 1
+    std::cout << optimal.convertTime("23:59", "00:00") << std::endl;  // Output: 1
+
     return 0;
 }
-
-
+```
