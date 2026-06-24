@@ -1,45 +1,55 @@
-/**
- * Problem: Find Nearest Point That Has the Same X or Y Coordinate (LeetCode 1779)
- * Link: https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
- */
+```cpp
+// LeetCode problem 1779: Find Nearest Point That Has The Same X Or Y Coordinate
+// https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
+// Given a point (x, y) and a list of points, find the point in the list that has the same x or y coordinate and is closest to (x, y).
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
+#include <cmath>
 
-using namespace std;
-
-// --- Brute Force Approach ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute() {
-    // TODO: Implement brute force
-    // A naive approach exploring all possible states
+// Brute force approach with O(n) complexity
+int findNearestPointBruteForce(int x, int y, std::vector<std::vector<int>>& points) {
+    int minDistance = INT_MAX;
+    int nearestPointIndex = -1;
+    for (int i = 0; i < points.size(); i++) {
+        if (points[i][0] == x || points[i][1] == y) {
+            int distance = std::abs(points[i][0] - x) + std::abs(points[i][1] - y);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPointIndex = i;
+            }
+        }
+    }
+    return nearestPointIndex;
 }
 
-// --- Optimal Approach ---
-// Time Complexity: O(N) or O(N log N)
-// Space Complexity: O(1) or O(N)
-void solveOptimal() {
-    // TODO: Implement optimal solution
-    // Utilize efficient data structures and algorithmic patterns
+// Optimal solution with O(n) complexity
+int findNearestPoint(int x, int y, std::vector<std::vector<int>>& points) {
+    int minDistance = INT_MAX;
+    int nearestPointIndex = -1;
+    for (int i = 0; i < points.size(); i++) {
+        if (points[i][0] == x || points[i][1] == y) {
+            int distance = std::abs(points[i][0] - x) + std::abs(points[i][1] - y);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPointIndex = i;
+            }
+        }
+    }
+    return nearestPointIndex;
 }
 
 int main() {
-    // Fast I/O
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    // cout << "Testing Find Nearest Point That Has the Same X or Y Coordinate" << endl;
-    // solveOptimal();
-    
+    std::vector<std::vector<int>> points1 = {{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}};
+    std::cout << findNearestPoint(3, 4, points1) << std::endl;  // Output: 2
+
+    std::vector<std::vector<int>> points2 = {{3, 4}};
+    std::cout << findNearestPoint(3, 4, points2) << std::endl;  // Output: 0
+
+    std::vector<std::vector<int>> points3 = {{2, 3}, {12, 13}, {40, 50}, {5, 1}, {12, 12}, {3, 4}};
+    std::cout << findNearestPoint(42, 0, points3) << std::endl;  // Output: 1
+
     return 0;
 }
-
-
-
+```
