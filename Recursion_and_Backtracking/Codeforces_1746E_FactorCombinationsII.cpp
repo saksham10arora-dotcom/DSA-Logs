@@ -1,50 +1,73 @@
-/**
- * Problem: FactorCombinationsII (Codeforces 1746E)
- * Link: https://codeforces.com/problems/factorcombinationsii/
- */
+```cpp
+// Codeforces_1746E_FactorCombinationsII
+// https://codeforces.com/contest/1746/problem/E
+// Given a positive integer n, find all possible factor combinations of n.
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include <queue>
 
-using namespace std;
+// Brute force approach with O(2^n) complexity
+// void bruteForce(int n) {
+//     for (int i = 1; i <= n; i++) {
+//         if (n % i == 0) {
+//             std::cout << i << " ";
+//         }
+//     }
+// }
 
-// --- Brute Force ---
-// Time Complexity: O(N^2)
-// Space Complexity: O(N)
-void solveBrute_1746E() {
-    // TODO: Implement naive brute force solution
-    // Iterating over all pairs/subarrays
-    int ans = 0;
-    for(int i = 0; i < 10; i++) {
-        for(int j = i; j < 10; j++) {
-            ans = max(ans, i + j);
+// Optimal solution with O(sqrt(n)) complexity
+void factorCombinations(int n, int start, std::vector<int>& current, std::vector<std::vector<int>>& result) {
+    if (n == 1) {
+        result.push_back(current);
+        return;
+    }
+    for (int i = start; i * i <= n; i++) {
+        if (n % i == 0) {
+            current.push_back(i);
+            factorCombinations(n / i, i, current, result);
+            current.pop_back();
         }
     }
 }
 
-// --- Optimal Solution ---
-// Time Complexity: O(N log N) or O(N)
-// Space Complexity: O(N) or O(1)
-void solveOptimal_1746E() {
-    // TODO: Implement optimal solution
-    // Using efficient data structures and algorithms
-    vector<int> dp(10, 0);
-    for(int i = 1; i < 10; i++) {
-        dp[i] = dp[i-1] + i;
-    }
-}
-
 int main() {
-    // cout << "Testing FactorCombinationsII" << endl;
-    // solveOptimal_1746E();
+    int n;
+    std::vector<std::vector<int>> result;
+    std::vector<int> current;
+
+    n = 12;
+    result.clear();
+    factorCombinations(n, 1, current, result);
+    std::cout << "Factor combinations of " << n << ":" << std::endl;
+    for (const auto& combination : result) {
+        for (int num : combination) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    n = 24;
+    result.clear();
+    factorCombinations(n, 1, current, result);
+    std::cout << "Factor combinations of " << n << ":" << std::endl;
+    for (const auto& combination : result) {
+        for (int num : combination) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    n = 36;
+    result.clear();
+    factorCombinations(n, 1, current, result);
+    std::cout << "Factor combinations of " << n << ":" << std::endl;
+    for (const auto& combination : result) {
+        for (int num : combination) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
     return 0;
 }
-
-
-
-
-
+```
